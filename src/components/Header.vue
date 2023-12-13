@@ -2,11 +2,15 @@
 <template>
   <v-app>
     <v-app-bar color="info" density="comfortable">
-      Subscription plus
+      <v-app-bar-title> Subscription plus </v-app-bar-title>
     </v-app-bar>
     <v-navigation-drawer expand-on-hover rail>
       <v-list>
-        <v-list-item title="Ted Vu" subtitle="tedvu184@gmail.com"></v-list-item>
+        <v-list-item
+          title="Ted Vu"
+          prepend-avatar="https://tedvublogimages.s3.us-west-1.amazonaws.com/profilepics.jpg"
+          subtitle="tedvu184@gmail.com"
+        ></v-list-item>
         <v-divider></v-divider>
         <v-list-item
           prepend-icon="mdi-account-multiple"
