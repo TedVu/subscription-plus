@@ -4,10 +4,11 @@ const drawer = ref(false);
 </script>
 
 <template>
-  <v-layout>
+  <v-app>
     <v-app-bar color="info" density="comfortable">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-app-bar-title>Subscription Management Application</v-app-bar-title>
+      Subscription plus
     </v-app-bar>
-  </v-layout>
+    <v-main><slot /></v-main>
+  </v-app>
 </template>
