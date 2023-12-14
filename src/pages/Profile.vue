@@ -4,6 +4,6 @@ import Header from '../components/Header.vue';
 
 <template>
   <Header>
-    <div>This is the home page</div>
+    <div>This is the profile page</div>
   </Header>
 </template>

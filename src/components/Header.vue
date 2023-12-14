@@ -14,13 +14,17 @@
         <v-divider></v-divider>
         <v-list-item
           prepend-icon="mdi-account-multiple"
-          link
+          to="profile"
           title="Profile"
         ></v-list-item>
-        <v-list-item prepend-icon="mdi-home" link title="Home"></v-list-item>
+        <v-list-item
+          prepend-icon="mdi-home"
+          to="home"
+          title="Home"
+        ></v-list-item>
         <v-list-item
           prepend-icon="mdi-information"
-          link
+          to="about"
           title="About"
         ></v-list-item>
       </v-list>
