@@ -3,7 +3,7 @@
 <template>
   <v-container>
     <v-row no-gutters>
-      <v-col cols="12" sm="4">
+      <v-col cols="12" sm="6">
         <v-card class="ma-2" max-width="400">
           <v-img
             class="align-end text-white"
@@ -29,7 +29,7 @@
           </v-card-actions>
         </v-card>
       </v-col>
-      <v-col cols="12" sm="4">
+      <v-col cols="12" sm="6">
         <v-card class="ma-2" max-width="400">
           <v-img
             class="align-end text-white"
