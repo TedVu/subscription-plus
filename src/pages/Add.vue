@@ -8,6 +8,7 @@ const name = ref('');
 const date = ref(null);
 const images = ref([]);
 const loading = ref(false);
+const subscriptionDateErrorMsg = ref<boolean | undefined>(undefined);
 const snackbar = ref(false);
 const snackbarMsg = ref('');
 const snackbarColor = ref('');
@@ -29,7 +30,10 @@ const isAllDataCorrect = () => {
 
   // subscription date must be filled
   if (date.value === null) {
+    subscriptionDateErrorMsg.value = false;
     isCorrect = false;
+  } else {
+    subscriptionDateErrorMsg.value = undefined;
   }
   return isCorrect;
 };
@@ -52,7 +56,7 @@ const submit = async () => {
 
 <template>
   <v-sheet width="300" class="mx-auto">
-    <v-form validate-on="submit" @submit.prevent="submit">
+    <v-form validate-on="blur" @submit.prevent="submit">
       <v-text-field
         v-model="name"
         label="Subscription Name"
@@ -67,7 +71,13 @@ const submit = async () => {
         text-input
         required
         format="dd/MM/yyyy"
-      />
+        :state="subscriptionDateErrorMsg"
+        v-on:update:model-value="isAllDataCorrect()"
+      >
+      </VueDatePicker>
+      <span v-if="subscriptionDateErrorMsg === false" class="date-error">
+        Subscription date is not in the correct format
+      </span>
       <v-file-input
         v-model="images"
         accept="image/png, image/jpeg, image/gif"
@@ -83,3 +93,10 @@ const submit = async () => {
     </v-snackbar>
   </v-sheet>
 </template>
+
+<style>
+.date-error {
+  font-size: 12px;
+  color: #bb0020;
+}
+</style>
