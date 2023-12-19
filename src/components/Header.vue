@@ -23,6 +23,11 @@
           title="Home"
         ></v-list-item>
         <v-list-item
+          prepend-icon="mdi-plus"
+          to="add-subscription"
+          title="Add subscription"
+        ></v-list-item>
+        <v-list-item
           prepend-icon="mdi-information"
           to="about"
           title="About"

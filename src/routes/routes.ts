@@ -1,10 +1,11 @@
-import { About, HomePage, Profile } from '../pages';
+import { About, HomePage, Profile, Add } from '../pages';
 import * as VueRouter from 'vue-router';
 
 const routes = [
   { path: '/about', component: About },
   { path: '/home', component: HomePage },
   { path: '/profile', component: Profile },
+  { path: '/add-subscription', component: Add },
 ];
 
 const router = VueRouter.createRouter({
