@@ -43,11 +43,13 @@ const submit = async () => {
   if (isAllDataCorrect()) {
     loading.value = true;
 
-    loading.value = false;
+    setTimeout(() => {
+      loading.value = false;
+    }, 2000);
     snackbar.value = true;
     snackbarMsg.value = 'Adding a new subscription successful!';
     snackbarColor.value = 'success';
-    await addFirebaseRecord({ name: 'subscription' });
+    await addFirebaseRecord({ name: name.value });
   } else {
     snackbar.value = true;
     snackbarMsg.value = 'Adding a new subscription failed!';
