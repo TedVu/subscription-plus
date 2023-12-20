@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import { enAU } from 'date-fns/locale';
+import { addFirebaseRecord } from '../firebase';
 
 const name = ref('');
 const date = ref(null);
@@ -46,6 +47,7 @@ const submit = async () => {
     snackbar.value = true;
     snackbarMsg.value = 'Adding a new subscription successful!';
     snackbarColor.value = 'success';
+    await addFirebaseRecord({ name: 'subscription' });
   } else {
     snackbar.value = true;
     snackbarMsg.value = 'Adding a new subscription failed!';
