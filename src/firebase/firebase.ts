@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import { collection, addDoc, getFirestore } from 'firebase/firestore';
+import { getStorage, ref, uploadBytes } from 'firebase/storage';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -22,7 +23,13 @@ const addFirebaseRecord = async (record: any) => {
   await addDoc(collection(db, 'subscriptions'), record);
 };
 
+const uploadFirebaseStaticFile = async (file: File, fileName: string) => {
+  const storage = getStorage(app);
+  const storageRef = ref(storage, `images/${fileName}`);
+  uploadBytes(storageRef, file);
+};
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export { addFirebaseRecord };
+export { addFirebaseRecord, uploadFirebaseStaticFile };

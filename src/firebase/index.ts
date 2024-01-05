@@ -1,3 +1,3 @@
-import { addFirebaseRecord } from './firebase';
+import { addFirebaseRecord, uploadFirebaseStaticFile } from './firebase';
 
-export { addFirebaseRecord };
+export { addFirebaseRecord, uploadFirebaseStaticFile };

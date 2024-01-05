@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import { enAU } from 'date-fns/locale';
-import { addFirebaseRecord } from '../firebase';
+import { addFirebaseRecord, uploadFirebaseStaticFile } from '../firebase';
 import { v4 as uuidv4 } from 'uuid';
 
 const name = ref('');
@@ -44,19 +44,19 @@ const submit = async () => {
   if (isAllDataCorrect()) {
     loading.value = true;
 
-    setTimeout(() => {
-      loading.value = false;
-    }, 2000);
-    snackbar.value = true;
-    snackbarMsg.value = 'Adding a new subscription successful!';
-    snackbarColor.value = 'success';
-    console.log(`subscription date is ${date.value}`);
     const imgName = `${uuidv4().replaceAll('-', '')}.${(
       images.value[0] as File
     ).name
       .split('.')
       .pop()}`;
     await addFirebaseRecord({ name: name.value, date: date.value, imgName });
+    await uploadFirebaseStaticFile(images.value[0], imgName);
+    setTimeout(() => {
+      loading.value = false;
+    }, 2000);
+    snackbar.value = true;
+    snackbarMsg.value = 'Adding a new subscription successful!';
+    snackbarColor.value = 'success';
   } else {
     snackbar.value = true;
     snackbarMsg.value = 'Adding a new subscription failed!';
