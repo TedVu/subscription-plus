@@ -19,7 +19,6 @@ const firebaseConfig = {
 
 const addFirebaseRecord = async (record: any) => {
   const db = getFirestore(app);
-  console.log('adding firebase record');
   await addDoc(collection(db, 'subscriptions'), record);
 };
 
