@@ -1,28 +1,27 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 const cards = ref([
   {
     title: 'Pre-fab homes',
     src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-    flex: 6,
   },
   {
     title: 'Favorite road trips',
     src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg',
-    flex: 6,
   },
   {
     title: 'Best airlines',
     src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg',
-    flex: 6,
   },
 ]);
+
+onMounted(() => {});
 </script>
 
 <template>
   <v-container fluid>
     <v-row dense>
-      <v-col v-for="card in cards" :key="card.title" :cols="card.flex">
+      <v-col v-for="card in cards" :key="card.title" :cols="6">
         <v-card>
           <v-img
             :src="card.src"
@@ -36,14 +35,6 @@ const cards = ref([
 
           <v-card-actions>
             <v-spacer></v-spacer>
-
-            <v-btn
-              size="small"
-              color="surface-variant"
-              variant="text"
-              icon="mdi-heart"
-            ></v-btn>
-
             <v-btn
               size="small"
               color="surface-variant"
