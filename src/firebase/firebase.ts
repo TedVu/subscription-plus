@@ -1,6 +1,12 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import { collection, addDoc, getFirestore } from 'firebase/firestore';
+import {
+  collection,
+  addDoc,
+  getFirestore,
+  getDocs,
+  Timestamp,
+} from 'firebase/firestore';
 import { getStorage, ref, uploadBytes } from 'firebase/storage';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -27,6 +33,25 @@ const uploadFirebaseStaticFile = async (file: File, fileName: string) => {
   const storage = getStorage(app);
   const storageRef = ref(storage, `images/${fileName}`);
   uploadBytes(storageRef, file);
+};
+
+const getSubscriptionItems = () => {
+  const db = getFirestore(app);
+  const colRef = collection(db, 'subscriptions');
+  getDocs(colRef).then((snapshots) => {
+    snapshots.docs.forEach((doc) => {
+      const date = new Timestamp(
+        doc.data().date.seconds,
+        doc.data().date.nanoseconds
+      )
+        .toDate()
+        .toLocaleDateString('en-AU');
+
+      const name = doc.data().name;
+      const id = doc.id;
+      const imageStorageLocation = `images/${doc.data().imageName}`;
+    });
+  });
 };
 
 // Initialize Firebase

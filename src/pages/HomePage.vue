@@ -15,7 +15,9 @@ const cards = ref([
   },
 ]);
 
-onMounted(() => {});
+onMounted(() => {
+  // fetch from firebase
+});
 </script>
 
 <template>
