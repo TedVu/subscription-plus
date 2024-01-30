@@ -53,7 +53,7 @@ const getSubscriptionItems = async () => {
 
     const name = doc.data().name;
     const id = doc.id;
-    const imageName = `images/${doc.data().imageName}`;
+    const imgName = `images/${doc.data().imgName}`;
 
     console.log(`Name is ${JSON.stringify(name)}`);
 
@@ -61,7 +61,7 @@ const getSubscriptionItems = async () => {
       name,
       id,
       date,
-      imageName,
+      imgName,
     });
   });
 

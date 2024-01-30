@@ -2,7 +2,7 @@ type Subscription = {
   name: string;
   date: string;
   id: string;
-  imageName?: string;
+  imgName?: string;
 };
 
 export type { Subscription };
