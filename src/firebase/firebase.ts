@@ -7,7 +7,7 @@ import {
   getDocs,
   Timestamp,
 } from 'firebase/firestore';
-import { getStorage, ref, uploadBytes } from 'firebase/storage';
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import { Subscription } from '../types/';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -55,8 +55,6 @@ const getSubscriptionItems = async () => {
     const id = doc.id;
     const imgName = `images/${doc.data().imgName}`;
 
-    console.log(`Name is ${JSON.stringify(name)}`);
-
     subscriptionItems.push({
       name,
       id,
@@ -68,7 +66,27 @@ const getSubscriptionItems = async () => {
   return subscriptionItems;
 };
 
+const getSubscriptionImageUrl = (
+  storageLocation: string | undefined
+): Promise<string | void> => {
+  const storage = getStorage(app);
+  const storageRef = ref(storage, storageLocation);
+
+  return getDownloadURL(storageRef)
+    .then((url) => {
+      return url;
+    })
+    .catch((error) => {
+      // handle error
+    });
+};
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export { addFirebaseRecord, getSubscriptionItems, uploadFirebaseStaticFile };
+export {
+  addFirebaseRecord,
+  getSubscriptionImageUrl,
+  getSubscriptionItems,
+  uploadFirebaseStaticFile,
+};
