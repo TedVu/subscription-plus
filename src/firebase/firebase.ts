@@ -8,6 +8,7 @@ import {
   Timestamp,
 } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes } from 'firebase/storage';
+import { Subscription } from '../types/';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -35,26 +36,39 @@ const uploadFirebaseStaticFile = async (file: File, fileName: string) => {
   uploadBytes(storageRef, file);
 };
 
-const getSubscriptionItems = () => {
+const getSubscriptionItems = async () => {
   const db = getFirestore(app);
   const colRef = collection(db, 'subscriptions');
-  getDocs(colRef).then((snapshots) => {
-    snapshots.docs.forEach((doc) => {
-      const date = new Timestamp(
-        doc.data().date.seconds,
-        doc.data().date.nanoseconds
-      )
-        .toDate()
-        .toLocaleDateString('en-AU');
 
-      const name = doc.data().name;
-      const id = doc.id;
-      const imageStorageLocation = `images/${doc.data().imageName}`;
+  const subscriptionItems = [] as Array<Subscription>;
+
+  const docs = await getDocs(colRef);
+  docs.forEach((doc) => {
+    const date = new Timestamp(
+      doc.data().date.seconds,
+      doc.data().date.nanoseconds
+    )
+      .toDate()
+      .toLocaleDateString('en-AU');
+
+    const name = doc.data().name;
+    const id = doc.id;
+    const imageName = `images/${doc.data().imageName}`;
+
+    console.log(`Name is ${JSON.stringify(name)}`);
+
+    subscriptionItems.push({
+      name,
+      id,
+      date,
+      imageName,
     });
   });
+
+  return subscriptionItems;
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export { addFirebaseRecord, uploadFirebaseStaticFile };
+export { addFirebaseRecord, getSubscriptionItems, uploadFirebaseStaticFile };

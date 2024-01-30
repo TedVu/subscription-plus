@@ -1,3 +1,7 @@
-import { addFirebaseRecord, uploadFirebaseStaticFile } from './firebase';
+import {
+  addFirebaseRecord,
+  getSubscriptionItems,
+  uploadFirebaseStaticFile,
+} from './firebase';
 
-export { addFirebaseRecord, uploadFirebaseStaticFile };
+export { addFirebaseRecord, getSubscriptionItems, uploadFirebaseStaticFile };

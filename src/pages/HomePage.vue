@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import { getSubscriptionItems } from '../firebase';
 const cards = ref([
   {
     title: 'Pre-fab homes',
@@ -15,8 +16,11 @@ const cards = ref([
   },
 ]);
 
-onMounted(() => {
+onMounted(async () => {
   // fetch from firebase
+
+  const items = await getSubscriptionItems();
+  console.log(`Items is ${JSON.stringify(items)}`);
 });
 </script>
 
