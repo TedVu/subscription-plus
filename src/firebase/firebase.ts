@@ -25,7 +25,7 @@ const firebaseConfig = {
   measurementId: 'G-FSTQ57T420',
 };
 
-const addFirebaseRecord = async (record: any) => {
+const addFirebaseRecord = async (record: Subscription) => {
   const db = getFirestore(app);
   await addDoc(collection(db, 'subscriptions'), record);
 };

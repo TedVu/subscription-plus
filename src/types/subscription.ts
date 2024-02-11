@@ -1,6 +1,6 @@
 type Subscription = {
   name: string;
-  date: string;
+  date?: string;
   id: string;
   imgName?: string;
 };
