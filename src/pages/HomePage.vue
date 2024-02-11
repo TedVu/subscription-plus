@@ -7,8 +7,6 @@ const items = ref<Subscription[]>([]);
 const itemsMap = ref<Map<string, string | void>>();
 
 onMounted(async () => {
-  // fetch from firebase
-
   items.value = await getSubscriptionItems();
 
   itemsMap.value = new Map<string, string | void>();
@@ -23,8 +21,8 @@ onMounted(async () => {
 <template>
   <v-container fluid>
     <v-row dense>
-      <v-col v-for="item in items" :key="item.id" :cols="6">
-        <v-card>
+      <v-col v-for="item in items" :key="item.id" cols="6">
+        <v-card class="card">
           <v-img
             :src="itemsMap?.get(item.id)!"
             class="align-end"
@@ -57,4 +55,6 @@ onMounted(async () => {
   </v-container>
 </template>
 
-<style></style>
+<style lang="scss">
+@import './HomePage.module.scss';
+</style>
