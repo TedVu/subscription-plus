@@ -66,19 +66,18 @@ const getSubscriptionItems = async () => {
   return subscriptionItems;
 };
 
-const getSubscriptionImageUrl = (
+const getSubscriptionImageUrl = async (
   storageLocation: string | undefined
 ): Promise<string | void> => {
   const storage = getStorage(app);
   const storageRef = ref(storage, storageLocation);
 
-  return getDownloadURL(storageRef)
-    .then((url) => {
-      return url;
-    })
-    .catch((error) => {
-      // handle error
-    });
+  try {
+    const downloadUrl = await getDownloadURL(storageRef);
+    return downloadUrl;
+  } catch (err) {
+    // handle error
+  }
 };
 
 // Initialize Firebase
