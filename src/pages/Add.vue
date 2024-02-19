@@ -7,7 +7,7 @@ import { addFirebaseRecord, uploadFirebaseStaticFile } from '../firebase';
 import { v4 as uuidv4 } from 'uuid';
 
 const name = ref('');
-const date = ref(null);
+const date = ref('');
 const images = ref([]);
 const loading = ref(false);
 const subscriptionDateErrorMsg = ref<boolean | undefined>(undefined);
@@ -49,7 +49,12 @@ const submit = async () => {
     ).name
       .split('.')
       .pop()}`;
-    await addFirebaseRecord({ name: name.value, date: date.value, imgName });
+    await addFirebaseRecord({
+      name: name.value,
+      date: date.value,
+      imgName,
+      id: uuidv4().replaceAll('-', ''),
+    });
     await uploadFirebaseStaticFile(images.value[0], imgName);
     setTimeout(() => {
       loading.value = false;

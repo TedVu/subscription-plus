@@ -34,19 +34,13 @@ onMounted(async () => {
           </v-img>
 
           <v-card-actions>
-            <v-spacer></v-spacer>
+            Subscription Date: {{ item.date }}
+            <v-spacer />
             <v-btn
               size="small"
               color="surface-variant"
               variant="text"
-              icon="mdi-bookmark"
-            ></v-btn>
-
-            <v-btn
-              size="small"
-              color="surface-variant"
-              variant="text"
-              icon="mdi-share-variant"
+              icon="mdi-update"
             ></v-btn>
           </v-card-actions>
         </v-card>
