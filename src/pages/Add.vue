@@ -5,6 +5,7 @@ import '@vuepic/vue-datepicker/dist/main.css';
 import { enAU } from 'date-fns/locale';
 import { addFirebaseRecord, uploadFirebaseStaticFile } from '../firebase';
 import { v4 as uuidv4 } from 'uuid';
+import { nameRules } from '../validation';
 
 const name = ref('');
 const date = ref('');
@@ -14,13 +15,6 @@ const subscriptionDateErrorMsg = ref<boolean | undefined>(undefined);
 const snackbar = ref(false);
 const snackbarMsg = ref('');
 const snackbarColor = ref('');
-
-const nameRules = [
-  (name: string) => {
-    if (name?.length >= 3) return true;
-    return 'Subscription name must be at least 3 characters.';
-  },
-];
 
 const isAllDataCorrect = () => {
   let isCorrect = true;
@@ -102,7 +96,15 @@ const submit = async () => {
         prepend-icon="mdi-camera"
       ></v-file-input>
 
-      <v-btn :loading="loading" type="submit" block class="mt-2">Submit</v-btn>
+      <v-btn
+        :loading="loading"
+        type="submit"
+        block
+        class="mt-2"
+        color="green"
+        variant="elevated"
+        >Submit</v-btn
+      >
     </v-form>
     <v-snackbar v-model="snackbar" :color="snackbarColor">
       {{ snackbarMsg }}
