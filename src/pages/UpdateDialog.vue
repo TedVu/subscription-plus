@@ -1,17 +1,19 @@
 <template>
   <v-form validate-on="blur">
     <v-card title="Update Subscription">
-      <v-card-item>
+      <v-card-text>
         <v-text-field
           v-model="name"
           label="Subscription Name"
           :rules="nameRules"
         />
         <VueDatePicker
+          teleport-center
+          :offset="50"
           v-model="date"
           :enable-time-picker="false"
           :format-locale="enAU"
-          :clearable="true"
+          clearable
           placeholder="Subscription Date"
           text-input
           required
@@ -29,7 +31,7 @@
           class="mt-5"
           prepend-icon="mdi-camera"
         ></v-file-input>
-      </v-card-item>
+      </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
