@@ -1,5 +1,5 @@
 <template>
-  <v-form validate-on="blur">
+  <v-form validate-on="blur" @submit.prevent="submit">
     <v-card title="Update Subscription">
       <v-card-text>
         <v-text-field
@@ -38,7 +38,7 @@
           color="green"
           variant="elevated"
           text="Update"
-          @click="emits('close')"
+          type="submit"
         ></v-btn>
         <v-btn
           color="red"
@@ -61,6 +61,7 @@ const emits = defineEmits(['close']);
 const name = ref('');
 const date = ref('');
 const images = ref([]);
-
 const subscriptionDateErrorMsg = ref<boolean | undefined>(undefined);
+
+const submit = async () => {};
 </script>

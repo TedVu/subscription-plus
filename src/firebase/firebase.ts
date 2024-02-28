@@ -30,6 +30,11 @@ const addFirebaseRecord = async (record: Subscription) => {
   await addDoc(collection(db, 'subscriptions'), record);
 };
 
+const updateFirebaseRecord = async (
+  id: string,
+  updatedRecord: Subscription
+) => {};
+
 const uploadFirebaseStaticFile = async (file: File, fileName: string) => {
   const storage = getStorage(app);
   const storageRef = ref(storage, `images/${fileName}`);
@@ -88,4 +93,5 @@ export {
   getSubscriptionImageUrl,
   getSubscriptionItems,
   uploadFirebaseStaticFile,
+  updateFirebaseRecord,
 };
