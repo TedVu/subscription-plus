@@ -6,6 +6,7 @@ import {
   getFirestore,
   getDocs,
   Timestamp,
+  updateDoc,
 } from 'firebase/firestore';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import { Subscription } from '../types/';
@@ -33,7 +34,18 @@ const addFirebaseRecord = async (record: Subscription) => {
 const updateFirebaseRecord = async (
   id: string,
   updatedRecord: Subscription
-) => {};
+) => {
+  const db = getFirestore(app);
+  const colRef = collection(db, 'subscriptions');
+  const docs = await getDocs(colRef);
+  docs.forEach(async (doc) => {
+    console.log(`debug ${doc.id} and ${id}`);
+    if (doc.id === id) {
+      alert('ID MATCHED');
+      await updateDoc(doc.ref, updatedRecord);
+    }
+  });
+};
 
 const uploadFirebaseStaticFile = async (file: File, fileName: string) => {
   const storage = getStorage(app);

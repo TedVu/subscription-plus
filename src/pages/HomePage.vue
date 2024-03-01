@@ -48,7 +48,7 @@ onMounted(async () => {
                 ></v-btn>
               </template>
               <template #default="{ isActive }">
-                <update-dialog @close="isActive.value = false" />
+                <update-dialog @close="isActive.value = false" :id="item.id" />
               </template>
             </v-dialog>
           </v-card-actions>

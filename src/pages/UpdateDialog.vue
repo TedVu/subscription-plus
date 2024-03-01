@@ -1,3 +1,31 @@
+<script setup lang="ts">
+import { ref } from 'vue';
+import { enAU } from 'date-fns/locale';
+import { nameRules, isAllDataCorrect } from '../validation';
+import { updateFirebaseRecord } from '../firebase';
+import VueDatePicker from '@vuepic/vue-datepicker';
+const emits = defineEmits(['close']);
+
+const props = defineProps({
+  id: {
+    type: String,
+    default: undefined,
+  },
+});
+const name = ref('');
+const date = ref('');
+const images = ref([]);
+const subscriptionDateErrorMsg = ref<boolean | undefined>(undefined);
+
+const submit = async () => {
+  const updatedSubscriptionItem = {
+    id: props.id!,
+    name: name.value,
+    date: date.value,
+  };
+  await updateFirebaseRecord(props.id!, updatedSubscriptionItem);
+};
+</script>
 <template>
   <v-form validate-on="blur" @submit.prevent="submit">
     <v-card title="Update Subscription">
@@ -50,18 +78,3 @@
     </v-card>
   </v-form>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue';
-import { enAU } from 'date-fns/locale';
-import { nameRules, isAllDataCorrect } from '../validation';
-import VueDatePicker from '@vuepic/vue-datepicker';
-const emits = defineEmits(['close']);
-
-const name = ref('');
-const date = ref('');
-const images = ref([]);
-const subscriptionDateErrorMsg = ref<boolean | undefined>(undefined);
-
-const submit = async () => {};
-</script>
