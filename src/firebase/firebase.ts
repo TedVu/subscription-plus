@@ -39,9 +39,7 @@ const updateFirebaseRecord = async (
   const colRef = collection(db, 'subscriptions');
   const docs = await getDocs(colRef);
   docs.forEach(async (doc) => {
-    console.log(`debug ${doc.id} and ${id}`);
     if (doc.id === id) {
-      alert('ID MATCHED');
       await updateDoc(doc.ref, updatedRecord);
     }
   });
