@@ -7,6 +7,7 @@ import {
   getDocs,
   Timestamp,
   updateDoc,
+  deleteDoc,
 } from 'firebase/firestore';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import { Subscription } from '../types/';
@@ -41,6 +42,17 @@ const updateFirebaseRecord = async (
   docs.forEach(async (doc) => {
     if (doc.id === id) {
       await updateDoc(doc.ref, updatedRecord);
+    }
+  });
+};
+
+const deleteFirebaseRecord = async (id: string) => {
+  const db = getFirestore(app);
+  const colRef = collection(db, 'subscriptions');
+  const docs = await getDocs(colRef);
+  docs.forEach(async (doc) => {
+    if (doc.id === id) {
+      await deleteDoc(doc.ref);
     }
   });
 };
@@ -100,8 +112,9 @@ const app = initializeApp(firebaseConfig);
 
 export {
   addFirebaseRecord,
+  deleteFirebaseRecord,
   getSubscriptionImageUrl,
   getSubscriptionItems,
-  uploadFirebaseStaticFile,
   updateFirebaseRecord,
+  uploadFirebaseStaticFile,
 };
