@@ -14,16 +14,35 @@ const props = defineProps({
 });
 const name = ref('');
 const date = ref('');
+const loading = ref(false);
+const snackbar = ref(false);
+const snackbarMsg = ref('');
+const snackbarColor = ref('');
 const images = ref([]);
 const subscriptionDateErrorMsg = ref<boolean | undefined>(undefined);
 
 const submit = async () => {
-  const updatedSubscriptionItem = {
-    id: props.id!,
-    name: name.value,
-    date: date.value,
-  };
-  await updateFirebaseRecord(props.id!, updatedSubscriptionItem);
+  if (
+    isAllDataCorrect(name.value, date.value, subscriptionDateErrorMsg.value)
+  ) {
+    loading.value = true;
+    setTimeout(() => {
+      loading.value = false;
+    }, 2000);
+    const updatedSubscriptionItem = {
+      id: props.id!,
+      name: name.value,
+      date: date.value,
+    };
+    await updateFirebaseRecord(props.id!, updatedSubscriptionItem);
+    snackbar.value = true;
+    snackbarMsg.value = 'Adding a new subscription successful!';
+    snackbarColor.value = 'success';
+  } else {
+    snackbar.value = true;
+    snackbarMsg.value = 'Adding a new subscription failed!';
+    snackbarColor.value = 'red-darken-2';
+  }
 };
 </script>
 <template>
@@ -47,9 +66,6 @@ const submit = async () => {
           required
           format="dd/MM/yyyy"
           :state="subscriptionDateErrorMsg"
-          v-on:update:model-value="
-            isAllDataCorrect(name, date, subscriptionDateErrorMsg)
-          "
         >
         </VueDatePicker>
         <v-file-input
@@ -63,6 +79,7 @@ const submit = async () => {
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
+          :loading="loading"
           color="green"
           variant="elevated"
           text="Update"
@@ -77,4 +94,7 @@ const submit = async () => {
       </v-card-actions>
     </v-card>
   </v-form>
+  <v-snackbar v-model="snackbar" :color="snackbarColor">
+    {{ snackbarMsg }}
+  </v-snackbar>
 </template>
