@@ -5,11 +5,7 @@ const nameRules = [
   },
 ];
 
-const isAllDataCorrect = (
-  name: string,
-  date: string,
-  subscriptionDateErrorMsg: boolean | undefined
-) => {
+const isAllDataCorrect = (name: string) => {
   let isCorrect = true;
 
   // subscription name must be at least 3 characters
@@ -17,13 +13,6 @@ const isAllDataCorrect = (
     isCorrect = false;
   }
 
-  // subscription date must be filled
-  if (date === null) {
-    subscriptionDateErrorMsg = false;
-    isCorrect = false;
-  } else {
-    subscriptionDateErrorMsg = undefined;
-  }
   return isCorrect;
 };
 

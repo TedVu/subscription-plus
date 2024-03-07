@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { enAU } from 'date-fns/locale';
-import { nameRules, isAllDataCorrect } from '../validation';
+import { nameRules } from '../validation';
 import { updateFirebaseRecord } from '../firebase';
 import VueDatePicker from '@vuepic/vue-datepicker';
 const emits = defineEmits(['close']);
@@ -22,9 +22,7 @@ const images = ref([]);
 const subscriptionDateErrorMsg = ref<boolean | undefined>(undefined);
 
 const submit = async () => {
-  if (
-    isAllDataCorrect(name.value, date.value, subscriptionDateErrorMsg.value)
-  ) {
+  if (true) {
     loading.value = true;
     setTimeout(() => {
       loading.value = false;
