@@ -1,11 +1,13 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { Subscription } from '../types';
 import { getSubscriptionItems } from '../firebase';
 export const useSubscriptionItemsStore = defineStore(
   'subscription-items',
   () => {
-    const subscriptionItems = ref([] as Subscription[]);
+    const subscriptionItems = ref([
+      { id: '1', name: 'TEST' },
+    ] as Subscription[]);
     const fetchLatestData = async () => {
       subscriptionItems.value = await getSubscriptionItems();
     };

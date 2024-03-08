@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ref, onMounted, Ref } from 'vue';
 import UpdateDialog from './UpdateDialog.vue';
-import {
-  deleteFirebaseRecord,
-  getSubscriptionImageUrl,
-  getSubscriptionItems,
-} from '../firebase';
+import { getSubscriptionImageUrl } from '../firebase';
+import { getSubscriptionItems, removeSubscription } from '../composables';
 import { Subscription } from '../types/subscription';
-const items = ref<Subscription[]>([]);
+import { useSubscriptionItemsStore } from '../store';
+
+const store = useSubscriptionItemsStore();
+const items = store.subscriptionItems;
 
 const itemsMap = ref<Map<string, string | void>>();
 const dialog = ref(false);
@@ -15,20 +15,9 @@ const snackbar = ref(false);
 const snackbarMsg = ref('');
 const snackbarColor = ref('');
 
-onMounted(async () => {
-  items.value = await getSubscriptionItems();
-
-  itemsMap.value = new Map<string, string | void>();
-
-  items.value.forEach(async (item: Subscription) => {
-    const imageUrl = await getSubscriptionImageUrl(item.imgName);
-    itemsMap.value?.set(item.id, imageUrl);
-  });
-});
-
 const handleSubscriptionDelete = async (id: string, isActive: Ref<Boolean>) => {
   dialog.value = false;
-  await deleteFirebaseRecord(id);
+
   isActive.value = false;
   snackbar.value = true;
   snackbarMsg.value = 'Deleting a subscription successful!';
