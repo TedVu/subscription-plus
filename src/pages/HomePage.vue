@@ -7,6 +7,7 @@ import { Subscription } from '../types/subscription';
 import { useSubscriptionItemsStore } from '../store';
 
 const store = useSubscriptionItemsStore();
+await store.fetchLatestData();
 const items = store.subscriptionItems;
 
 const itemsMap = ref<Map<string, string | void>>();

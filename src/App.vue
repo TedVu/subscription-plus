@@ -3,9 +3,11 @@ import Header from './components/Header.vue';
 </script>
 
 <template>
-  <Header>
-    <router-view></router-view>
-  </Header>
+  <Suspense>
+    <Header>
+      <router-view></router-view>
+    </Header>
+  </Suspense>
 </template>
 
 <style scoped></style>
