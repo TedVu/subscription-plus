@@ -2,9 +2,7 @@
 import { ref } from 'vue';
 import { enAU } from 'date-fns/locale';
 import { isAllDataCorrect, nameRules } from '../validation';
-import { updateFirebaseRecord } from '../firebase';
 import VueDatePicker from '@vuepic/vue-datepicker';
-import { useSubscriptionItemsStore } from '../store';
 import { updateSubscription } from '../composables';
 
 const emits = defineEmits(['close']);
