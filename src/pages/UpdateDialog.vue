@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { enAU } from 'date-fns/locale';
-import { nameRules } from '../validation';
+import { isAllDataCorrect, nameRules } from '../validation';
 import { updateFirebaseRecord } from '../firebase';
 import VueDatePicker from '@vuepic/vue-datepicker';
+import { useSubscriptionItemsStore } from '../store';
+
 const emits = defineEmits(['close']);
 
 const props = defineProps({
@@ -22,7 +24,7 @@ const images = ref([]);
 const subscriptionDateErrorMsg = ref<boolean | undefined>(undefined);
 
 const submit = async () => {
-  if (true) {
+  if (isAllDataCorrect(name.value, date.value, subscriptionDateErrorMsg)) {
     loading.value = true;
     setTimeout(() => {
       loading.value = false;
@@ -30,15 +32,18 @@ const submit = async () => {
     const updatedSubscriptionItem = {
       id: props.id!,
       name: name.value,
-      date: date.value,
+      date: new Date(date.value).toLocaleDateString('en-AU'),
     };
+
     await updateFirebaseRecord(props.id!, updatedSubscriptionItem);
+    const store = useSubscriptionItemsStore();
+    store.updateSubscription(updatedSubscriptionItem);
     snackbar.value = true;
     snackbarMsg.value = 'Adding a new subscription successful!';
     snackbarColor.value = 'success';
   } else {
     snackbar.value = true;
-    snackbarMsg.value = 'Adding a new subscription failed!';
+    snackbarMsg.value = 'Updating a subscription failed!';
     snackbarColor.value = 'red-darken-2';
   }
 };
@@ -62,7 +67,6 @@ const submit = async () => {
           placeholder="Subscription Date"
           text-input
           required
-          format="dd/MM/yyyy"
           :state="subscriptionDateErrorMsg"
         >
         </VueDatePicker>

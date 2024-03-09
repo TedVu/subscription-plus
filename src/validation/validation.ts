@@ -1,3 +1,4 @@
+import { Ref } from 'vue';
 const nameRules = [
   (name: string) => {
     if (name?.length >= 3) return true;
@@ -5,7 +6,11 @@ const nameRules = [
   },
 ];
 
-const isAllDataCorrect = (name: string) => {
+const isAllDataCorrect = (
+  name: string,
+  date: string,
+  subscriptionDateErrorMsg: Ref<boolean | undefined>
+) => {
   let isCorrect = true;
 
   // subscription name must be at least 3 characters
@@ -13,6 +18,13 @@ const isAllDataCorrect = (name: string) => {
     isCorrect = false;
   }
 
+  // subscription date must be filled
+  if (date === null) {
+    subscriptionDateErrorMsg.value = false;
+    isCorrect = false;
+  } else {
+    subscriptionDateErrorMsg.value = undefined;
+  }
   return isCorrect;
 };
 
