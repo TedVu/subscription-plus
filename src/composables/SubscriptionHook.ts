@@ -13,9 +13,9 @@ const addSubscriptionItem = async (subscriptionItem: Subscription) => {
   await addFirebaseRecord(subscriptionItem);
 };
 
-const removeSubscription = async (subscriptionItem: Subscription) => {
+const removeSubscription = async (id: string) => {
   const store = useSubscriptionItemsStore();
-  store.removeSubscription(subscriptionItem);
-  await deleteFirebaseRecord(subscriptionItem.id);
+  store.removeSubscription(id);
+  await deleteFirebaseRecord(id);
 };
 export { getSubscriptionItems, addSubscriptionItem, removeSubscription };

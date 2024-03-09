@@ -2,8 +2,9 @@
 import { ref, Ref, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import UpdateDialog from './UpdateDialog.vue';
-import { getSubscriptionImageUrl, deleteFirebaseRecord } from '../firebase';
+import { getSubscriptionImageUrl } from '../firebase';
 import { Subscription } from '../types/subscription';
+import { removeSubscription } from '../composables';
 import { useSubscriptionItemsStore } from '../store';
 
 const store = useSubscriptionItemsStore();
@@ -25,8 +26,7 @@ const snackbarMsg = ref('');
 const snackbarColor = ref('');
 
 const handleSubscriptionDelete = async (id: string, isActive: Ref<Boolean>) => {
-  await deleteFirebaseRecord(id);
-  store.removeSubscription(id);
+  await removeSubscription(id);
   dialog.value = false;
   isActive.value = false;
   snackbar.value = true;
