@@ -5,6 +5,7 @@ import { isAllDataCorrect, nameRules } from '../validation';
 import { updateFirebaseRecord } from '../firebase';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import { useSubscriptionItemsStore } from '../store';
+import { updateSubscription } from '../composables';
 
 const emits = defineEmits(['close']);
 
@@ -34,10 +35,7 @@ const submit = async () => {
       name: name.value,
       date: new Date(date.value).toLocaleDateString('en-AU'),
     };
-
-    await updateFirebaseRecord(props.id!, updatedSubscriptionItem);
-    const store = useSubscriptionItemsStore();
-    store.updateSubscription(updatedSubscriptionItem);
+    updateSubscription(props.id!, updatedSubscriptionItem);
     snackbar.value = true;
     snackbarMsg.value = 'Adding a new subscription successful!';
     snackbarColor.value = 'success';

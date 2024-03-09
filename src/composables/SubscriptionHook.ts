@@ -1,6 +1,10 @@
 import { Subscription } from '../types';
 import { useSubscriptionItemsStore } from '../store';
-import { addFirebaseRecord, deleteFirebaseRecord } from '../firebase';
+import {
+  addFirebaseRecord,
+  deleteFirebaseRecord,
+  updateFirebaseRecord,
+} from '../firebase';
 const getSubscriptionItems = async () => {
   const store = useSubscriptionItemsStore();
   await store.fetchLatestData();
@@ -18,4 +22,18 @@ const removeSubscription = async (id: string) => {
   store.removeSubscription(id);
   await deleteFirebaseRecord(id);
 };
-export { getSubscriptionItems, addSubscriptionItem, removeSubscription };
+
+const updateSubscription = async (
+  id: string,
+  updatedSubscriptionItem: Subscription
+) => {
+  await updateFirebaseRecord(id, updatedSubscriptionItem);
+  const store = useSubscriptionItemsStore();
+  store.updateSubscription(updatedSubscriptionItem);
+};
+export {
+  getSubscriptionItems,
+  addSubscriptionItem,
+  removeSubscription,
+  updateSubscription,
+};
