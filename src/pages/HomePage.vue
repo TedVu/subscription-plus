@@ -1,19 +1,20 @@
 <script setup lang="ts">
 import { ref, Ref, onMounted } from 'vue';
+import { storeToRefs } from 'pinia';
 import UpdateDialog from './UpdateDialog.vue';
-import { getSubscriptionImageUrl } from '../firebase';
+import { getSubscriptionImageUrl, deleteFirebaseRecord } from '../firebase';
 import { Subscription } from '../types/subscription';
 import { useSubscriptionItemsStore } from '../store';
 
 const store = useSubscriptionItemsStore();
 await store.fetchLatestData();
-const items = store.subscriptionItems;
+const { subscriptionItems } = storeToRefs(store);
 
 const itemsMap = ref<Map<string, string | void>>();
 
 onMounted(async () => {
   itemsMap.value = new Map<string, string | void>();
-  items.forEach(async (item: Subscription) => {
+  subscriptionItems.value.forEach(async (item: Subscription) => {
     const imageUrl = await getSubscriptionImageUrl(item.imgName);
     itemsMap.value?.set(item.id, imageUrl);
   });
@@ -24,8 +25,9 @@ const snackbarMsg = ref('');
 const snackbarColor = ref('');
 
 const handleSubscriptionDelete = async (id: string, isActive: Ref<Boolean>) => {
+  await deleteFirebaseRecord(id);
+  store.removeSubscription(id);
   dialog.value = false;
-
   isActive.value = false;
   snackbar.value = true;
   snackbarMsg.value = 'Deleting a subscription successful!';
@@ -36,8 +38,8 @@ const handleSubscriptionDelete = async (id: string, isActive: Ref<Boolean>) => {
 <template>
   <v-container fluid>
     <v-row dense>
-      <template v-if="items.length > 0">
-        <v-col v-for="item in items" :key="item.id" cols="6">
+      <template v-if="subscriptionItems.length > 0">
+        <v-col v-for="item in subscriptionItems" :key="item.id" cols="6">
           <v-card class="card">
             <v-img
               :src="itemsMap?.get(item.id)!"

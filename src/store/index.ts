@@ -10,9 +10,9 @@ export const useSubscriptionItemsStore = defineStore(
       subscriptionItems.value = await getSubscriptionItems();
     };
 
-    const removeSubscription = (subscriptionItem: Subscription) => {
+    const removeSubscription = (id: string) => {
       subscriptionItems.value = subscriptionItems.value.filter(
-        (item) => item.id !== subscriptionItem.id
+        (item) => item.id !== id
       );
     };
 
