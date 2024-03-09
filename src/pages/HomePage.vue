@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted, Ref } from 'vue';
+import { ref, Ref, onMounted } from 'vue';
 import UpdateDialog from './UpdateDialog.vue';
 import { getSubscriptionImageUrl } from '../firebase';
-import { getSubscriptionItems, removeSubscription } from '../composables';
 import { Subscription } from '../types/subscription';
 import { useSubscriptionItemsStore } from '../store';
 
@@ -11,6 +10,14 @@ await store.fetchLatestData();
 const items = store.subscriptionItems;
 
 const itemsMap = ref<Map<string, string | void>>();
+
+onMounted(async () => {
+  itemsMap.value = new Map<string, string | void>();
+  items.forEach(async (item: Subscription) => {
+    const imageUrl = await getSubscriptionImageUrl(item.imgName);
+    itemsMap.value?.set(item.id, imageUrl);
+  });
+});
 const dialog = ref(false);
 const snackbar = ref(false);
 const snackbarMsg = ref('');
