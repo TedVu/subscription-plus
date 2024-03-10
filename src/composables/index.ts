@@ -1,2 +1,2 @@
 export * from './SubscriptionHook';
-export * from './Symbol';
+export * from './LoadingHook';

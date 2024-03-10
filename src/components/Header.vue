@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-import { computed, provide, ref, Ref } from 'vue';
-import { loadingSymbol } from '../composables';
-const loading = ref<boolean>(false);
-provide<Ref<Boolean>>(loadingSymbol, loading);
+import { computed } from 'vue';
+import { setLoadingState } from '../composables';
+const loading = setLoadingState(false);
 
 const computedVMainStyle = computed(() => ({
   'progress-center': loading.value,

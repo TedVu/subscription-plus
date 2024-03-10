@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { ref, Ref, onMounted, inject } from 'vue';
+import { ref, Ref, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import UpdateDialog from './UpdateDialog.vue';
 import { getSubscriptionImageUrl } from '../firebase';
 import { Subscription } from '../types/subscription';
-import { removeSubscription } from '../composables';
+import { removeSubscription, useLoadingState } from '../composables';
 import { useSubscriptionItemsStore } from '../store';
-import { loadingSymbol } from '../composables';
 
-const loading = inject<Ref<Boolean>>(loadingSymbol);
+const loading = useLoadingState();
 loading!.value = true;
 const store = useSubscriptionItemsStore();
 await store.fetchLatestData();
