@@ -3,9 +3,9 @@ import { ref } from 'vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import { enAU } from 'date-fns/locale';
-import { addFirebaseRecord, uploadFirebaseStaticFile } from '../firebase';
+import { addFirebaseRecord, uploadFirebaseStaticFile } from '../../firebase';
 import { v4 as uuidv4 } from 'uuid';
-import { nameRules } from '../validation';
+import { nameRules } from '../../validation';
 
 const name = ref('');
 const date = ref('');
@@ -118,3 +118,4 @@ const submit = async () => {
   color: #bb0020;
 }
 </style>
+../../firebase../../validation

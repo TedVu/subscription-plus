@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { enAU } from 'date-fns/locale';
-import { isAllDataCorrect, nameRules } from '../validation';
+import { isAllDataCorrect, nameRules } from '../../validation';
 import VueDatePicker from '@vuepic/vue-datepicker';
-import { updateSubscription } from '../composables';
+import { updateSubscription } from '../../composables';
 
 const emits = defineEmits(['close']);
 
@@ -96,3 +96,4 @@ const submit = async () => {
     {{ snackbarMsg }}
   </v-snackbar>
 </template>
+../../validation../../composables

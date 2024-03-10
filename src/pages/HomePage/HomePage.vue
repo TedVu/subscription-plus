@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref, Ref, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
-import UpdateDialog from './UpdateDialog.vue';
-import { getSubscriptionImageUrl } from '../firebase';
-import { Subscription } from '../types/subscription';
-import { removeSubscription, useLoadingState } from '../composables';
-import { useSubscriptionItemsStore } from '../store';
+import UpdateDialog from '../UpdateDialog.vue';
+import { getSubscriptionImageUrl } from '../../firebase';
+import { Subscription } from '../../types/subscription';
+import { removeSubscription, useLoadingState } from '../../composables';
+import { useSubscriptionItemsStore } from '../../store';
 
 const loading = useLoadingState();
 loading!.value = true;
@@ -127,3 +127,4 @@ const handleSubscriptionDelete = async (id: string, isActive: Ref<Boolean>) => {
 <style lang="scss">
 @import './HomePage.module.scss';
 </style>
+../UpdateDialog/UpdateDialog.vue
