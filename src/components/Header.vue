@@ -1,4 +1,14 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { computed, provide, ref, Ref } from 'vue';
+import { loadingSymbol } from '../composables';
+const loading = ref<boolean>(false);
+provide<Ref<Boolean>>(loadingSymbol, loading);
+
+const computedVMainStyle = computed(() => ({
+  'progress-center': loading.value,
+  'content-container': !loading.value,
+}));
+</script>
 <template>
   <v-app>
     <v-app-bar color="info" density="comfortable">
@@ -34,6 +44,16 @@
         ></v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-main><slot /></v-main>
+    <v-main :class="computedVMainStyle"><slot /></v-main>
   </v-app>
 </template>
+
+<style lang="scss">
+.progress-center {
+  padding-top: 40vh !important;
+}
+
+.content-container {
+  padding-top: 15vh !important;
+}
+</style>
