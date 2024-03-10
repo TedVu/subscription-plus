@@ -1,1 +1,3 @@
-export * from './Add.vue';
+import Add from './Add.vue';
+
+export default Add;

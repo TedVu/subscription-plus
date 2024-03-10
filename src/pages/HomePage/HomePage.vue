@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, Ref, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
-import UpdateDialog from '../UpdateDialog.vue';
+import UpdateDialog from '../UpdateDialog';
 import { getSubscriptionImageUrl } from '../../firebase';
 import { Subscription } from '../../types/subscription';
 import { removeSubscription, useLoadingState } from '../../composables';
