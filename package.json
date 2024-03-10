@@ -4,10 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
     "build": "vue-tsc && vite build",
+    "dev": "vite",
     "preview": "vite preview",
-    "serve": "vite"
+    "serve": "vite",
+    "type:check": "vue-tsc"
   },
   "dependencies": {
     "@vuepic/vue-datepicker": "^7.4.0",
