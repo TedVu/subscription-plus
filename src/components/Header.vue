@@ -26,14 +26,10 @@ const computedVMainStyle = computed(() => ({
           to="profile"
           title="Profile"
         ></v-list-item>
-        <v-list-item
-          prepend-icon="mdi-home"
-          to="home"
-          title="Home"
-        ></v-list-item>
+        <v-list-item prepend-icon="mdi-home" to="/" title="Home"></v-list-item>
         <v-list-item
           prepend-icon="mdi-plus"
-          to="add-subscription"
+          to="add"
           title="Add subscription"
         ></v-list-item>
         <v-list-item
