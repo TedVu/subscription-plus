@@ -66,7 +66,8 @@ const handleSubscriptionDelete = async (id: string, isActive: Ref<Boolean>) => {
               </v-img>
 
               <v-card-actions>
-                Subscription Date: {{ item.date }}
+                <div class="mr-2 font-weight-bold">Subscription Date:</div>
+                {{ item.date }}
                 <v-spacer />
                 <v-dialog width="500">
                   <template #activator="{ props }">
