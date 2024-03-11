@@ -29,7 +29,6 @@ export const useSubscriptionItemsStore = defineStore(
           newSubscriptionItems.push(item);
         }
       });
-      alert('Update subscription');
       subscriptionItems.value = newSubscriptionItems;
     };
 

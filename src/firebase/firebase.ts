@@ -60,7 +60,7 @@ const deleteFirebaseRecord = async (id: string) => {
 const uploadFirebaseStaticFile = async (file: File, fileName: string) => {
   const storage = getStorage(app);
   const storageRef = ref(storage, `images/${fileName}`);
-  uploadBytes(storageRef, file);
+  await uploadBytes(storageRef, file);
 };
 
 const getSubscriptionItems = async () => {
@@ -80,7 +80,7 @@ const getSubscriptionItems = async () => {
 
     const name = doc.data().name;
     const id = doc.id;
-    const imgName = `images/${doc.data().imgName}`;
+    const imgName = doc.data().imgName;
 
     subscriptionItems.push({
       name,

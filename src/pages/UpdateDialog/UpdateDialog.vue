@@ -43,8 +43,8 @@ const submit = async () => {
       date: date.value,
       imgName: updateImageName,
     };
-    await updateSubscription(props.id!, updatedSubscriptionItem);
     await uploadFirebaseStaticFile(images.value[0], updateImageName);
+    await updateSubscription(props.id!, updatedSubscriptionItem);
 
     snackbar.value = true;
     snackbarMsg.value = 'Updating a new subscription successful!';

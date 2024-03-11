@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, Ref, onMounted, onUpdated, watch } from 'vue';
+import { ref, Ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import UpdateDialog from '../UpdateDialog';
 import { getSubscriptionImageUrl } from '../../firebase';
@@ -13,9 +13,7 @@ loading!.value = true;
 const store = useSubscriptionItemsStore();
 await store.fetchLatestData();
 
-setTimeout(() => {
-  loading!.value = false;
-}, 2000);
+loading!.value = false;
 
 const { subscriptionItems } = storeToRefs(store);
 
@@ -23,11 +21,10 @@ const itemsMapComputed = computedAsync(async () => {
   const itemsMap = new Map<string, string | void>();
 
   for await (const item of subscriptionItems.value) {
-    const imageUrl = await getSubscriptionImageUrl(item.imgName);
+    const imageUrl = await getSubscriptionImageUrl(`images/${item.imgName}`);
     itemsMap?.set(item.id, imageUrl);
   }
 
-  alert(`Items map is ${JSON.stringify(itemsMap)}`);
   return itemsMap;
 }, new Map<string, string | void>());
 
