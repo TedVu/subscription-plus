@@ -40,13 +40,14 @@ const submit = async () => {
     const updatedSubscriptionItem = {
       id: props.id!,
       name: name.value,
-      date: new Date(date.value).toLocaleDateString('en-AU'),
+      date: date.value,
       imgName: updateImageName,
     };
     await updateSubscription(props.id!, updatedSubscriptionItem);
     await uploadFirebaseStaticFile(images.value[0], updateImageName);
+
     snackbar.value = true;
-    snackbarMsg.value = 'Adding a new subscription successful!';
+    snackbarMsg.value = 'Updating a new subscription successful!';
     snackbarColor.value = 'success';
   } else {
     snackbar.value = true;

@@ -29,7 +29,10 @@ const updateSubscription = async (
 ) => {
   await updateFirebaseRecord(id, updatedSubscriptionItem);
   const store = useSubscriptionItemsStore();
-  store.updateSubscription(updatedSubscriptionItem);
+  store.updateSubscription({
+    ...updatedSubscriptionItem,
+    date: new Date(updatedSubscriptionItem.date!).toLocaleDateString('en-AU'),
+  });
 };
 export {
   getSubscriptionItems,

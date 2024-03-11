@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { ref, Ref, onMounted } from 'vue';
+import { computed, ref, Ref, onMounted, onUpdated, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import UpdateDialog from '../UpdateDialog';
 import { getSubscriptionImageUrl } from '../../firebase';
-import { Subscription } from '../../types/subscription';
 import { removeSubscription, useLoadingState } from '../../composables';
 import { useSubscriptionItemsStore } from '../../store';
+import { computedAsync } from '@vueuse/core';
 
 const loading = useLoadingState();
 loading!.value = true;
+
 const store = useSubscriptionItemsStore();
 await store.fetchLatestData();
 
@@ -18,15 +19,18 @@ setTimeout(() => {
 
 const { subscriptionItems } = storeToRefs(store);
 
-const itemsMap = ref<Map<string, string | void>>();
+const itemsMapComputed = computedAsync(async () => {
+  const itemsMap = new Map<string, string | void>();
 
-onMounted(async () => {
-  itemsMap.value = new Map<string, string | void>();
-  subscriptionItems.value.forEach(async (item: Subscription) => {
+  for await (const item of subscriptionItems.value) {
     const imageUrl = await getSubscriptionImageUrl(item.imgName);
-    itemsMap.value?.set(item.id, imageUrl);
-  });
-});
+    itemsMap?.set(item.id, imageUrl);
+  }
+
+  alert(`Items map is ${JSON.stringify(itemsMap)}`);
+  return itemsMap;
+}, new Map<string, string | void>());
+
 const dialog = ref(false);
 const snackbar = ref(false);
 const snackbarMsg = ref('');
@@ -53,7 +57,7 @@ const handleSubscriptionDelete = async (id: string, isActive: Ref<Boolean>) => {
           <v-col v-for="item in subscriptionItems" :key="item.id" cols="6">
             <v-card class="card">
               <v-img
-                :src="itemsMap?.get(item.id)!"
+                :src="itemsMapComputed.get(item.id)!"
                 class="align-end"
                 gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                 height="200px"
@@ -128,4 +132,3 @@ const handleSubscriptionDelete = async (id: string, isActive: Ref<Boolean>) => {
 <style lang="scss">
 @import './HomePage.module.scss';
 </style>
-../UpdateDialog/UpdateDialog.vue

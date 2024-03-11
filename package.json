@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@vuepic/vue-datepicker": "^7.4.0",
+    "@vueuse/core": "^10.9.0",
     "firebase": "^10.7.1",
     "pinia": "^2.1.7",
     "uuid": "^9.0.1",
