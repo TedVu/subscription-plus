@@ -46,7 +46,11 @@ const submit = async () => {
 </script>
 <template>
   <v-form validate-on="blur" @submit.prevent="submit">
-    <v-card title="Update Subscription">
+    <v-card title="">
+      <v-card-title class="d-flex justify-space-between align-center">
+        <div class="text-h5 text-medium-emphasis ps-2">Update Subscription</div>
+        <v-btn icon="mdi-close" variant="text" @click="emits('close')"></v-btn>
+      </v-card-title>
       <v-card-text>
         <v-text-field
           v-model="name"
@@ -96,4 +100,3 @@ const submit = async () => {
     {{ snackbarMsg }}
   </v-snackbar>
 </template>
-../../validation../../composables
