@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { Subscription } from '../types';
-import { getSubscriptionItems, getSubscriptionImageUrl } from '../firebase';
+import { getSubscriptionItems } from '../firebase';
 export const useSubscriptionItemsStore = defineStore(
   'subscription-items',
   () => {
