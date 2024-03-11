@@ -19,7 +19,7 @@ const isAllDataCorrect = (
   }
 
   // subscription date must be filled
-  if (date === null) {
+  if (!date) {
     subscriptionDateErrorMsg.value = false;
     isCorrect = false;
   } else {
