@@ -4,6 +4,8 @@ import { enAU } from 'date-fns/locale';
 import { isAllDataCorrect, nameRules } from '../../validation';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import { updateSubscription } from '../../composables';
+import { v4 as uuidv4 } from 'uuid';
+import { uploadFirebaseStaticFile } from '../../firebase';
 
 const emits = defineEmits(['close']);
 
@@ -28,12 +30,21 @@ const submit = async () => {
     setTimeout(() => {
       loading.value = false;
     }, 2000);
+
+    const updateImageName = `${uuidv4().replaceAll('-', '')}.${(
+      images.value[0] as File
+    ).name
+      .split('.')
+      .pop()}`;
+
     const updatedSubscriptionItem = {
       id: props.id!,
       name: name.value,
       date: new Date(date.value).toLocaleDateString('en-AU'),
+      imgName: updateImageName,
     };
-    updateSubscription(props.id!, updatedSubscriptionItem);
+    await updateSubscription(props.id!, updatedSubscriptionItem);
+    await uploadFirebaseStaticFile(images.value[0], updateImageName);
     snackbar.value = true;
     snackbarMsg.value = 'Adding a new subscription successful!';
     snackbarColor.value = 'success';
