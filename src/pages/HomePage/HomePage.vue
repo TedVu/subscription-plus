@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, Ref } from 'vue';
+import { computed, ref, Ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import UpdateDialog from '../UpdateDialog';
 import { getSubscriptionImageUrl } from '../../firebase';
@@ -24,9 +24,14 @@ const itemsMapComputed = computedAsync(async () => {
     const imageUrl = await getSubscriptionImageUrl(`images/${item.imgName}`);
     itemsMap?.set(item.id, imageUrl);
   }
-
   return itemsMap;
 }, new Map<string, string | void>());
+
+const itemsName = computed(() => {
+  const names = [];
+  subscriptionItems.value.forEach((item) => names.push(item.name));
+  return names;
+});
 
 const dialog = ref(false);
 const snackbar = ref(false);
@@ -42,13 +47,27 @@ const handleSubscriptionDelete = async (id: string, isActive: Ref<Boolean>) => {
   snackbarColor.value = 'red-darken-2';
 };
 </script>
-
 <template>
   <template v-if="loading"
     ><v-progress-circular color="primary" indeterminate></v-progress-circular
   ></template>
   <template v-else>
     <v-container fluid>
+      <v-autocomplete
+        :items="itemsName"
+        append-inner-icon="mdi-microphone"
+        class="mx-auto"
+        density="comfortable"
+        menu-icon=""
+        placeholder="Search Google or type a URL"
+        prepend-inner-icon="mdi-magnify"
+        style="max-width: 350px"
+        theme="light"
+        variant="solo"
+        auto-select-first
+        item-props
+        rounded
+      ></v-autocomplete>
       <v-row dense>
         <template v-if="subscriptionItems.length > 0">
           <v-col v-for="item in subscriptionItems" :key="item.id" cols="6">
