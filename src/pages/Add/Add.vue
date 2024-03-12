@@ -19,12 +19,10 @@ const snackbarColor = ref('');
 const isAllDataCorrect = () => {
   let isCorrect = true;
 
-  // subscription name must be at least 3 characters
   if (name.value.length < 3) {
     isCorrect = false;
   }
 
-  // subscription date must be filled
   if (date.value === null) {
     subscriptionDateErrorMsg.value = false;
     isCorrect = false;
@@ -118,4 +116,3 @@ const submit = async () => {
   color: #bb0020;
 }
 </style>
-../../firebase../../validation
