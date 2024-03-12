@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, Ref } from 'vue';
+import { computed, ref, Ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import UpdateDialog from '../UpdateDialog';
 import { getSubscriptionImageUrl } from '../../firebase';
@@ -8,6 +8,7 @@ import { useSubscriptionItemsStore } from '../../store';
 import { computedAsync } from '@vueuse/core';
 
 const loading = useLoadingState();
+const filterValue = ref('');
 loading!.value = true;
 
 const store = useSubscriptionItemsStore();
@@ -28,10 +29,17 @@ const itemsMapComputed = computedAsync(async () => {
 }, new Map<string, string | void>());
 
 const itemsName = computed(() => {
-  const names = [];
+  const names: string[] = [];
   subscriptionItems.value.forEach((item) => names.push(item.name));
   return names;
 });
+
+watch(
+  () => filterValue.value,
+  async (newFilterValue) => {
+    await store.filterSubscriptionItems(newFilterValue);
+  }
+);
 
 const dialog = ref(false);
 const snackbar = ref(false);
@@ -67,6 +75,7 @@ const handleSubscriptionDelete = async (id: string, isActive: Ref<Boolean>) => {
         auto-select-first
         item-props
         rounded
+        v-model="filterValue"
       ></v-autocomplete>
       <v-row dense>
         <template v-if="subscriptionItems.length > 0">

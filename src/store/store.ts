@@ -32,7 +32,18 @@ export const useSubscriptionItemsStore = defineStore(
       subscriptionItems.value = newSubscriptionItems;
     };
 
+    const filterSubscriptionItems = async (subscriptionItemName: string) => {
+      if (subscriptionItemName != null) {
+        subscriptionItems.value = subscriptionItems.value.filter(
+          (item) => item.name === subscriptionItemName
+        );
+      } else {
+        await fetchLatestData();
+      }
+    };
+
     return {
+      filterSubscriptionItems,
       subscriptionItems,
       fetchLatestData,
       addSubscription,
