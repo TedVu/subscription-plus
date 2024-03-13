@@ -9,6 +9,7 @@ import { computedAsync } from '@vueuse/core';
 
 const loading = useLoadingState();
 const filterValue = ref('');
+const delayFilterTimeout = ref(0);
 loading!.value = true;
 
 const store = useSubscriptionItemsStore();
@@ -28,19 +29,6 @@ const itemsMapComputed = computedAsync(async () => {
   return itemsMap;
 }, new Map<string, string | void>());
 
-const itemsName = computed(() => {
-  const names: string[] = [];
-  subscriptionItems.value.forEach((item) => names.push(item.name));
-  return names;
-});
-
-watch(
-  () => filterValue.value,
-  async (newFilterValue) => {
-    await store.filterSubscriptionItems(newFilterValue);
-  }
-);
-
 const dialog = ref(false);
 const snackbar = ref(false);
 const snackbarMsg = ref('');
@@ -54,29 +42,31 @@ const handleSubscriptionDelete = async (id: string, isActive: Ref<Boolean>) => {
   snackbarMsg.value = 'Deleting a subscription successful!';
   snackbarColor.value = 'red-darken-2';
 };
+
+watch(
+  () => filterValue.value,
+  async (newfilterValue) => {
+    if (delayFilterTimeout.value) {
+      window.clearTimeout(delayFilterTimeout.value);
+    }
+    delayFilterTimeout.value = window.setTimeout(async () => {
+      await store.filterSubscriptionItems(newfilterValue);
+      window.clearTimeout(delayFilterTimeout.value);
+    }, 300);
+  }
+);
 </script>
 <template>
   <template v-if="loading"
     ><v-progress-circular color="primary" indeterminate></v-progress-circular
   ></template>
   <template v-else>
+    <v-text-field v-model="filterValue">
+      <template v-slot:append-inner>
+        <v-icon> mdi-magnify </v-icon>
+      </template>
+    </v-text-field>
     <v-container fluid>
-      <v-autocomplete
-        :items="itemsName"
-        append-inner-icon="mdi-microphone"
-        class="mx-auto"
-        density="comfortable"
-        menu-icon=""
-        placeholder="Search Google or type a URL"
-        prepend-inner-icon="mdi-magnify"
-        style="max-width: 350px"
-        theme="light"
-        variant="solo"
-        auto-select-first
-        item-props
-        rounded
-        v-model="filterValue"
-      ></v-autocomplete>
       <v-row dense>
         <template v-if="subscriptionItems.length > 0">
           <v-col v-for="item in subscriptionItems" :key="item.id" cols="6">

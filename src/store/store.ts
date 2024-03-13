@@ -6,8 +6,10 @@ export const useSubscriptionItemsStore = defineStore(
   'subscription-items',
   () => {
     const subscriptionItems = ref([] as Subscription[]);
+    const serverSubscriptionItems = ref([] as Subscription[]);
     const fetchLatestData = async () => {
       subscriptionItems.value = await getSubscriptionItems();
+      serverSubscriptionItems.value = subscriptionItems.value;
     };
 
     const removeSubscription = (id: string) => {
@@ -33,9 +35,9 @@ export const useSubscriptionItemsStore = defineStore(
     };
 
     const filterSubscriptionItems = async (subscriptionItemName: string) => {
-      if (subscriptionItemName != null) {
-        subscriptionItems.value = subscriptionItems.value.filter(
-          (item) => item.name === subscriptionItemName
+      if (subscriptionItemName) {
+        subscriptionItems.value = serverSubscriptionItems.value.filter((item) =>
+          item.name.toUpperCase().includes(subscriptionItemName.toUpperCase())
         );
       } else {
         await fetchLatestData();
