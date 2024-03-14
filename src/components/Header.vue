@@ -50,5 +50,6 @@ const computedVMainStyle = computed(() => ({
 
 .content-container {
   padding-top: 15vh !important;
+  width: 80vw;
 }
 </style>
