@@ -1,5 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import draggable from 'vuedraggable';
+</script>
 
 <template>
-  <div>This is the profile page</div>
+  <div>TEST</div>
+  <draggable>TEST</draggable>
 </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, Ref, watch } from 'vue';
+import { ref, Ref, watch, computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import UpdateDialog from '../UpdateDialog';
 import { getSubscriptionImageUrl } from '../../firebase';
@@ -33,6 +33,8 @@ const dialog = ref(false);
 const snackbar = ref(false);
 const snackbarMsg = ref('');
 const snackbarColor = ref('');
+const isDrag = ref(false);
+const currentDragItemId = ref('');
 
 const handleSubscriptionDelete = async (id: string, isActive: Ref<Boolean>) => {
   await removeSubscription(id);
@@ -41,6 +43,16 @@ const handleSubscriptionDelete = async (id: string, isActive: Ref<Boolean>) => {
   snackbar.value = true;
   snackbarMsg.value = 'Deleting a subscription successful!';
   snackbarColor.value = 'red-darken-2';
+};
+
+const ondragstart = (itemId: string) => {
+  currentDragItemId.value = itemId;
+  isDrag.value = true;
+};
+
+const ondragend = () => {
+  isDrag.value = false;
+  console.log('end dragging...');
 };
 
 watch(
@@ -55,6 +67,16 @@ watch(
     }, 300);
   }
 );
+
+const displayCard = (id: string) => {
+  console.log(`IsDrag is ${isDrag.value}`);
+  if (id === currentDragItemId.value && isDrag.value === true) {
+    return {
+      opacity: 0,
+    };
+  }
+  return {};
+};
 </script>
 <template>
   <template v-if="loading"
@@ -70,7 +92,13 @@ watch(
       <v-row dense>
         <template v-if="subscriptionItems.length > 0">
           <v-col v-for="item in subscriptionItems" :key="item.id" cols="6">
-            <v-card class="card">
+            <v-card
+              class="card"
+              draggable="true"
+              @dragstart="ondragstart(item.id)"
+              @dragend="ondragend"
+              :style="displayCard(item.id)"
+            >
               <v-img
                 :src="itemsMapComputed.get(item.id)!"
                 class="align-end"
@@ -88,6 +116,12 @@ watch(
                 <div class="mr-2 font-weight-bold">Subscription Date:</div>
                 {{ item.date }}
                 <v-spacer />
+                <v-btn
+                  size="small"
+                  variant="text"
+                  icon="mdi-drag"
+                  style="cursor: grab"
+                ></v-btn>
                 <v-dialog width="500">
                   <template #activator="{ props }">
                     <v-btn
