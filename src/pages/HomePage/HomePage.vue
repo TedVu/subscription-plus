@@ -47,12 +47,27 @@ const handleSubscriptionDelete = async (id: string, isActive: Ref<Boolean>) => {
   snackbarColor.value = 'red-darken-2';
 };
 
-const ondragstart = (event: Event, itemId: string) => {
+const ondragstart = (event: DragEvent, itemId: string) => {
   document.addEventListener('drag', (event: MouseEvent) => {
     mouseX.value = event.clientX;
     mouseY.value = event.clientY;
     //gVMSpKjTf5kKBy5nGuQ9
   });
+
+  document.addEventListener('dragover', (event) => {
+    event.dataTransfer!.dropEffect = 'move';
+    event.preventDefault();
+  });
+
+  document.addEventListener('dragenter', (event) => {
+    event.preventDefault();
+  });
+
+  event.dataTransfer?.setDragImage(
+    new Image(),
+    window.outerWidth,
+    window.outerHeight
+  );
   currentDragItemId.value = itemId;
   isDrag.value = true;
 
@@ -97,9 +112,6 @@ const displayCard = (id: string) => {
 const dragPopupX = ref(0);
 const dragPopupY = ref(0);
 const dragContainer = (id: string) => {
-  console.log(
-    `Is drag value and curent dragitem id ${isDrag.value} ${currentDragItemId.value}`
-  );
   if (isDrag.value && id === currentDragItemId.value) {
     console.log('GO HERE');
     return {
@@ -108,6 +120,7 @@ const dragContainer = (id: string) => {
       left: dragPopupX.value + 'px',
       top: dragPopupY.value + 'px',
       opacity: 1,
+      cursor: 'move',
     };
   } else {
     return {
@@ -131,7 +144,7 @@ const dragContainer = (id: string) => {
         <template v-if="subscriptionItems.length > 0">
           <v-col v-for="item in subscriptionItems" :key="item.id" cols="6">
             <v-card
-              class="card"
+              class="card grabbable"
               draggable="true"
               @dragstart="ondragstart($event, item.id)"
               @dragend="ondragend($event)"
@@ -215,7 +228,7 @@ const dragContainer = (id: string) => {
             </v-card>
 
             <v-card
-              class="card"
+              class="card grabbable"
               draggable="true"
               :style="dragContainer(item.id)"
             >
