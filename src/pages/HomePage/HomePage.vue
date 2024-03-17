@@ -51,7 +51,6 @@ const ondragstart = (event: DragEvent, itemId: string) => {
   document.addEventListener('drag', (event: MouseEvent) => {
     mouseX.value = event.clientX;
     mouseY.value = event.clientY;
-    //gVMSpKjTf5kKBy5nGuQ9
   });
 
   document.addEventListener('dragover', (event) => {
@@ -108,6 +107,13 @@ const displayCard = (id: string) => {
   }
   return {};
 };
+
+const ondragover = (id: string) => {
+  console.log('dragover...');
+  if (id !== currentDragItemId.value) {
+    store.orderElementDragOver(currentDragItemId.value, id);
+  }
+};
 const dragPopupX = ref(0);
 const dragPopupY = ref(0);
 const dragContainer = (id: string) => {
@@ -117,11 +123,10 @@ const dragContainer = (id: string) => {
       zIndex: 9,
       left: dragPopupX.value + 'px',
       top: dragPopupY.value + 'px',
-      opacity: 1,
     };
   } else {
     return {
-      opacity: 0,
+      display: 'none',
     };
   }
 };
@@ -141,11 +146,11 @@ const dragContainer = (id: string) => {
         <template v-if="subscriptionItems.length > 0">
           <v-col v-for="item in subscriptionItems" :key="item.id" cols="6">
             <v-card
-              id="item.id"
               class="card grabbable"
               draggable="true"
               @dragstart="ondragstart($event, item.id)"
               @dragend="ondragend($event)"
+              @dragover="ondragover(item.id)"
               :style="displayCard(item.id)"
             >
               <v-img
