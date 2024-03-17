@@ -85,7 +85,6 @@ const ondragend = (event: Event) => {
   mouseY.value = 0;
   dragPopupX.value = 0;
   dragPopupY.value = 0;
-  event.preventDefault();
 };
 
 watch(
