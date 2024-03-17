@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, Ref, watch } from 'vue';
+import { ref, Ref, watch, CSSProperties } from 'vue';
 import { storeToRefs } from 'pinia';
 import UpdateDialog from '../UpdateDialog';
 import { getSubscriptionImageUrl } from '../../firebase';
@@ -116,14 +116,15 @@ const ondragover = (id: string) => {
 };
 const dragPopupX = ref(0);
 const dragPopupY = ref(0);
-const dragContainer = (id: string) => {
+const dragContainer: (id: string) => CSSProperties = (id: string) => {
   if (isDrag.value && id === currentDragItemId.value) {
-    return {
+    const containerStyle: CSSProperties = {
       position: 'absolute',
       zIndex: 9,
       left: dragPopupX.value + 'px',
       top: dragPopupY.value + 'px',
     };
+    return containerStyle;
   } else {
     return {
       display: 'none',
