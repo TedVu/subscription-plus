@@ -113,14 +113,12 @@ const dragPopupX = ref(0);
 const dragPopupY = ref(0);
 const dragContainer = (id: string) => {
   if (isDrag.value && id === currentDragItemId.value) {
-    console.log('GO HERE');
     return {
       position: 'absolute',
       zIndex: 9,
       left: dragPopupX.value + 'px',
       top: dragPopupY.value + 'px',
       opacity: 1,
-      cursor: 'move',
     };
   } else {
     return {
@@ -144,6 +142,7 @@ const dragContainer = (id: string) => {
         <template v-if="subscriptionItems.length > 0">
           <v-col v-for="item in subscriptionItems" :key="item.id" cols="6">
             <v-card
+              id="item.id"
               class="card grabbable"
               draggable="true"
               @dragstart="ondragstart($event, item.id)"
@@ -228,7 +227,7 @@ const dragContainer = (id: string) => {
             </v-card>
 
             <v-card
-              class="card grabbable"
+              class="card"
               draggable="true"
               :style="dragContainer(item.id)"
             >
