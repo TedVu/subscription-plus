@@ -1,4 +1,8 @@
 .card {
-  min-width: 20vw;
+  user-select: none;
+}
+
+.card-dragged {
+  // max-width: 8vw;
   user-select: none;
 }

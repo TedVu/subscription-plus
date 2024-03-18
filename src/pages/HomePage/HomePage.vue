@@ -108,10 +108,10 @@ const displayCard = (id: string) => {
   return {};
 };
 
-const ondragover = (id: string) => {
-  console.log('dragover...');
+const ondragover = (event: DragEvent, id: string) => {
   if (id !== currentDragItemId.value) {
     store.orderElementDragOver(currentDragItemId.value, id);
+    event.preventDefault();
   }
 };
 const dragPopupX = ref(0);
@@ -151,7 +151,7 @@ const dragContainer: (id: string) => CSSProperties = (id: string) => {
               draggable="true"
               @dragstart="ondragstart($event, item.id)"
               @dragend="ondragend"
-              @dragover="ondragover(item.id)"
+              @dragover="ondragover($event, item.id)"
               :style="displayCard(item.id)"
             >
               <v-img
@@ -232,7 +232,7 @@ const dragContainer: (id: string) => CSSProperties = (id: string) => {
             </v-card>
 
             <v-card
-              class="card"
+              class="card-dragged"
               draggable="true"
               :style="dragContainer(item.id)"
             >
