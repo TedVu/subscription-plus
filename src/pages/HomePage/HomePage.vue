@@ -76,7 +76,7 @@ const ondragstart = (event: DragEvent, itemId: string) => {
   }, 10);
 };
 
-const ondragend = (event: Event) => {
+const ondragend = () => {
   isDrag.value = false;
   currentDragItemId.value = '';
   window.clearInterval(dragIntervalId.value);
@@ -150,7 +150,7 @@ const dragContainer: (id: string) => CSSProperties = (id: string) => {
               class="card grabbable"
               draggable="true"
               @dragstart="ondragstart($event, item.id)"
-              @dragend="ondragend($event)"
+              @dragend="ondragend"
               @dragover="ondragover(item.id)"
               :style="displayCard(item.id)"
             >
