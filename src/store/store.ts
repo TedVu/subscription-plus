@@ -34,38 +34,8 @@ export const useSubscriptionItemsStore = defineStore(
       subscriptionItems.value = newSubscriptionItems;
     };
 
-    const orderElementDragOver = (
-      oldElementId: string,
-      shiftedElementId: string
-    ) => {
-      const oldElement = subscriptionItems.value.find(
-        (item) => item.id === oldElementId
-      );
-      const oldElementIndex = subscriptionItems.value.findIndex(
-        (item) => item.id === oldElementId
-      );
-
-      const oldShiftedElementIndex = subscriptionItems.value.findIndex(
-        (item) => item.id === shiftedElementId
-      );
-      subscriptionItems.value.splice(oldElementIndex, 1);
-
-      const shiftedElementIndex = subscriptionItems.value.findIndex(
-        (item) => item.id === shiftedElementId
-      );
-      // console.log(`Debug ${JSON.stringify(subscriptionItems.value)}`);
-      // console.log(`New element index: ${newElementIndex}`);
-      // console.log(`New element index: ${newElementIndex}`);
-
-      subscriptionItems.value.splice(
-        oldShiftedElementIndex > oldElementIndex
-          ? shiftedElementIndex + 1
-          : shiftedElementIndex,
-        0,
-        oldElement!
-      );
-
-      console.log(`Debug ${JSON.stringify(subscriptionItems.value)}`);
+    const updateElementOrder = (newSubscriptionItems: Subscription[]) => {
+      subscriptionItems.value = newSubscriptionItems;
     };
 
     const filterSubscriptionItems = async (subscriptionItemName: string) => {
@@ -79,12 +49,12 @@ export const useSubscriptionItemsStore = defineStore(
     };
 
     return {
-      orderElementDragOver,
-      filterSubscriptionItems,
-      subscriptionItems,
-      fetchLatestData,
       addSubscription,
+      fetchLatestData,
+      filterSubscriptionItems,
       removeSubscription,
+      subscriptionItems,
+      updateElementOrder,
       updateSubscription,
     };
   }

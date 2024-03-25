@@ -56,6 +56,10 @@ watch(
     }, 300);
   }
 );
+
+const sortChangedHandler = async () => {
+  store.updateElementOrder(subscriptionItems.value);
+};
 </script>
 <template>
   <template v-if="loading"
@@ -78,10 +82,12 @@ watch(
             handle=".drag-handle"
             style="display: flex"
             fallback-class="drag"
+            ghost-class="ghost"
             :force-fallback="true"
+            @change="sortChangedHandler"
           >
             <template #item="{ element: item }: { element: Subscription }">
-              <v-col :key="item.id" cols="6">
+              <v-col :key="item.id" cols="4">
                 <v-card class="card">
                   <v-img
                     :src="itemsMapComputed.get(item.id)!"
