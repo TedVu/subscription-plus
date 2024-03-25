@@ -77,6 +77,8 @@ watch(
             :animation="150"
             handle=".drag-handle"
             style="display: flex"
+            fallback-class="drag"
+            :force-fallback="true"
           >
             <template #item="{ element: item }: { element: Subscription }">
               <v-col :key="item.id" cols="6">
