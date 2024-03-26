@@ -71,25 +71,24 @@ const sortChangedHandler = async () => {
         <v-icon> mdi-magnify </v-icon>
       </template>
     </v-text-field>
-    <v-container fluid>
-      <v-row dense>
-        <template v-if="subscriptionItems.length > 0">
+    <v-container>
+      <template v-if="subscriptionItems.length > 0">
+        <v-row no-gutters justify-cotent="center">
           <draggable
             v-model="subscriptionItems"
             group="subscriptionItems"
             item-key="id"
             :animation="150"
             handle=".drag-handle"
-            style="display: flex"
             fallback-class="drag"
             ghost-class="ghost"
             :force-fallback="true"
-            class="flex-row"
+            style="display: contents"
             @change="sortChangedHandler"
           >
             <template #item="{ element: item }: { element: Subscription }">
-              <v-col :key="item.id" cols="5">
-                <v-card class="card">
+              <v-col :key="item.id" cols="4">
+                <v-card>
                   <v-img
                     :src="itemsMapComputed.get(item.id)!"
                     class="align-end"
@@ -172,9 +171,9 @@ const sortChangedHandler = async () => {
               </v-col>
             </template>
           </draggable>
-        </template>
-        <template v-else> No subscription items </template>
-      </v-row>
+        </v-row>
+      </template>
+      <template v-else> No subscription items </template>
     </v-container>
   </template>
   <v-snackbar v-model="snackbar" :color="snackbarColor">
