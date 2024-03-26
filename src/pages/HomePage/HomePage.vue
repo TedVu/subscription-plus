@@ -84,10 +84,11 @@ const sortChangedHandler = async () => {
             fallback-class="drag"
             ghost-class="ghost"
             :force-fallback="true"
+            class="flex-row"
             @change="sortChangedHandler"
           >
             <template #item="{ element: item }: { element: Subscription }">
-              <v-col :key="item.id" cols="4">
+              <v-col :key="item.id" cols="5">
                 <v-card class="card">
                   <v-img
                     :src="itemsMapComputed.get(item.id)!"
