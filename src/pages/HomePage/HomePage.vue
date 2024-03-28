@@ -103,7 +103,9 @@ const sortChangedHandler = async () => {
                   </v-img>
 
                   <v-card-actions>
-                    <div class="mr-2 font-weight-bold">Subscription Date:</div>
+                    <div class="mr-2 font-weight-bold" style="font-size: 12px">
+                      Subscription Date:
+                    </div>
                     {{ item.date }}
                     <v-spacer />
                     <v-btn
