@@ -5,6 +5,7 @@ import {
   deleteFirebaseRecord,
   updateFirebaseRecord,
 } from '../firebase';
+
 const getSubscriptionItems = async () => {
   const store = useSubscriptionItemsStore();
   await store.getLatestData();
