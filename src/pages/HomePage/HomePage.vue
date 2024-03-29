@@ -1,21 +1,26 @@
 <script setup lang="ts">
 import { ref, Ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
-import UpdateDialog from '../UpdateDialog';
-import { getSubscriptionImageUrl } from '../../firebase';
-import { removeSubscription, useLoadingState } from '../../composables';
-import { useSubscriptionItemsStore } from '../../store';
 import { computedAsync } from '@vueuse/core';
 import draggable from 'vuedraggable';
 import type { Subscription } from '../../types';
+import { getSubscriptionImageUrl } from '../../firebase';
+import { removeSubscription, useLoadingState } from '../../composables';
+import { useSubscriptionItemsStore } from '../../store';
+import UpdateDialog from '../UpdateDialog';
 
 const loading = useLoadingState();
 const filterValue = ref('');
 const delayFilterTimeout = ref(0);
+const dialog = ref(false);
+const snackbar = ref(false);
+const snackbarMsg = ref('');
+const snackbarColor = ref('');
+
 loading!.value = true;
 
 const store = useSubscriptionItemsStore();
-await store.fetchLatestData();
+await store.getLatestData();
 
 loading!.value = false;
 
@@ -31,11 +36,10 @@ const itemsMapComputed = computedAsync(async () => {
   return itemsMap;
 }, new Map<string, string | void>());
 
-const dialog = ref(false);
-const snackbar = ref(false);
-const snackbarMsg = ref('');
-const snackbarColor = ref('');
-const handleSubscriptionDelete = async (id: string, isActive: Ref<Boolean>) => {
+const handleSubscriptionItemDelete = async (
+  id: string,
+  isActive: Ref<Boolean>
+) => {
   await removeSubscription(id);
   dialog.value = false;
   isActive.value = false;
@@ -56,10 +60,6 @@ watch(
     }, 300);
   }
 );
-
-const sortChangedHandler = async () => {
-  store.updateElementOrder(subscriptionItems.value);
-};
 </script>
 <template>
   <template v-if="loading"
@@ -84,7 +84,6 @@ const sortChangedHandler = async () => {
             ghost-class="ghost"
             :force-fallback="true"
             style="display: contents"
-            @change="sortChangedHandler"
           >
             <template #item="{ element: item }: { element: Subscription }">
               <v-col :key="item.id" cols="4">
@@ -149,7 +148,7 @@ const sortChangedHandler = async () => {
 
                             <v-btn
                               @click="
-                                handleSubscriptionDelete(item.id, isActive)
+                                handleSubscriptionItemDelete(item.id, isActive)
                               "
                               color="red"
                               variant="elevated"

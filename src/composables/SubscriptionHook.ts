@@ -7,7 +7,7 @@ import {
 } from '../firebase';
 const getSubscriptionItems = async () => {
   const store = useSubscriptionItemsStore();
-  await store.fetchLatestData();
+  await store.getLatestData();
   return store.subscriptionItems;
 };
 
