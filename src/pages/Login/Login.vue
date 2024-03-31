@@ -1,41 +1,26 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-const name = ref('');
-const password = ref('');
-const loading = ref(false);
-const snackbar = ref(false);
-const snackbarMsg = ref('');
-const snackbarColor = ref('');
-const submit = async () => {};
+import * as firebaseui from 'firebaseui';
+import firebase from 'firebase/compat/app';
+import 'firebaseui/dist/firebaseui.css';
+import { getAuth } from 'firebase/auth';
+const auth = getAuth();
+
+var ui = new firebaseui.auth.AuthUI(auth);
+var uiConfig = {
+  signInSuccessUrl: 'index',
+  signInOptions: [
+    // Leave the lines as is for the providers you want to offer your users.
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+    firebase.auth.GithubAuthProvider.PROVIDER_ID,
+    firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+  ],
+};
+ui.start('#firebaseui-auth-container', uiConfig);
 </script>
 
 <template>
-  <v-sheet width="300" class="mx-auto">
-    <v-form validate-on="blur" @submit.prevent="submit">
-      <v-text-field v-model="name" label="Username" />
-      <v-text-field v-model="password" label="Password" />
-
-      <v-btn
-        :loading="loading"
-        type="submit"
-        block
-        class="mt-2"
-        color="success"
-        variant="elevated"
-        >Login</v-btn
-      >
-      <v-btn
-        :loading="loading"
-        type="submit"
-        block
-        class="mt-2"
-        color="primary"
-        variant="elevated"
-        >Register</v-btn
-      >
-    </v-form>
-    <v-snackbar v-model="snackbar" :color="snackbarColor">
-      {{ snackbarMsg }}
-    </v-snackbar>
-  </v-sheet>
+  <div id="firebaseui-auth-container"></div>
 </template>
