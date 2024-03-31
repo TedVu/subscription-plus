@@ -2,7 +2,6 @@ import { About, HomePage, Profile, Add } from '../pages';
 import * as VueRouter from 'vue-router';
 import Login from '../pages/Login/Login.vue';
 import { useAuthentication } from '../composables';
-import { storeToRefs } from 'pinia';
 
 const routes = [
   { name: 'about', path: '/about', component: About },
@@ -18,7 +17,11 @@ const router = VueRouter.createRouter({
 });
 
 router.beforeEach(async (to) => {
-  const { isAuthenticated } = storeToRefs(useAuthentication());
+  const { isAuthenticated } = useAuthentication();
+
+  if (to.path === '/login' && isAuthenticated) {
+    return '/home';
+  }
   if (
     // make sure the user is authenticated
     !isAuthenticated &&

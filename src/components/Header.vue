@@ -10,7 +10,14 @@ const computedVMainStyle = computed(() => ({
   'progress-center': loading.value,
   'content-container': !loading.value,
 }));
-const { isAuthenticated } = storeToRefs(useAuthentication());
+
+const authenticationStore = useAuthentication();
+const { isAuthenticated } = storeToRefs(authenticationStore);
+
+const handleLogout = () => {
+  authenticationStore.logout();
+  window.location.reload();
+};
 </script>
 <template>
   <v-app>
@@ -45,6 +52,35 @@ const { isAuthenticated } = storeToRefs(useAuthentication());
           to="about"
           title="About"
         ></v-list-item>
+        <v-dialog width="500">
+          <template #activator="{ props }">
+            <v-list-item
+              v-bind="props"
+              prepend-icon="mdi-logout"
+              title="Logout"
+              @click=""
+            ></v-list-item>
+          </template>
+          <template #default="{ isActive }">
+            <v-card title="Are you sure you want to logout">
+              <template v-slot:actions>
+                <v-spacer></v-spacer>
+
+                <v-btn color="error" variant="elevated" @click="handleLogout">
+                  Yes
+                </v-btn>
+
+                <v-btn
+                  @click="isActive.value = false"
+                  color="primary"
+                  variant="elevated"
+                >
+                  No
+                </v-btn>
+              </template>
+            </v-card>
+          </template>
+        </v-dialog>
       </v-list>
     </v-navigation-drawer>
     <v-main :class="computedVMainStyle"><slot /></v-main>
