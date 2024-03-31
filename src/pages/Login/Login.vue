@@ -2,12 +2,11 @@
 import * as firebaseui from 'firebaseui';
 import firebase from 'firebase/compat/app';
 import 'firebaseui/dist/firebaseui.css';
-import { getAuth } from 'firebase/auth';
-const auth = getAuth();
+import { auth } from '../../firebase';
 
 var ui = new firebaseui.auth.AuthUI(auth);
 var uiConfig = {
-  signInSuccessUrl: 'index',
+  signInSuccessUrl: '/',
   signInOptions: [
     // Leave the lines as is for the providers you want to offer your users.
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -22,5 +21,6 @@ ui.start('#firebaseui-auth-container', uiConfig);
 </script>
 
 <template>
+  <div class="text-h6">Welcome to Subscription Plus Application</div>
   <div id="firebaseui-auth-container"></div>
 </template>

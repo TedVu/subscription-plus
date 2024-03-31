@@ -1,19 +1,23 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { setLoadingState } from '../composables';
+import { useAuthentication } from '../composables';
+import { storeToRefs } from 'pinia';
+
 const loading = setLoadingState(false);
 
 const computedVMainStyle = computed(() => ({
   'progress-center': loading.value,
   'content-container': !loading.value,
 }));
+const { isAuthenticated } = storeToRefs(useAuthentication());
 </script>
 <template>
   <v-app>
-    <v-app-bar color="info" density="comfortable">
+    <v-app-bar color="info" density="comfortable" v-if="isAuthenticated">
       <v-app-bar-title> Subscription plus </v-app-bar-title>
     </v-app-bar>
-    <v-navigation-drawer expand-on-hover rail>
+    <v-navigation-drawer expand-on-hover rail v-if="isAuthenticated">
       <v-list>
         <v-list-item
           title="Ted Vu"
@@ -26,7 +30,11 @@ const computedVMainStyle = computed(() => ({
           to="profile"
           title="Profile"
         ></v-list-item>
-        <v-list-item prepend-icon="mdi-home" to="/" title="Home"></v-list-item>
+        <v-list-item
+          prepend-icon="mdi-home"
+          to="home"
+          title="Home"
+        ></v-list-item>
         <v-list-item
           prepend-icon="mdi-plus"
           to="add"
