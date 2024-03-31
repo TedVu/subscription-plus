@@ -17,7 +17,7 @@ const router = VueRouter.createRouter({
   routes,
 });
 
-router.beforeEach(async (to, from) => {
+router.beforeEach(async (to) => {
   const { isAuthenticated } = storeToRefs(useAuthentication());
   if (
     // make sure the user is authenticated
