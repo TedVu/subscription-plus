@@ -22,7 +22,9 @@ loading!.value = true;
 const store = useSubscriptionItemsStore();
 await store.getLatestData();
 
-loading!.value = false;
+setTimeout(() => {
+  loading!.value = false;
+}, 3000);
 
 const { subscriptionItems } = storeToRefs(store);
 
