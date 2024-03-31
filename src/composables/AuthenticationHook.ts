@@ -10,6 +10,7 @@ export const useAuthentication = defineStore(
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        console.log(`User object is ${JSON.stringify(user)}`);
         isAuthenticated.value = true;
       }
     });
