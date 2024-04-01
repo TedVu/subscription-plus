@@ -19,5 +19,7 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
 
 ## To Do
 
-1. Check best practices
-2. Initial POC for subscription notifications feature
+1. Implement update and delete for local storage (still buggy).
+2. Implement pagination on the web.
+3. Add editor config.
+4. Implement dialog animation.
