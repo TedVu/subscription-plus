@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, Ref, watch } from 'vue';
+import { ref, Ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { computedAsync } from '@vueuse/core';
 import draggable from 'vuedraggable';
