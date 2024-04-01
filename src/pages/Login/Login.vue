@@ -10,17 +10,21 @@ var uiConfig = {
   signInOptions: [
     // Leave the lines as is for the providers you want to offer your users.
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-    firebase.auth.GithubAuthProvider.PROVIDER_ID,
-    firebase.auth.EmailAuthProvider.PROVIDER_ID,
-    firebase.auth.PhoneAuthProvider.PROVIDER_ID,
   ],
+  signInFlow: 'popup',
+  callbacks: {
+    uiShown: function () {
+      document.getElementById('loader')!.style.display = 'none';
+    },
+  },
 };
 ui.start('#firebaseui-auth-container', uiConfig);
 </script>
 
 <template>
-  <div class="text-h6">Welcome to Subscription Plus Application</div>
+  <div class="text-h6 mb-12">Welcome to Subscription Plus Application</div>
   <div id="firebaseui-auth-container"></div>
+  <div id="loader">
+    <v-progress-circular color="primary" indeterminate></v-progress-circular>
+  </div>
 </template>

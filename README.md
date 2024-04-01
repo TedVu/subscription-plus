@@ -20,4 +20,4 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
 ## To Do
 
 1. Check best practices
-2. Initial POV for subscription notifications feature
+2. Initial POC for subscription notifications feature

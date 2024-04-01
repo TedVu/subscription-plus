@@ -24,7 +24,7 @@ await store.getLatestData();
 
 setTimeout(() => {
   loading!.value = false;
-}, 3000);
+}, 1000);
 
 const { subscriptionItems } = storeToRefs(store);
 
@@ -68,7 +68,7 @@ watch(
     ><v-progress-circular color="primary" indeterminate></v-progress-circular
   ></template>
   <template v-else>
-    <v-text-field v-model="filterValue">
+    <v-text-field v-model="filterValue" v-if="subscriptionItems.length > 0">
       <template v-slot:append-inner>
         <v-icon> mdi-magnify </v-icon>
       </template>
