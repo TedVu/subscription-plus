@@ -17,6 +17,7 @@ const { isAuthenticated, userRef } = storeToRefs(authenticationStore);
 
 const handleLogout = () => {
   authenticationStore.logout();
+  localStorage.clear();
   window.location.reload();
 };
 
