@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import * as firebaseui from 'firebaseui';
-import firebase from 'firebase/compat/app';
 import 'firebaseui/dist/firebaseui.css';
 import { auth } from '../../firebase';
 
@@ -8,8 +7,13 @@ var ui = new firebaseui.auth.AuthUI(auth);
 var uiConfig = {
   signInSuccessUrl: '/home',
   signInOptions: [
-    // Leave the lines as is for the providers you want to offer your users.
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    {
+      provider: 'google.com',
+      providerName: 'Google',
+      // To override the full label of the button.
+      // fullLabel: 'Login with Microsoft',
+      buttonColor: 'primary',
+    },
   ],
   signInFlow: 'popup',
   callbacks: {
@@ -17,6 +21,10 @@ var uiConfig = {
       document.getElementById('loader')!.style.display = 'none';
     },
   },
+  // Terms of service url.
+  tosUrl: 'https://policies.google.com/terms',
+  // Privacy policy url.
+  privacyPolicyUrl: 'https://policies.google.com/privacy',
 };
 ui.start('#firebaseui-auth-container', uiConfig);
 </script>
