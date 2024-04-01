@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, Ref, watch } from 'vue';
+import { computed, ref, Ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { computedAsync } from '@vueuse/core';
 import draggable from 'vuedraggable';
@@ -8,6 +8,7 @@ import { getSubscriptionImageUrl } from '../../firebase';
 import { removeSubscription, useLoadingState } from '../../composables';
 import { useSubscriptionItemsStore } from '../../store';
 import UpdateDialog from '../UpdateDialog';
+import { onMounted } from 'vue';
 
 const loading = useLoadingState();
 const filterValue = ref('');
@@ -22,6 +23,30 @@ loading!.value = true;
 const store = useSubscriptionItemsStore();
 await store.getLatestData();
 
+const computeItemsOrder = () => {
+  const localStorageItems = JSON.parse(
+    localStorage.getItem('items-order')!
+  ) as Subscription[];
+  if (localStorageItems) {
+    const oldOrderedItems = [] as Subscription[];
+    const newOrderItems = [] as Subscription[];
+    localStorageItems.forEach((item) => {
+      if (subscriptionItems.value.indexOf(item) !== -1) {
+        oldOrderedItems.push(item);
+      } else {
+        newOrderItems.push(item);
+      }
+    });
+
+    oldOrderedItems.push(...newOrderItems);
+    subscriptionItems.value = oldOrderedItems;
+  }
+  return subscriptionItems.value;
+};
+
+onMounted(() => {
+  computeItemsOrder();
+});
 setTimeout(() => {
   loading!.value = false;
 }, 1000);
@@ -62,6 +87,10 @@ watch(
     }, 300);
   }
 );
+
+const handleDragEnd = () => {
+  localStorage.setItem('items-order', JSON.stringify(subscriptionItems.value));
+};
 </script>
 <template>
   <template v-if="loading"
@@ -86,6 +115,7 @@ watch(
             ghost-class="ghost"
             :force-fallback="true"
             style="display: contents"
+            @change="handleDragEnd"
           >
             <template #item="{ element: item }: { element: Subscription }">
               <v-col :key="item.id" cols="4">
