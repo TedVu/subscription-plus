@@ -3,6 +3,7 @@ import { computed } from 'vue';
 import { setLoadingState } from '../composables';
 import { useAuthentication } from '../composables';
 import { storeToRefs } from 'pinia';
+import router from '../routes';
 
 const loading = setLoadingState(false);
 
@@ -12,11 +13,15 @@ const computedVMainStyle = computed(() => ({
 }));
 
 const authenticationStore = useAuthentication();
-const { isAuthenticated } = storeToRefs(authenticationStore);
+const { isAuthenticated, userRef } = storeToRefs(authenticationStore);
 
 const handleLogout = () => {
   authenticationStore.logout();
   window.location.reload();
+};
+
+const handleProfileItemClick = () => {
+  router.push('/profile');
 };
 </script>
 <template>
@@ -27,9 +32,10 @@ const handleLogout = () => {
     <v-navigation-drawer expand-on-hover rail v-if="isAuthenticated">
       <v-list>
         <v-list-item
-          title="Ted Vu"
-          prepend-avatar="https://tedvublogimages.s3.us-west-1.amazonaws.com/profilepics.jpg"
-          subtitle="tedvu184@gmail.com"
+          :title="userRef?.displayName!"
+          :prepend-avatar="userRef?.photoURL!"
+          :subtitle="userRef?.email!"
+          @click="handleProfileItemClick"
         ></v-list-item>
         <v-divider></v-divider>
         <v-list-item
