@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+import { storeToRefs } from 'pinia';
 import { enAU } from 'date-fns/locale';
 import { isAllDataCorrect, nameRules } from '../../validation';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import { updateSubscription } from '../../composables';
 import { v4 as uuidv4 } from 'uuid';
 import { uploadFirebaseStaticFile } from '../../firebase';
+import { useSubscriptionItemsStore } from '../../store';
 
 const emits = defineEmits(['close', 'update']);
 
@@ -15,8 +17,19 @@ const props = defineProps({
     default: undefined,
   },
 });
-const name = ref('');
-const date = ref('');
+
+const store = useSubscriptionItemsStore();
+const { subscriptionItems } = storeToRefs(store);
+
+const attachedSubscriptionItem = subscriptionItems.value
+  .filter((subscriptionItem) => subscriptionItem.id === props.id)
+  .at(0);
+
+const parts = attachedSubscriptionItem!.date!.split('/');
+const parsedDate = new Date(+parts[2], +parts[1] - 1, +parts[0]);
+console.log(parsedDate.toDateString());
+const name = ref(attachedSubscriptionItem!.name);
+const date = ref(parsedDate.toDateString());
 const loading = ref(false);
 const snackbar = ref(false);
 const snackbarMsg = ref('');
@@ -54,6 +67,13 @@ const submit = async () => {
     snackbarColor.value = 'red-darken-2';
   }
 };
+
+watch(
+  () => date.value,
+  (newDate: string) => {
+    console.log(newDate);
+  }
+);
 </script>
 <template>
   <v-form validate-on="blur" @submit.prevent="submit">
