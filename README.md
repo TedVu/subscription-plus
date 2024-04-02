@@ -20,8 +20,9 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
 ## To Do
 
 1. Implement update and delete for local storage (still buggy). DONE
-2. Implement prefill update dialog with data and allow updating partially.
-3. Implement pagination on the web.
-4. Add editor config.
-5. Improve dialog animation.
-6. Implement basic feature to capture notification features: how long does subscription last?, notification type (is it via phone or email?), frequency of notifications, how long before subscription end to notify?,...
+2. Implement prefill update dialog with data and allow updating partially. DONE
+3. Allow update without populating all the data
+4. Implement pagination on the web.
+5. Add editor config.
+6. Improve dialog animation.
+7. Implement basic feature to capture notification features: how long does subscription last?, notification type (is it via phone or email?), frequency of notifications, how long before subscription end to notify?,...
