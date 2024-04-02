@@ -27,7 +27,6 @@ const attachedSubscriptionItem = subscriptionItems.value
 
 const parts = attachedSubscriptionItem!.date!.split('/');
 const parsedDate = new Date(+parts[2], +parts[1] - 1, +parts[0]);
-console.log(parsedDate.toDateString());
 const name = ref(attachedSubscriptionItem!.name);
 const date = ref(parsedDate.toDateString());
 const loading = ref(false);
