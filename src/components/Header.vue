@@ -59,7 +59,7 @@ const handleProfileItemClick = () => {
           to="about"
           title="About"
         ></v-list-item>
-        <v-dialog width="500">
+        <v-dialog width="500" transition="dialog-top-transition">
           <template #activator="{ props }">
             <v-list-item
               v-bind="props"

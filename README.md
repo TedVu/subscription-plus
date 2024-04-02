@@ -21,7 +21,7 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
 
 1. Implement update and delete for local storage (still buggy). DONE
 2. Implement prefill update dialog with data and allow updating partially. DONE
-3. Allow update without populating all the data
+3. Allow update without populating all the data.
 4. Implement pagination on the web.
 5. Add editor config.
 6. Improve dialog animation.

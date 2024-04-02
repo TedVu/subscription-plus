@@ -151,7 +151,7 @@ const handleDragEnd = () => {
                       style="cursor: grab"
                       class="drag-handle"
                     ></v-btn>
-                    <v-dialog width="500">
+                    <v-dialog width="500" transition="dialog-top-transition">
                       <template #activator="{ props }">
                         <v-btn
                           v-bind="props"
