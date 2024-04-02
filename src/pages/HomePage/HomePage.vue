@@ -90,7 +90,6 @@ watch(
 );
 
 const handleUpdate = () => {
-  console.log(`Subscription Items ${JSON.stringify(subscriptionItems.value)}`);
   localStorage.setItem('items-order', JSON.stringify(subscriptionItems.value));
 };
 
