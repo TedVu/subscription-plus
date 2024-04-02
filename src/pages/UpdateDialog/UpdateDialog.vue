@@ -7,7 +7,7 @@ import { updateSubscription } from '../../composables';
 import { v4 as uuidv4 } from 'uuid';
 import { uploadFirebaseStaticFile } from '../../firebase';
 
-const emits = defineEmits(['close']);
+const emits = defineEmits(['close', 'update']);
 
 const props = defineProps({
   id: {
@@ -31,9 +31,8 @@ const submit = async () => {
       loading.value = false;
     }, 2000);
 
-    const updateImageName = `${uuidv4().replaceAll('-', '')}.${(
-      images.value[0] as File
-    ).name
+    const updateImageName = `${uuidv4().replaceAll('-', '')}.${(images
+      .value[0] as File)!.name
       .split('.')
       .pop()}`;
 
@@ -45,7 +44,7 @@ const submit = async () => {
     };
     await uploadFirebaseStaticFile(images.value[0], updateImageName);
     await updateSubscription(props.id!, updatedSubscriptionItem);
-
+    emits('update');
     snackbar.value = true;
     snackbarMsg.value = 'Updating a new subscription successful!';
     snackbarColor.value = 'success';

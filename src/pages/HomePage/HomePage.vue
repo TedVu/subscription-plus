@@ -68,6 +68,7 @@ const handleSubscriptionItemDelete = async (
   isActive: Ref<Boolean>
 ) => {
   await removeSubscription(id);
+  localStorage.setItem('items-order', JSON.stringify(subscriptionItems.value));
   dialog.value = false;
   isActive.value = false;
   snackbar.value = true;
@@ -87,6 +88,11 @@ watch(
     }, 300);
   }
 );
+
+const handleUpdate = () => {
+  console.log(`Subscription Items ${JSON.stringify(subscriptionItems.value)}`);
+  localStorage.setItem('items-order', JSON.stringify(subscriptionItems.value));
+};
 
 const handleDragEnd = () => {
   localStorage.setItem('items-order', JSON.stringify(subscriptionItems.value));
@@ -159,6 +165,7 @@ const handleDragEnd = () => {
                       <template #default="{ isActive }">
                         <update-dialog
                           @close="isActive.value = false"
+                          @update="handleUpdate"
                           :id="item.id"
                         />
                       </template>
