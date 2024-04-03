@@ -43,16 +43,19 @@ const submit = async () => {
       loading.value = false;
     }, 2000);
 
-    const updateImageName = `${uuidv4().replaceAll('-', '')}.${(images
-      .value[0] as File)!.name
+    const updateImageName = `${uuidv4().replaceAll('-', '')}.${(
+      images.value[0] as File
+    )?.name
       .split('.')
       .pop()}`;
 
     const updatedSubscriptionItem = {
       id: props.id!,
       name: name.value,
-      date: date.value,
-      imgName: updateImageName,
+      date: date.value || attachedSubscriptionItem?.date,
+      imgName: images.value[0]
+        ? updateImageName
+        : attachedSubscriptionItem?.imgName,
     };
     await uploadFirebaseStaticFile(images.value[0], updateImageName);
     await updateSubscription(props.id!, updatedSubscriptionItem);
