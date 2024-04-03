@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, Ref, watch } from 'vue';
+import { ref, Ref, watch, computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { computedAsync } from '@vueuse/core';
 import draggable from 'vuedraggable';
@@ -17,6 +17,7 @@ const dialog = ref(false);
 const snackbar = ref(false);
 const snackbarMsg = ref('');
 const snackbarColor = ref('');
+const pagination = ref(1);
 
 loading!.value = true;
 
@@ -41,8 +42,21 @@ const computeItemsOrder = () => {
     oldOrderedItems.push(...newOrderItems);
     subscriptionItems.value = oldOrderedItems;
   }
-  return subscriptionItems.value;
 };
+
+const displayItemsPagination = computed(() => {
+  console.log('DEBUG');
+  const paginatedItems: Subscription[] = [];
+  subscriptionItems.value.forEach((item, index) => {
+    const mx = pagination.value * 6;
+    const mn = (pagination.value - 1) * 6;
+    if (index < mx && index >= mn) {
+      paginatedItems.push(item);
+    }
+  });
+
+  return paginatedItems;
+});
 
 onMounted(() => {
   computeItemsOrder();
@@ -53,6 +67,9 @@ setTimeout(() => {
 
 const { subscriptionItems } = storeToRefs(store);
 
+const paginationLength = computed(() => {
+  return Math.ceil(subscriptionItems.value.length / 6);
+});
 const itemsMapComputed = computedAsync(async () => {
   const itemsMap = new Map<string, string | void>();
 
@@ -111,7 +128,7 @@ const handleDragEnd = () => {
       <template v-if="subscriptionItems.length > 0">
         <v-row no-gutters justify-cotent="center">
           <draggable
-            v-model="subscriptionItems"
+            v-model="displayItemsPagination"
             group="subscriptionItems"
             item-key="id"
             :animation="150"
@@ -211,7 +228,11 @@ const handleDragEnd = () => {
             </template>
           </draggable>
         </v-row>
-        <v-pagination :length="2"></v-pagination>
+        <v-pagination
+          variant="elevated"
+          :length="paginationLength"
+          v-model="pagination"
+        ></v-pagination>
       </template>
       <template v-else> No subscription items </template>
     </v-container>
