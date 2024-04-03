@@ -15,6 +15,7 @@ const getSubscriptionItems = async () => {
 const addSubscriptionItem = async (subscriptionItem: Subscription) => {
   const store = useSubscriptionItemsStore();
   store.addSubscription(subscriptionItem);
+  localStorage.setItem('items-order', JSON.stringify(store.subscriptionItems));
   await addFirebaseRecord(subscriptionItem);
 };
 

@@ -211,6 +211,7 @@ const handleDragEnd = () => {
             </template>
           </draggable>
         </v-row>
+        <v-pagination :length="2"></v-pagination>
       </template>
       <template v-else> No subscription items </template>
     </v-container>

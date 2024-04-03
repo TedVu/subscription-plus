@@ -3,7 +3,8 @@ import { ref } from 'vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import { enAU } from 'date-fns/locale';
-import { addFirebaseRecord, uploadFirebaseStaticFile } from '../../firebase';
+import { uploadFirebaseStaticFile } from '../../firebase';
+import { addSubscriptionItem } from '../../composables';
 import { v4 as uuidv4 } from 'uuid';
 import { nameRules } from '../../validation';
 
@@ -41,9 +42,9 @@ const submit = async () => {
     ).name
       .split('.')
       .pop()}`;
-    await addFirebaseRecord({
+    await addSubscriptionItem({
       name: name.value,
-      date: date.value,
+      date: new Date(date.value).toLocaleDateString('en-AU'),
       imgName,
       id: uuidv4().replaceAll('-', ''),
     });
