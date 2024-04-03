@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { enAU } from 'date-fns/locale';
 import { isAllDataCorrect, nameRules } from '../../validation';
@@ -66,13 +66,6 @@ const submit = async () => {
     snackbarColor.value = 'red-darken-2';
   }
 };
-
-watch(
-  () => date.value,
-  (newDate: string) => {
-    console.log(newDate);
-  }
-);
 </script>
 <template>
   <v-form validate-on="blur" @submit.prevent="submit">
