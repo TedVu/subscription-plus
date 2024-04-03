@@ -2,7 +2,11 @@
 
 ## What is it ?
 
-Subscription Plus application is a software that helps you address the problem of forgetting to cancel a subscription trial. As there are a lot of free offers from many vendors, we tend to forget to cancel a subscription trial, or the vendors only provide the reminder through email and the reminder is pretty much confined by the vendors. This application attempts to break that norm.
+Subscription Plus application is a software that helps you address the problem of forgetting to cancel a subscription trial. As there is a lot of free offers from many vendors, we tend to forget to cancel a subscription trial, or the vendors only provide the reminder through email and hence the reminder is pretty much confined by the vendors. This application attempts to break that norm.
+
+## What is offered ?
+
+## Contribute
 
 ## To Do
 
