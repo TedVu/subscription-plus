@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { ref, Ref, watch, computed } from 'vue';
-import { storeToRefs } from 'pinia';
-import { computedAsync } from '@vueuse/core';
-import draggable from 'vuedraggable';
-import type { Subscription } from '../../types';
-import { getSubscriptionImageUrl } from '../../firebase';
-import { removeSubscription, useLoadingState } from '../../composables';
-import { useSubscriptionItemsStore } from '../../store';
-import UpdateDialog from '../UpdateDialog';
-import { onMounted } from 'vue';
+import { ref, Ref, watch, computed } from "vue";
+import { storeToRefs } from "pinia";
+import { computedAsync } from "@vueuse/core";
+import draggable from "vuedraggable";
+import type { Subscription } from "../../types";
+import { getSubscriptionImageUrl } from "../../firebase";
+import { removeSubscription, useLoadingState } from "../../composables";
+import { useSubscriptionItemsStore } from "../../store";
+import UpdateDialog from "../UpdateDialog";
+import { onMounted } from "vue";
 
 const loading = useLoadingState();
-const filterValue = ref('');
+const filterValue = ref("");
 const delayFilterTimeout = ref(0);
 const dialog = ref(false);
 const snackbar = ref(false);
-const snackbarMsg = ref('');
-const snackbarColor = ref('');
+const snackbarMsg = ref("");
+const snackbarColor = ref("");
 const pagination = ref(1);
 
 loading!.value = true;
@@ -26,7 +26,7 @@ await store.getLatestData();
 
 const computeItemsOrder = () => {
   const localStorageItems = JSON.parse(
-    localStorage.getItem('items-order')!
+    localStorage.getItem("items-order")!
   ) as Subscription[];
   if (localStorageItems) {
     const oldOrderedItems = [] as Subscription[];
@@ -45,7 +45,7 @@ const computeItemsOrder = () => {
 };
 
 const displayItemsPagination = computed(() => {
-  console.log('DEBUG');
+  console.log("DEBUG");
   const paginatedItems: Subscription[] = [];
   subscriptionItems.value.forEach((item, index) => {
     const mx = pagination.value * 6;
@@ -85,12 +85,12 @@ const handleSubscriptionItemDelete = async (
   isActive: Ref<Boolean>
 ) => {
   await removeSubscription(id);
-  localStorage.setItem('items-order', JSON.stringify(subscriptionItems.value));
+  localStorage.setItem("items-order", JSON.stringify(subscriptionItems.value));
   dialog.value = false;
   isActive.value = false;
   snackbar.value = true;
-  snackbarMsg.value = 'Deleting a subscription successful!';
-  snackbarColor.value = 'red-darken-2';
+  snackbarMsg.value = "Deleting a subscription successful!";
+  snackbarColor.value = "red-darken-2";
 };
 
 watch(
@@ -107,11 +107,11 @@ watch(
 );
 
 const handleUpdate = () => {
-  localStorage.setItem('items-order', JSON.stringify(subscriptionItems.value));
+  localStorage.setItem("items-order", JSON.stringify(subscriptionItems.value));
 };
 
 const handleDragEnd = () => {
-  localStorage.setItem('items-order', JSON.stringify(subscriptionItems.value));
+  localStorage.setItem("items-order", JSON.stringify(subscriptionItems.value));
 };
 </script>
 <template>
@@ -229,6 +229,7 @@ const handleDragEnd = () => {
           </draggable>
         </v-row>
         <v-pagination
+          v-if="paginationLength > 6"
           variant="elevated"
           :length="paginationLength"
           v-model="pagination"
@@ -243,5 +244,5 @@ const handleDragEnd = () => {
 </template>
 
 <style lang="scss" scoped>
-@import './HomePage.module.scss';
+@import "./HomePage.module.scss";
 </style>
