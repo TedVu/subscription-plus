@@ -11,3 +11,5 @@ Subscription Plus application is a software that helps you address the problem o
 ## To Do
 
 1. Implement basic feature to capture notification features: how long does subscription last?, notification type (is it via phone or email?), frequency of notifications, how long before subscription end to notify?,...
+
+2. Bug when searching => showing invalid date.
