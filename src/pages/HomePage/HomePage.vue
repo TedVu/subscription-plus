@@ -141,7 +141,7 @@ const handleDragEnd = () => {
           >
             <template #item="{ element: item }: { element: Subscription }">
               <v-col :key="item.id" cols="4">
-                <v-card>
+                <v-card hover href="/reminder">
                   <v-img
                     :src="itemsMapComputed.get(item.id)!"
                     class="align-end"
