@@ -45,7 +45,6 @@ const computeItemsOrder = () => {
 };
 
 const displayItemsPagination = computed(() => {
-  console.log("DEBUG");
   const paginatedItems: Subscription[] = [];
   subscriptionItems.value.forEach((item, index) => {
     const mx = pagination.value * 6;
