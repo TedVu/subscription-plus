@@ -9,6 +9,7 @@ import { removeSubscription, useLoadingState } from "../../composables";
 import { useSubscriptionItemsStore } from "../../store";
 import UpdateDialog from "../UpdateDialog";
 import { onMounted } from "vue";
+import router from "../../routes";
 
 const loading = useLoadingState();
 const filterValue = ref("");
@@ -112,6 +113,11 @@ const handleUpdate = () => {
 const handleDragEnd = () => {
   localStorage.setItem("items-order", JSON.stringify(subscriptionItems.value));
 };
+
+const handleCardClick = () => {
+  console.log("GO TO REMINDER");
+  router.push("/reminder");
+};
 </script>
 <template>
   <template v-if="loading"
@@ -140,7 +146,7 @@ const handleDragEnd = () => {
           >
             <template #item="{ element: item }: { element: Subscription }">
               <v-col :key="item.id" cols="4">
-                <v-card hover href="/reminder">
+                <v-card hover @click="handleCardClick">
                   <v-img
                     :src="itemsMapComputed.get(item.id)!"
                     class="align-end"
