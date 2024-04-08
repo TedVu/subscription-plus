@@ -47,9 +47,9 @@ const computeItemsOrder = () => {
 const displayItemsPagination = computed(() => {
   const paginatedItems: Subscription[] = [];
   subscriptionItems.value.forEach((item, index) => {
-    const mx = pagination.value * 6;
-    const mn = (pagination.value - 1) * 6;
-    if (index < mx && index >= mn) {
+    const maxPage = pagination.value * 6;
+    const minPage = (pagination.value - 1) * 6;
+    if (index < maxPage && index >= minPage) {
       paginatedItems.push(item);
     }
   });
