@@ -115,7 +115,6 @@ const handleDragEnd = () => {
 };
 
 const handleCardClick = () => {
-  console.log("GO TO REMINDER");
   router.push("/reminder");
 };
 </script>
