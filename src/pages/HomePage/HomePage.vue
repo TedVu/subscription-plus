@@ -117,6 +117,10 @@ const handleDragEnd = () => {
 const handleCardClick = () => {
   router.push("/reminder");
 };
+
+const isCardVisible = (item: Subscription) => {
+  return displayItemsPagination.value.includes(item);
+};
 </script>
 <template>
   <template v-if="loading"
@@ -132,8 +136,7 @@ const handleCardClick = () => {
       <template v-if="subscriptionItems.length > 0">
         <v-row no-gutters justify-cotent="center">
           <draggable
-            v-model="displayItemsPagination"
-            group="subscriptionItems"
+            v-model="subscriptionItems"
             item-key="id"
             :animation="150"
             handle=".drag-handle"
@@ -145,7 +148,11 @@ const handleCardClick = () => {
           >
             <template #item="{ element: item }: { element: Subscription }">
               <v-col :key="item.id" cols="4">
-                <v-card hover @click="handleCardClick">
+                <v-card
+                  hover
+                  @click="handleCardClick"
+                  v-if="isCardVisible(item)"
+                >
                   <v-img
                     :src="itemsMapComputed.get(item.id)!"
                     class="align-end"
@@ -233,7 +240,7 @@ const handleCardClick = () => {
           </draggable>
         </v-row>
         <v-pagination
-          v-if="paginationLength > 6"
+          v-if="paginationLength > 1"
           variant="elevated"
           :length="paginationLength"
           v-model="pagination"
