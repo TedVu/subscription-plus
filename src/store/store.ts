@@ -1,9 +1,9 @@
-import { defineStore } from 'pinia';
-import { ref } from 'vue';
-import { Subscription } from '../types';
-import { getSubscriptionItems } from '../firebase';
+import { defineStore } from "pinia";
+import { ref } from "vue";
+import { Subscription } from "../types";
+import { getSubscriptionItems } from "../firebase";
 export const useSubscriptionItemsStore = defineStore(
-  'subscription-items',
+  "subscription-items",
   () => {
     const subscriptionItems = ref([] as Subscription[]);
     const serverSubscriptionItems = ref([] as Subscription[]);

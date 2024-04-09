@@ -8,7 +8,6 @@ import {
   addDoc,
   getFirestore,
   getDocs,
-  Timestamp,
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
@@ -74,12 +73,7 @@ const getSubscriptionItems = async () => {
 
   const docs = await getDocs(colRef);
   docs.forEach((doc) => {
-    const date = new Timestamp(
-      doc.data().date.seconds,
-      doc.data().date.nanoseconds
-    )
-      .toDate()
-      .toLocaleDateString("en-AU");
+    const date = doc.data().date;
 
     const name = doc.data().name;
     const id = doc.id;
@@ -110,7 +104,6 @@ const getSubscriptionImageUrl = async (
   }
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
@@ -123,7 +116,6 @@ Notification.requestPermission().then((permission) => {
   }
 });
 
-// messaging code
 const VAPID_KEY =
   "BIQRMBhhAitZDfsNxRRkhPYy-NhR4SyZ1jMLy6VeLZgfS6uj4ZH1rd_h8mwqTUard-yh96WNwroP79e09mYnsSw";
 
