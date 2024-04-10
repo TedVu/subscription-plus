@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "build": "vue-tsc && vite build",
+    "deploy": "firebase deploy --only hosting",
     "dev": "vite",
+    "prepare": "husky",
     "preview": "vite preview",
     "serve": "vite",
-    "type:check": "vue-tsc",
-    "prepare": "husky"
+    "type:check": "vue-tsc"
   },
   "dependencies": {
     "@vuepic/vue-datepicker": "^7.4.0",
@@ -38,3 +39,4 @@
     "vue-tsc": "^1.8.22"
   }
 }
+

@@ -1,4 +1,4 @@
-import { About, HomePage, Profile, Add, Reminder } from "../pages";
+import { About, HomePage, Profile, Add, Reminder, NotFound } from "../pages";
 import * as VueRouter from "vue-router";
 import Login from "../pages/Login/Login.vue";
 import { useAuthentication } from "../composables";
@@ -10,6 +10,7 @@ const routes = [
   { name: "login", path: "/login", component: Login, alias: "/" },
   { name: "add", path: "/add", component: Add },
   { name: "reminder", path: "/reminder", component: Reminder },
+  { name: "not-found", path: "/:pathMatch(.*)*", component: NotFound },
 ];
 
 const router = VueRouter.createRouter({
