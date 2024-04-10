@@ -127,7 +127,7 @@ const isCardVisible = (item: Subscription) => {
     ><v-progress-circular color="primary" indeterminate></v-progress-circular
   ></template>
   <template v-else>
-    <v-text-field v-model="filterValue" v-if="subscriptionItems.length > 0">
+    <v-text-field v-model="filterValue">
       <template v-slot:append-inner>
         <v-icon> mdi-magnify </v-icon>
       </template>
