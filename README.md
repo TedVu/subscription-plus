@@ -14,4 +14,4 @@ Subscription Plus application is a software that helps you address the problem o
 
 2. Firebase hosting.
 
-3. Sanity check
+3. Sanity check.
