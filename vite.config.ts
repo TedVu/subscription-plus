@@ -9,9 +9,6 @@ export default defineConfig({
   plugins: [vue(), splitVendorChunkPlugin(), vuetify(), visualizer()],
   build: {
     rollupOptions: {
-      input: {
-        app: "public/index.html", // default
-      },
       plugins: [del({ targets: "dist/*" })],
       output: {
         manualChunks(id) {
