@@ -21,9 +21,9 @@ const snackbarColor = ref("");
 const pagination = ref(1);
 
 loading!.value = true;
-
 const store = useSubscriptionItemsStore();
 await store.getLatestData();
+loading!.value = false;
 
 const computeItemsOrder = () => {
   const localStorageItems = JSON.parse(
@@ -61,9 +61,6 @@ const displayItemsPagination = computed(() => {
 onMounted(() => {
   computeItemsOrder();
 });
-setTimeout(() => {
-  loading!.value = false;
-}, 1000);
 
 const { subscriptionItems } = storeToRefs(store);
 
