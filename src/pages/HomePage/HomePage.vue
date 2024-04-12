@@ -47,9 +47,10 @@ const computeItemsOrder = () => {
 
 const displayItemsPagination = computed(() => {
   const paginatedItems: Subscription[] = [];
+  console.log(JSON.stringify(subscriptionItems.value));
   subscriptionItems.value.forEach((item, index) => {
-    const maxPage = pagination.value * 6;
-    const minPage = (pagination.value - 1) * 6;
+    const maxPage = pagination.value * 3;
+    const minPage = (pagination.value - 1) * 3;
     if (index < maxPage && index >= minPage) {
       paginatedItems.push(item);
     }
@@ -65,7 +66,7 @@ onMounted(() => {
 const { subscriptionItems } = storeToRefs(store);
 
 const paginationLength = computed(() => {
-  return Math.ceil(subscriptionItems.value.length / 6);
+  return Math.ceil(subscriptionItems.value.length / 3);
 });
 const itemsMapComputed = computedAsync(async () => {
   const itemsMap = new Map<string, string | void>();
@@ -144,12 +145,8 @@ const isCardVisible = (item: Subscription) => {
             @change="handleDragEnd"
           >
             <template #item="{ element: item }: { element: Subscription }">
-              <v-col :key="item.id" cols="4">
-                <v-card
-                  hover
-                  @click="handleCardClick"
-                  v-if="isCardVisible(item)"
-                >
+              <v-col :key="item.id" cols="4" v-if="isCardVisible(item)">
+                <v-card hover @click="handleCardClick">
                   <v-img
                     :src="itemsMapComputed.get(item.id)!"
                     class="align-end"
