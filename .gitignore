@@ -11,9 +11,10 @@ node_modules
 dist
 dist-ssr
 *.local
+.firebase/
 
 # Editor directories and files
-.vscode/*
+.vscode/
 !.vscode/extensions.json
 .idea
 .DS_Store
@@ -23,3 +24,4 @@ dist-ssr
 *.sln
 *.sw?
 stats.html
+
