@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import VueDatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css';
-import { enAU } from 'date-fns/locale';
-import { uploadFirebaseStaticFile } from '../../firebase';
-import { addSubscriptionItem } from '../../composables';
-import { v4 as uuidv4 } from 'uuid';
-import { nameRules } from '../../validation';
+import { ref } from "vue";
+import VueDatePicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
+import { enAU } from "date-fns/locale";
+import { uploadFirebaseStaticFile } from "../../firebase";
+import { addSubscriptionItem } from "../../composables";
+import { v4 as uuidv4 } from "uuid";
+import { nameRules } from "../../validation";
 
-const name = ref('');
-const date = ref('');
+const name = ref("");
+const date = ref("");
 const images = ref([]);
 const loading = ref(false);
 const subscriptionDateErrorMsg = ref<boolean | undefined>(undefined);
 const snackbar = ref(false);
-const snackbarMsg = ref('');
-const snackbarColor = ref('');
+const snackbarMsg = ref("");
+const snackbarColor = ref("");
 
 const isAllDataCorrect = () => {
   let isCorrect = true;
@@ -37,28 +37,28 @@ const submit = async () => {
   if (isAllDataCorrect()) {
     loading.value = true;
 
-    const imgName = `${uuidv4().replaceAll('-', '')}.${(
+    const imgName = `${uuidv4().replaceAll("-", "")}.${(
       images.value[0] as File
-    ).name
-      .split('.')
+    )?.name
+      .split(".")
       .pop()}`;
     await addSubscriptionItem({
       name: name.value,
-      date: new Date(date.value).toLocaleDateString('en-AU'),
+      date: new Date(date.value).toLocaleDateString("en-AU"),
       imgName,
-      id: uuidv4().replaceAll('-', ''),
+      id: uuidv4().replaceAll("-", ""),
     });
     await uploadFirebaseStaticFile(images.value[0], imgName);
     setTimeout(() => {
       loading.value = false;
     }, 2000);
     snackbar.value = true;
-    snackbarMsg.value = 'Adding a new subscription successful!';
-    snackbarColor.value = 'success';
+    snackbarMsg.value = "Adding a new subscription successful!";
+    snackbarColor.value = "success";
   } else {
     snackbar.value = true;
-    snackbarMsg.value = 'Adding a new subscription failed!';
-    snackbarColor.value = 'red-darken-2';
+    snackbarMsg.value = "Adding a new subscription failed!";
+    snackbarColor.value = "red-darken-2";
   }
 };
 </script>
