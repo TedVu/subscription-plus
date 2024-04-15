@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { storeToRefs } from 'pinia';
-import { enAU } from 'date-fns/locale';
-import { isAllDataCorrect, nameRules } from '../../validation';
-import VueDatePicker from '@vuepic/vue-datepicker';
-import { updateSubscription } from '../../composables';
-import { v4 as uuidv4 } from 'uuid';
-import { uploadFirebaseStaticFile } from '../../firebase';
-import { useSubscriptionItemsStore } from '../../store';
+import { ref } from "vue";
+import { storeToRefs } from "pinia";
+import { enAU } from "date-fns/locale";
+import { isAllDataCorrect, nameRules } from "../../validation";
+import VueDatePicker from "@vuepic/vue-datepicker";
+import { updateSubscription } from "../../composables";
+import { v4 as uuidv4 } from "uuid";
+import { uploadFirebaseStaticFile } from "../../firebase";
+import { useSubscriptionItemsStore } from "../../store";
 
-const emits = defineEmits(['close', 'update']);
+const emits = defineEmits(["close", "update"]);
 
 const props = defineProps({
   id: {
@@ -25,14 +25,14 @@ const attachedSubscriptionItem = subscriptionItems.value
   .filter((subscriptionItem) => subscriptionItem.id === props.id)
   .at(0);
 
-const parts = attachedSubscriptionItem!.date!.split('/');
+const parts = attachedSubscriptionItem!.date!.split("/");
 const parsedDate = new Date(+parts[2], +parts[1] - 1, +parts[0]);
 const name = ref(attachedSubscriptionItem!.name);
 const date = ref(parsedDate.toDateString());
 const loading = ref(false);
 const snackbar = ref(false);
-const snackbarMsg = ref('');
-const snackbarColor = ref('');
+const snackbarMsg = ref("");
+const snackbarColor = ref("");
 const images = ref([]);
 const subscriptionDateErrorMsg = ref<boolean | undefined>(undefined);
 
@@ -43,10 +43,10 @@ const submit = async () => {
       loading.value = false;
     }, 2000);
 
-    const updateImageName = `${uuidv4().replaceAll('-', '')}.${(
+    const updateImageName = `${uuidv4().replaceAll("-", "")}.${(
       images.value[0] as File
     )?.name
-      .split('.')
+      .split(".")
       .pop()}`;
 
     const updatedSubscriptionItem = {
@@ -59,14 +59,14 @@ const submit = async () => {
     };
     await uploadFirebaseStaticFile(images.value[0], updateImageName);
     await updateSubscription(props.id!, updatedSubscriptionItem);
-    emits('update');
+    emits("update");
     snackbar.value = true;
-    snackbarMsg.value = 'Updating a new subscription successful!';
-    snackbarColor.value = 'success';
+    snackbarMsg.value = "Updating a new subscription successful!";
+    snackbarColor.value = "success";
   } else {
     snackbar.value = true;
-    snackbarMsg.value = 'Updating a subscription failed!';
-    snackbarColor.value = 'red-darken-2';
+    snackbarMsg.value = "Updating a subscription failed!";
+    snackbarColor.value = "red-darken-2";
   }
 };
 </script>
@@ -93,6 +93,7 @@ const submit = async () => {
           placeholder="Subscription Date"
           text-input
           required
+          format="dd/MM/yyyy"
           :state="subscriptionDateErrorMsg"
         >
         </VueDatePicker>
