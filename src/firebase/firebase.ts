@@ -110,39 +110,36 @@ const auth = getAuth(app);
 
 export const messaging = getMessaging(app);
 
-Notification.requestPermission().then((permission) => {
-  if (permission === "granted") {
-    console.log("Notification permission granted.");
-  }
-});
-
 const VAPID_KEY =
   "BIQRMBhhAitZDfsNxRRkhPYy-NhR4SyZ1jMLy6VeLZgfS6uj4ZH1rd_h8mwqTUard-yh96WNwroP79e09mYnsSw";
 
-getToken(messaging, { vapidKey: VAPID_KEY })
-  .then((currentToken) => {
-    if (currentToken) {
-      console.log(`Current token: ${JSON.stringify(currentToken)}`);
-      // Send the token to your server and update the UI if necessary
+const _getToken = () => {
+  getToken(messaging, { vapidKey: VAPID_KEY })
+    .then((currentToken) => {
+      if (currentToken) {
+        console.log(`Current token: ${JSON.stringify(currentToken)}`);
+        // Send the token to your server and update the UI if necessary
+        // ...
+      } else {
+        // Show permission request UI
+        console.log(
+          "No registration token available. Request permission to generate one."
+        );
+        // ...
+      }
+    })
+    .catch((err) => {
+      console.log("An error occurred while retrieving token. ", err);
       // ...
-    } else {
-      // Show permission request UI
-      console.log(
-        "No registration token available. Request permission to generate one."
-      );
-      // ...
-    }
-  })
-  .catch((err) => {
-    console.log("An error occurred while retrieving token. ", err);
-    // ...
-  });
+    });
+};
 
 export {
   addFirebaseRecord,
   deleteFirebaseRecord,
   getSubscriptionImageUrl,
   getSubscriptionItems,
+  _getToken,
   updateFirebaseRecord,
   uploadFirebaseStaticFile,
   auth,

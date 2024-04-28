@@ -22,8 +22,4 @@ const vuetify = createVuetify({
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
 
-navigator.serviceWorker.register("../firebase-messaging-sw.ts", {
-  type: "module",
-});
-
 createApp(App).use(vuetify).use(router).use(pinia).mount("#app");
