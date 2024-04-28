@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getMessaging, getToken } from "firebase/messaging";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { getAuth } from "firebase/auth";
 
 import {
@@ -113,6 +113,9 @@ export const messaging = getMessaging(app);
 const VAPID_KEY =
   "BIQRMBhhAitZDfsNxRRkhPYy-NhR4SyZ1jMLy6VeLZgfS6uj4ZH1rd_h8mwqTUard-yh96WNwroP79e09mYnsSw";
 
+onMessage(messaging, (payload) => {
+  console.log("Message received. ", payload);
+});
 const _getToken = () => {
   getToken(messaging, { vapidKey: VAPID_KEY })
     .then((currentToken) => {
