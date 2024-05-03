@@ -7,7 +7,9 @@ import { uploadFirebaseStaticFile } from "../../firebase";
 import { addSubscriptionItem } from "../../composables";
 import { v4 as uuidv4 } from "uuid";
 import { nameRules } from "../../validation";
+import { useAuthentication } from "../../composables";
 
+const { userRef } = useAuthentication();
 const name = ref("");
 const date = ref("");
 const images = ref([]);
@@ -42,12 +44,15 @@ const submit = async () => {
     )?.name
       .split(".")
       .pop()}`;
-    await addSubscriptionItem({
-      name: name.value,
-      date: new Date(date.value).toLocaleDateString("en-AU"),
-      imgName,
-      id: uuidv4().replaceAll("-", ""),
-    });
+    await addSubscriptionItem(
+      {
+        name: name.value,
+        date: new Date(date.value).toLocaleDateString("en-AU"),
+        imgName,
+        id: uuidv4().replaceAll("-", ""),
+      },
+      userRef?.uid!
+    );
     await uploadFirebaseStaticFile(images.value[0], imgName);
     setTimeout(() => {
       loading.value = false;

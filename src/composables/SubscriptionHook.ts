@@ -1,10 +1,10 @@
-import { Subscription } from '../types';
-import { useSubscriptionItemsStore } from '../store';
+import { Subscription } from "../types";
+import { useSubscriptionItemsStore } from "../store";
 import {
   addFirebaseRecord,
   deleteFirebaseRecord,
   updateFirebaseRecord,
-} from '../firebase';
+} from "../firebase";
 
 const getSubscriptionItems = async () => {
   const store = useSubscriptionItemsStore();
@@ -12,11 +12,14 @@ const getSubscriptionItems = async () => {
   return store.subscriptionItems;
 };
 
-const addSubscriptionItem = async (subscriptionItem: Subscription) => {
+const addSubscriptionItem = async (
+  subscriptionItem: Subscription,
+  userId: string
+) => {
   const store = useSubscriptionItemsStore();
   store.addSubscription(subscriptionItem);
-  localStorage.setItem('items-order', JSON.stringify(store.subscriptionItems));
-  await addFirebaseRecord(subscriptionItem);
+  localStorage.setItem("items-order", JSON.stringify(store.subscriptionItems));
+  await addFirebaseRecord(subscriptionItem, userId);
 };
 
 const removeSubscription = async (id: string) => {
@@ -33,7 +36,7 @@ const updateSubscription = async (
   const store = useSubscriptionItemsStore();
   store.updateSubscription({
     ...updatedSubscriptionItem,
-    date: new Date(updatedSubscriptionItem.date!).toLocaleDateString('en-AU'),
+    date: new Date(updatedSubscriptionItem.date!).toLocaleDateString("en-AU"),
   });
 };
 export {

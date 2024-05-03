@@ -1,32 +1,32 @@
 <script setup lang="ts">
-import * as firebaseui from 'firebaseui';
-import 'firebaseui/dist/firebaseui.css';
-import { auth } from '../../firebase';
+import * as firebaseui from "firebaseui";
+import "firebaseui/dist/firebaseui.css";
+import { auth } from "../../firebase";
 
 var ui = new firebaseui.auth.AuthUI(auth);
 var uiConfig = {
-  signInSuccessUrl: '/home',
+  signInSuccessUrl: "/home",
   signInOptions: [
     {
-      provider: 'google.com',
-      providerName: 'Google',
+      provider: "google.com",
+      providerName: "Google",
       // To override the full label of the button.
-      // fullLabel: 'Login with Microsoft',
-      buttonColor: 'primary',
+      // fullLabel: 'Login with Google',
+      buttonColor: "primary",
     },
   ],
-  signInFlow: 'popup',
+  signInFlow: "popup",
   callbacks: {
     uiShown: function () {
-      document.getElementById('loader')!.style.display = 'none';
+      document.getElementById("loader")!.style.display = "none";
     },
   },
   // Terms of service url.
-  tosUrl: 'https://policies.google.com/terms',
+  tosUrl: "https://policies.google.com/terms",
   // Privacy policy url.
-  privacyPolicyUrl: 'https://policies.google.com/privacy',
+  privacyPolicyUrl: "https://policies.google.com/privacy",
 };
-ui.start('#firebaseui-auth-container', uiConfig);
+ui.start("#firebaseui-auth-container", uiConfig);
 </script>
 
 <template>

@@ -13,11 +13,12 @@ import {
 } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { Subscription } from "../types/";
+import { useAuthentication } from "../composables";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration   
+// Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyBcalO2Ij8vqCh1rpi09PIzwikHWT2_QF8",
@@ -29,9 +30,9 @@ const firebaseConfig = {
   measurementId: "G-FSTQ57T420",
 };
 
-const addFirebaseRecord = async (record: Subscription) => {
+const addFirebaseRecord = async (record: Subscription, userId: string) => {
   const db = getFirestore(app);
-  await addDoc(collection(db, "subscriptions"), record);
+  await addDoc(collection(db, userId), record);
 };
 
 const updateFirebaseRecord = async (
@@ -67,7 +68,8 @@ const uploadFirebaseStaticFile = async (file: File, fileName: string) => {
 
 const getSubscriptionItems = async () => {
   const db = getFirestore(app);
-  const colRef = collection(db, "subscriptions");
+  const { userRef } = useAuthentication();
+  const colRef = collection(db, userRef?.uid!);
 
   const subscriptionItems = [] as Array<Subscription>;
 
