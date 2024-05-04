@@ -40,7 +40,8 @@ const updateFirebaseRecord = async (
   updatedRecord: Subscription
 ) => {
   const db = getFirestore(app);
-  const colRef = collection(db, "subscriptions");
+  const { userRef } = useAuthentication();
+  const colRef = collection(db, userRef!.uid);
   const docs = await getDocs(colRef);
   docs.forEach(async (doc) => {
     if (doc.id === id) {
@@ -51,7 +52,8 @@ const updateFirebaseRecord = async (
 
 const deleteFirebaseRecord = async (id: string) => {
   const db = getFirestore(app);
-  const colRef = collection(db, "subscriptions");
+  const { userRef } = useAuthentication();
+  const colRef = collection(db, userRef!.uid);
   const docs = await getDocs(colRef);
   docs.forEach(async (doc) => {
     if (doc.id === id) {
@@ -69,7 +71,7 @@ const uploadFirebaseStaticFile = async (file: File, fileName: string) => {
 const getSubscriptionItems = async () => {
   const db = getFirestore(app);
   const { userRef } = useAuthentication();
-  const colRef = collection(db, userRef?.uid!);
+  const colRef = collection(db, userRef!.uid);
 
   const subscriptionItems = [] as Array<Subscription>;
 
