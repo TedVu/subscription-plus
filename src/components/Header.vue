@@ -1,15 +1,15 @@
 <script lang="ts" setup>
-import { computed } from 'vue';
-import { setLoadingState } from '../composables';
-import { useAuthentication } from '../composables';
-import { storeToRefs } from 'pinia';
-import router from '../routes';
+import { computed } from "vue";
+import { storeToRefs } from "pinia";
+import { setLoadingState } from "../composables";
+import { useAuthentication } from "../composables";
+import router from "../routes";
 
 const loading = setLoadingState(false);
 
 const computedVMainStyle = computed(() => ({
-  'progress-center': loading.value,
-  'content-container': !loading.value,
+  "progress-center__vmain": loading.value,
+  "content-container__vmain": !loading.value,
 }));
 
 const authenticationStore = useAuthentication();
@@ -22,7 +22,7 @@ const handleLogout = () => {
 };
 
 const handleProfileItemClick = () => {
-  router.push('/profile');
+  router.push("/profile");
 };
 </script>
 <template>
@@ -33,9 +33,9 @@ const handleProfileItemClick = () => {
     <v-navigation-drawer expand-on-hover rail v-if="isAuthenticated">
       <v-list>
         <v-list-item
-          :title="userRef?.displayName!"
-          :prepend-avatar="userRef?.photoURL!"
-          :subtitle="userRef?.email!"
+          :title="userRef?.displayName ?? undefined"
+          :prepend-avatar="userRef?.photoURL ?? undefined"
+          :subtitle="userRef?.email ?? undefined"
           @click="handleProfileItemClick"
         ></v-list-item>
         <v-divider></v-divider>
@@ -95,11 +95,11 @@ const handleProfileItemClick = () => {
 </template>
 
 <style lang="scss">
-.progress-center {
+.progress-center__vmain {
   padding-top: 40vh !important;
 }
 
-.content-container {
+.content-container__vmain {
   padding-top: 15vh !important;
   width: 80vw;
 }

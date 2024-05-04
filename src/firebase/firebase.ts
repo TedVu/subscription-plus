@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { getAuth } from "firebase/auth";
@@ -15,11 +14,6 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { Subscription } from "../types/";
 import { useAuthentication } from "../composables";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyBcalO2Ij8vqCh1rpi09PIzwikHWT2_QF8",
   authDomain: "subscription-plus.firebaseapp.com",
