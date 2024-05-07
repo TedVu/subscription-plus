@@ -137,7 +137,7 @@ const isCardVisible = (item: Subscription) => {
             item-key="id"
             :animation="150"
             handle=".drag-handle"
-            fallback-class="drag"
+            fallback-class="draggable__drag"
             ghost-class="ghost"
             :force-fallback="true"
             style="display: contents"
@@ -160,7 +160,7 @@ const isCardVisible = (item: Subscription) => {
                   </v-img>
 
                   <v-card-actions>
-                    <div class="mr-2 font-weight-bold" style="font-size: 12px">
+                    <div class="mr-2 font-weight-bold" style="font-size: 10px">
                       Subscription Date:
                     </div>
                     {{ item.date }}
@@ -171,6 +171,7 @@ const isCardVisible = (item: Subscription) => {
                       icon="mdi-drag"
                       style="cursor: grab"
                       class="drag-handle"
+                      @click="($event: Event) => $event.stopPropagation()"
                     ></v-btn>
                     <v-dialog width="500" transition="dialog-top-transition">
                       <template #activator="{ props }">

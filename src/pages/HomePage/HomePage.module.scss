@@ -2,11 +2,7 @@
   user-select: none;
 }
 
-.card-dragged {
-  max-width: 15vw;
-}
-
-.drag {
+.draggable__drag {
   transform: rotate(-2deg);
   z-index: 2;
   opacity: 1 !important;

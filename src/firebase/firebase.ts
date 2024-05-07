@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { getAuth } from "firebase/auth";
-
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import {
   collection,
   addDoc,
@@ -10,10 +10,10 @@ import {
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { Subscription } from "../types/";
 import { useAuthentication } from "../composables";
 
+// TO DO: Secure this in production, this should be pulled from the hosting server
 const firebaseConfig = {
   apiKey: "AIzaSyBcalO2Ij8vqCh1rpi09PIzwikHWT2_QF8",
   authDomain: "subscription-plus.firebaseapp.com",
@@ -33,8 +33,9 @@ const updateFirebaseRecord = async (
   id: string,
   updatedRecord: Subscription
 ) => {
-  const db = getFirestore(app);
   const { userRef } = useAuthentication();
+
+  const db = getFirestore(app);
   const colRef = collection(db, userRef!.uid);
   const docs = await getDocs(colRef);
   docs.forEach(async (doc) => {
@@ -45,8 +46,8 @@ const updateFirebaseRecord = async (
 };
 
 const deleteFirebaseRecord = async (id: string) => {
-  const db = getFirestore(app);
   const { userRef } = useAuthentication();
+  const db = getFirestore(app);
   const colRef = collection(db, userRef!.uid);
   const docs = await getDocs(colRef);
   docs.forEach(async (doc) => {
@@ -63,8 +64,8 @@ const uploadFirebaseStaticFile = async (file: File, fileName: string) => {
 };
 
 const getSubscriptionItems = async () => {
-  const db = getFirestore(app);
   const { userRef } = useAuthentication();
+  const db = getFirestore(app);
   const colRef = collection(db, userRef!.uid);
 
   const subscriptionItems = [] as Array<Subscription>;

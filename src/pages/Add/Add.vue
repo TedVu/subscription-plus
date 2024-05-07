@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import VueDatePicker from "@vuepic/vue-datepicker";
+import { v4 as uuidv4 } from "uuid";
 import "@vuepic/vue-datepicker/dist/main.css";
 import { enAU } from "date-fns/locale";
-import { uploadFirebaseStaticFile } from "../../firebase";
 import { addSubscriptionItem } from "../../composables";
-import { v4 as uuidv4 } from "uuid";
 import { nameRules } from "../../validation";
+import { uploadFirebaseStaticFile } from "../../firebase";
 import { useAuthentication } from "../../composables";
 
 const { userRef } = useAuthentication();
