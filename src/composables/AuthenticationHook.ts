@@ -4,10 +4,10 @@ import { onAuthStateChanged, User } from "firebase/auth";
 import { ref } from "vue";
 
 export const useAuthentication = defineStore(
-  "auth",
+  "authentication",
   () => {
     const isAuthenticated = ref(false);
-    const userRef = ref<User | undefined>(undefined);
+    const userRef = ref<User>();
     onAuthStateChanged(auth, (user) => {
       if (user) {
         isAuthenticated.value = true;
