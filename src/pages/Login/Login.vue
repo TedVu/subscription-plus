@@ -10,8 +10,6 @@ var uiConfig = {
     {
       provider: "google.com",
       providerName: "Google",
-      // To override the full label of the button.
-      // fullLabel: 'Login with Google',
       buttonColor: "primary",
     },
   ],
@@ -21,9 +19,7 @@ var uiConfig = {
       document.getElementById("loader")!.style.display = "none";
     },
   },
-  // Terms of service url.
   tosUrl: "https://policies.google.com/terms",
-  // Privacy policy url.
   privacyPolicyUrl: "https://policies.google.com/privacy",
 };
 ui.start("#firebaseui-auth-container", uiConfig);
