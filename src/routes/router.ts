@@ -3,13 +3,23 @@ import * as VueRouter from "vue-router";
 import Login from "../pages/Login/Login.vue";
 import { useAuthentication } from "../composables";
 
+enum RoutesEnum {
+  ABOUT = "/about",
+  HOME = "/home",
+  PROFILE = "/profile",
+  LOGIN = "/login",
+  ADD = "/add",
+  REMINDER = "/reminder",
+  NOTFOUND = "/not-found",
+}
+
 const routes = [
-  { name: "about", path: "/about", component: About },
-  { name: "home", path: "/home", component: HomePage },
-  { name: "profile", path: "/profile", component: Profile },
-  { name: "login", path: "/login", component: Login, alias: "/" },
-  { name: "add", path: "/add", component: Add },
-  { name: "reminder", path: "/reminder", component: Reminder },
+  { name: "about", path: RoutesEnum.ABOUT, component: About },
+  { name: "home", path: RoutesEnum.HOME, component: HomePage },
+  { name: "profile", path: RoutesEnum.PROFILE, component: Profile },
+  { name: "login", path: RoutesEnum.LOGIN, component: Login, alias: "/" },
+  { name: "add", path: RoutesEnum.ADD, component: Add },
+  { name: "reminder", path: RoutesEnum.REMINDER, component: Reminder },
   { name: "not-found", path: "/:pathMatch(.*)*", component: NotFound },
 ];
 
@@ -21,18 +31,18 @@ const router = VueRouter.createRouter({
 router.beforeEach(async (to) => {
   const { isAuthenticated } = useAuthentication();
 
-  if (to.path === "/login" && isAuthenticated) {
-    return "/home";
+  if (to.path === RoutesEnum.LOGIN && isAuthenticated) {
+    return RoutesEnum.HOME;
   }
   if (
     // make sure the user is authenticated
     !isAuthenticated &&
     // ❗️ Avoid an infinite redirect
-    to.path !== "/login"
+    to.path !== RoutesEnum.LOGIN
   ) {
     // redirect the user to the login page
-    return "/login";
+    return RoutesEnum.LOGIN;
   }
 });
 
-export { router };
+export { router, RoutesEnum };

@@ -1,3 +1,4 @@
-import { router } from './router';
+import { router, RoutesEnum } from "./router";
 
+export { RoutesEnum };
 export default router;

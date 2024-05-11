@@ -3,7 +3,7 @@ import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { setLoadingState } from "../composables";
 import { useAuthentication } from "../composables";
-import router from "../routes";
+import router, { RoutesEnum } from "../routes";
 
 const loading = setLoadingState(false);
 
@@ -22,7 +22,7 @@ const handleLogout = () => {
 };
 
 const handleProfileItemClick = () => {
-  router.push("/profile");
+  router.push(RoutesEnum.PROFILE);
 };
 </script>
 <template>

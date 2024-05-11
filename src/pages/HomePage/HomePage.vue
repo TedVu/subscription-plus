@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, Ref, watch, computed } from "vue";
+import { ref, Ref, watch, computed, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { computedAsync } from "@vueuse/core";
 import draggable from "vuedraggable";
@@ -8,8 +8,7 @@ import { getSubscriptionImageUrl } from "../../firebase";
 import { removeSubscription, useLoadingState } from "../../composables";
 import { useSubscriptionItemsStore } from "../../store";
 import UpdateDialog from "../UpdateDialog";
-import { onMounted } from "vue";
-import router from "../../routes";
+import router, { RoutesEnum } from "../../routes";
 
 const loading = useLoadingState();
 const filterValue = ref("");
@@ -112,7 +111,7 @@ const handleDragEnd = () => {
 };
 
 const handleCardClick = () => {
-  router.push("/reminder");
+  router.push(RoutesEnum.REMINDER);
 };
 
 const isCardVisible = (item: Subscription) => {

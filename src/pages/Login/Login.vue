@@ -2,10 +2,11 @@
 import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
 import { auth } from "../../firebase";
+import { RoutesEnum } from "../../routes";
 
 var ui = new firebaseui.auth.AuthUI(auth);
 var uiConfig = {
-  signInSuccessUrl: "/home",
+  signInSuccessUrl: RoutesEnum.HOME,
   signInOptions: [
     {
       provider: "google.com",
