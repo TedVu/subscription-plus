@@ -1,7 +1,13 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import {
+  getDownloadURL,
+  deleteObject,
+  getStorage,
+  ref,
+  uploadBytes,
+} from "firebase/storage";
 import {
   collection,
   addDoc,
@@ -39,20 +45,25 @@ const updateFirebaseRecord = async (
   const colRef = collection(db, userRef!.uid);
   const docs = await getDocs(colRef);
   docs.forEach(async (doc) => {
-    if (doc.id === id) {
+    if (doc.data().id || doc.id === id) {
       await updateDoc(doc.ref, updatedRecord);
     }
   });
 };
 
 const deleteFirebaseRecord = async (id: string) => {
+  alert("Calling Delete Firebase Record");
   const { userRef } = useAuthentication();
   const db = getFirestore(app);
   const colRef = collection(db, userRef!.uid);
   const docs = await getDocs(colRef);
   docs.forEach(async (doc) => {
-    if (doc.id === id) {
+    if (doc.data().id || doc.id === id) {
       await deleteDoc(doc.ref);
+      const storage = getStorage(app);
+      const storageRef = ref(storage, `images/${doc.data().imgName}`);
+      alert(`images/${doc.data().imgName}`);
+      await deleteObject(storageRef);
     }
   });
 };
@@ -73,7 +84,6 @@ const getSubscriptionItems = async () => {
   const docs = await getDocs(colRef);
   docs.forEach((doc) => {
     const date = doc.data().date;
-
     const name = doc.data().name;
     const id = doc.id;
     const imgName = doc.data().imgName;
