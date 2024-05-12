@@ -37,7 +37,8 @@ const addFirebaseRecord = async (record: Subscription, userId: string) => {
 
 const updateFirebaseRecord = async (
   id: string,
-  updatedRecord: Subscription
+  updatedRecord: Subscription,
+  isDeleteOldImage: boolean
 ) => {
   const { userRef } = useAuthentication();
 
@@ -45,20 +46,25 @@ const updateFirebaseRecord = async (
   const colRef = collection(db, userRef!.uid);
   const docs = await getDocs(colRef);
   docs.forEach(async (doc) => {
-    if (doc.data().id || doc.id === id) {
+    if (doc.data().id === id) {
+      if (isDeleteOldImage) {
+        const storage = getStorage(app);
+        const storageRef = ref(storage, `images/${doc.data().imgName}`);
+        alert(`images/${doc.data().imgName}`);
+        await deleteObject(storageRef);
+      }
       await updateDoc(doc.ref, updatedRecord);
     }
   });
 };
 
 const deleteFirebaseRecord = async (id: string) => {
-  alert("Calling Delete Firebase Record");
   const { userRef } = useAuthentication();
   const db = getFirestore(app);
   const colRef = collection(db, userRef!.uid);
   const docs = await getDocs(colRef);
   docs.forEach(async (doc) => {
-    if (doc.data().id || doc.id === id) {
+    if (doc.data().id === id) {
       await deleteDoc(doc.ref);
       const storage = getStorage(app);
       const storageRef = ref(storage, `images/${doc.data().imgName}`);
@@ -85,7 +91,7 @@ const getSubscriptionItems = async () => {
   docs.forEach((doc) => {
     const date = doc.data().date;
     const name = doc.data().name;
-    const id = doc.id;
+    const id = doc.data().id;
     const imgName = doc.data().imgName;
 
     subscriptionItems.push({

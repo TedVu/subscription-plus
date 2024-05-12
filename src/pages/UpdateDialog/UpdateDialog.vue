@@ -44,22 +44,31 @@ const submit = async () => {
       loading.value = false;
     }, 2000);
 
-    const updateImageName = `${uuidv4().replaceAll("-", "")}.${(
-      images.value[0] as File
-    )?.name
-      .split(".")
-      .pop()}`;
+    const updateImageName = images.value[0]
+      ? `${uuidv4().replaceAll("-", "")}.${(images.value[0] as File)?.name
+          .split(".")
+          .pop()}`
+      : undefined;
 
     const updatedSubscriptionItem = {
       id: props.id!,
       name: name.value,
-      date: date.value || attachedSubscriptionItem?.date,
-      imgName: images.value[0]
-        ? updateImageName
-        : attachedSubscriptionItem?.imgName,
+      date: date.value ?? attachedSubscriptionItem?.date,
+      imgName: updateImageName ?? attachedSubscriptionItem?.imgName,
     };
-    await uploadFirebaseStaticFile(images.value[0], updateImageName);
-    await updateSubscription(props.id!, updatedSubscriptionItem);
+
+    if (images.value[0]) {
+      await uploadFirebaseStaticFile(
+        images.value[0],
+        updatedSubscriptionItem.imgName!
+      );
+    }
+
+    await updateSubscription(
+      props.id!,
+      updatedSubscriptionItem,
+      !!images.value[0]
+    );
     emits("update");
     snackbar.value = true;
     snackbarMsg.value = "Updating a new subscription successful!";

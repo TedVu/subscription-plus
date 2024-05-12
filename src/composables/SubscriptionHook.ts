@@ -30,9 +30,10 @@ const removeSubscription = async (id: string) => {
 
 const updateSubscription = async (
   id: string,
-  updatedSubscriptionItem: Subscription
+  updatedSubscriptionItem: Subscription,
+  isDeleteOldImage: boolean
 ) => {
-  await updateFirebaseRecord(id, updatedSubscriptionItem);
+  await updateFirebaseRecord(id, updatedSubscriptionItem, isDeleteOldImage);
   const store = useSubscriptionItemsStore();
   store.updateSubscription({
     ...updatedSubscriptionItem,
