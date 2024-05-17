@@ -50,7 +50,6 @@ const updateFirebaseRecord = async (
       if (isDeleteOldImage) {
         const storage = getStorage(app);
         const storageRef = ref(storage, `images/${doc.data().imgName}`);
-        alert(`images/${doc.data().imgName}`);
         await deleteObject(storageRef);
       }
       await updateDoc(doc.ref, updatedRecord);
@@ -68,7 +67,6 @@ const deleteFirebaseRecord = async (id: string) => {
       await deleteDoc(doc.ref);
       const storage = getStorage(app);
       const storageRef = ref(storage, `images/${doc.data().imgName}`);
-      alert(`images/${doc.data().imgName}`);
       await deleteObject(storageRef);
     }
   });

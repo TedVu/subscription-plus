@@ -34,13 +34,7 @@ router.beforeEach(async (to) => {
   if (to.path === RoutesEnum.LOGIN && isAuthenticated) {
     return RoutesEnum.HOME;
   }
-  if (
-    // make sure the user is authenticated
-    !isAuthenticated &&
-    // ❗️ Avoid an infinite redirect
-    to.path !== RoutesEnum.LOGIN
-  ) {
-    // redirect the user to the login page
+  if (!isAuthenticated && to.path !== RoutesEnum.LOGIN) {
     return RoutesEnum.LOGIN;
   }
 });
