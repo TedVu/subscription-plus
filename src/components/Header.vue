@@ -8,8 +8,8 @@ import router, { RoutesEnum } from "../routes";
 const loading = setLoadingState(false);
 
 const computedVMainStyle = computed(() => ({
-  "progress-center__vmain": loading.value,
-  "content-container__vmain": !loading.value,
+  "vmain__main-content__loading": loading.value,
+  "vmain__main-content__loaded": !loading.value,
 }));
 
 const authenticationStore = useAuthentication();
@@ -94,13 +94,17 @@ const handleProfileItemClick = () => {
   </v-app>
 </template>
 
-<style lang="scss">
-.progress-center__vmain {
-  padding-top: 40vh !important;
-}
+<style lang="scss" scoped>
+.vmain {
+  &__main-content {
+    &__loading {
+      padding-top: 40vh !important;
+    }
 
-.content-container__vmain {
-  padding-top: 15vh !important;
-  width: 80vw;
+    &__loaded {
+      padding-top: 15vh !important;
+      width: 80vw;
+    }
+  }
 }
 </style>

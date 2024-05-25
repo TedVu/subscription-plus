@@ -5,7 +5,6 @@ import router from "./routes";
 import "@mdi/font/css/materialdesignicons.css";
 import { createPinia } from "pinia";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
-// Vuetify
 import "vuetify/styles";
 import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
