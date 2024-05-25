@@ -7,6 +7,7 @@
     "build": "vue-tsc && vite build",
     "deploy": "firebase deploy --only hosting",
     "dev": "vite",
+    "format": "prettier . --write",
     "prepare": "husky",
     "preview": "vite preview",
     "serve": "vite",
@@ -39,4 +40,3 @@
     "vue-tsc": "^1.8.22"
   }
 }
-

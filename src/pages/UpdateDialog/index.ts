@@ -1,3 +1,3 @@
-import UpdateDialog from './UpdateDialog.vue';
+import UpdateDialog from "./UpdateDialog.vue";
 
 export default UpdateDialog;
