@@ -36,7 +36,7 @@ const team = [
   {
     id: 1,
     name: "Ted Vu",
-    position: "Developer",
+    position: "Software Enginner",
     image: "https://tedvublogimages.s3.us-west-1.amazonaws.com/profilepics.jpg",
   },
   // Add more team members as needed
