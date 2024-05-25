@@ -1,13 +1,11 @@
-.card {
-  user-select: none;
-}
+.draggable {
+  &__dragged {
+    transform: rotate(-2deg);
+    z-index: 2;
+    opacity: 1 !important;
+  }
 
-.draggable__drag {
-  transform: rotate(-2deg);
-  z-index: 2;
-  opacity: 1 !important;
-}
-
-.ghost {
-  opacity: 0 !important;
+  &__ghost {
+    opacity: 0 !important;
+  }
 }
