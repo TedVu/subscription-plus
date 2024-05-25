@@ -11,17 +11,17 @@ import UpdateDialog from "../UpdateDialog";
 import router, { RoutesEnum } from "../../routes";
 
 const loading = useLoadingState();
-const filterValue = ref("");
 const delayFilterTimeout = ref(0);
 const dialog = ref(false);
-const snackbar = ref(false);
-const snackbarMsg = ref("");
-const snackbarColor = ref("");
+const filterValue = ref("");
 const pagination = ref(1);
+const snackbar = ref(false);
+const snackbarColor = ref("");
+const snackbarMsg = ref("");
 
 loading!.value = true;
 const store = useSubscriptionItemsStore();
-await store.getLatestData();
+await store.refreshDataSource();
 loading!.value = false;
 
 const computeItemsOrder = () => {

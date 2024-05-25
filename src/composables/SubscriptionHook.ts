@@ -8,7 +8,7 @@ import {
 
 const getSubscriptionItems = async () => {
   const store = useSubscriptionItemsStore();
-  await store.getLatestData();
+  await store.refreshDataSource();
   return store.subscriptionItems;
 };
 

@@ -7,8 +7,14 @@ export const useSubscriptionItemsStore = defineStore(
   () => {
     const subscriptionItems = ref([] as Subscription[]);
     const serverSubscriptionItems = ref([] as Subscription[]);
-    const getLatestData = async () => {
-      subscriptionItems.value = await getSubscriptionItems();
+    const refreshDataSource = async () => {
+      if (localStorage.getItem("items-order")) {
+        subscriptionItems.value = JSON.parse(
+          localStorage.getItem("items-order")!
+        ) as Subscription[];
+      } else {
+        subscriptionItems.value = await getSubscriptionItems();
+      }
       serverSubscriptionItems.value = subscriptionItems.value;
     };
 
@@ -38,19 +44,23 @@ export const useSubscriptionItemsStore = defineStore(
       subscriptionItems.value = newSubscriptionItems;
     };
 
-    const filterSubscriptionItems = async (subscriptionItemName: string) => {
-      if (subscriptionItemName) {
+    const filterSubscriptionItems = async (
+      subscriptionItemSearchKeyword: string
+    ) => {
+      if (subscriptionItemSearchKeyword) {
         subscriptionItems.value = serverSubscriptionItems.value.filter((item) =>
-          item.name.toUpperCase().includes(subscriptionItemName.toUpperCase())
+          item.name
+            .toUpperCase()
+            .includes(subscriptionItemSearchKeyword.toUpperCase())
         );
       } else {
-        await getLatestData();
+        await refreshDataSource();
       }
     };
 
     return {
       addSubscription,
-      getLatestData,
+      refreshDataSource,
       filterSubscriptionItems,
       removeSubscription,
       subscriptionItems,
