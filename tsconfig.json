@@ -18,8 +18,16 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@composables/*": ["composables/index.ts"], //one entry point for all the composables
+      "@components/*": ["components/*"],
+      "@pages/*": ["pages/*"],
+      "@routes/*": ["routes/*"]
+    }
   },
+
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
