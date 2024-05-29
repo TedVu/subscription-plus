@@ -5,10 +5,10 @@ import { enAU } from "date-fns/locale";
 import { v4 as uuidv4 } from "uuid";
 import VueDatePicker from "@vuepic/vue-datepicker";
 
-import { isAllDataCorrect, nameRules } from "../../validation";
-import { updateSubscription } from "../../composables";
+import { isAllDataCorrect, nameRules } from "@validation";
+import { updateSubscription } from "@composables";
 import { uploadFirebaseStaticFile } from "../../firebase";
-import { useSubscriptionItemsStore } from "../../store";
+import { useSubscriptionItemsStore } from "@store";
 
 const emits = defineEmits(["close", "update"]);
 

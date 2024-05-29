@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useAuthentication } from "../../composables";
+import { useAuthentication } from "@composables";
 
 const { userRef } = useAuthentication();
 </script>

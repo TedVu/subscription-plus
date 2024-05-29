@@ -1,5 +1,5 @@
 import { Subscription } from "../types";
-import { useSubscriptionItemsStore } from "../store";
+import { useSubscriptionItemsStore } from "@store";
 import {
   addFirebaseRecord,
   deleteFirebaseRecord,

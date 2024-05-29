@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
-import { setLoadingState, useAuthentication } from "@composables/";
-import router, { RoutesEnum } from "../routes";
+import { setLoadingState, useAuthentication } from "@composables";
+import router, { RoutesEnum } from "@routes";
 
 const loading = setLoadingState(false);
 

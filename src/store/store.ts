@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { Subscription } from "../types";
+import { Subscription } from "@types";
 import { getSubscriptionItems } from "../firebase";
 export const useSubscriptionItemsStore = defineStore(
   "subscription-items",

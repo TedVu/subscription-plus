@@ -19,15 +19,18 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": "./src",
+    "baseUrl": "./src/",
     "paths": {
-      "@composables/*": ["composables/index.ts"], //one entry point for all the composables
-      "@components/*": ["components/*"],
-      "@pages/*": ["pages/*"],
-      "@routes/*": ["routes/*"]
+      "@assets": ["assets/"],
+      "@composables": ["composables/index.ts"],
+      "@components": ["components/index.ts"],
+      "@pages": ["pages/index.ts"],
+      "@routes": ["routes/index.ts"],
+      "@store": ["store/index.ts"],
+      "@types": ["types/index.ts"],
+      "@validation": ["validation/index.ts"]
     }
   },
-
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

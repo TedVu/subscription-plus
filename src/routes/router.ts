@@ -1,6 +1,6 @@
 import { About, HomePage, Profile, Add, Reminder, NotFound } from "../pages";
 import * as VueRouter from "vue-router";
-import Login from "../pages/Login/Login.vue";
+import { Login } from "@pages";
 import { useAuthentication } from "../composables";
 
 enum RoutesEnum {

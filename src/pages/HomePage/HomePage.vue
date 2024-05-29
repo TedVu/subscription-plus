@@ -3,12 +3,12 @@ import { ref, Ref, watch, computed, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { computedAsync } from "@vueuse/core";
 import draggable from "vuedraggable";
-import type { Subscription } from "../../types";
+import type { Subscription } from "@types";
 import { getSubscriptionImageUrl } from "../../firebase";
-import { removeSubscription, useLoadingState } from "../../composables";
-import { useSubscriptionItemsStore } from "../../store";
-import UpdateDialog from "../UpdateDialog";
-import router, { RoutesEnum } from "../../routes";
+import { removeSubscription, useLoadingState } from "@composables";
+import { useSubscriptionItemsStore } from "@store";
+import { UpdateDialog } from "@pages";
+import router, { RoutesEnum } from "@routes";
 
 const loading = useLoadingState();
 const delayFilterTimeout = ref(0);
