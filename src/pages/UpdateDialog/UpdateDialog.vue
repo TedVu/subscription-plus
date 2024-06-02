@@ -22,9 +22,9 @@ const props = defineProps({
 const store = useSubscriptionItemsStore();
 const { subscriptionItems } = storeToRefs(store);
 
-const attachedSubscriptionItem = subscriptionItems.value
-  .filter((subscriptionItem) => subscriptionItem.id === props.id)
-  .at(0);
+const attachedSubscriptionItem = subscriptionItems.value.find(
+  (subscriptionItem) => subscriptionItem.id === props.id
+);
 
 const parts = attachedSubscriptionItem!.date!.split("/");
 const parsedDate = new Date(+parts[2], +parts[1] - 1, +parts[0]);
