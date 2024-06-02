@@ -8,6 +8,7 @@ enum RoutesEnum {
   HOME = "/home",
   PROFILE = "/profile",
   LOGIN = "/login",
+  DEFAULT = "/",
   ADD = "/add",
   REMINDER = "/reminder",
   NOTFOUND = "/not-found",
@@ -31,7 +32,10 @@ const router = VueRouter.createRouter({
 router.beforeEach(async (to) => {
   const { isAuthenticated } = useAuthentication();
 
-  if (to.path === RoutesEnum.LOGIN && isAuthenticated) {
+  if (
+    (to.path === RoutesEnum.LOGIN || to.path === RoutesEnum.DEFAULT) &&
+    isAuthenticated
+  ) {
     return RoutesEnum.HOME;
   }
   if (!isAuthenticated && to.path !== RoutesEnum.LOGIN) {
