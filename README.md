@@ -16,4 +16,9 @@ Subscription Plus application is a software that helps you address the problem o
 
 ## Bug list
 
-1. When access after login => no redirect to home page but still at login page.
+## Features
+
+1. Allow filtering overdue, future subscriptions.
+2. Display a dashboard showing subscription metrics such as total cost, number of subscriptions,...
+3. Sending email / SMS notification with Twilio APIs.
+4. Sending in-app notification with Firebase Cloud Messaging / One Signal.
