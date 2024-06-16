@@ -113,6 +113,13 @@ watch(
   }
 );
 
+watch(
+  () => currentFilterCategory.value,
+  async (newCurrentFilterCategory) => {
+    await store.filterSubscriptionItemsBasedOnDate(newCurrentFilterCategory);
+  }
+);
+
 const handleUpdate = () => {
   localStorage.setItem("items-order", JSON.stringify(subscriptionItems.value));
 };

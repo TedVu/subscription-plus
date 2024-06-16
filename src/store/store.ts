@@ -58,10 +58,27 @@ export const useSubscriptionItemsStore = defineStore(
       }
     };
 
+    const filterSubscriptionItemsBasedOnDate = async (
+      subscriptionItemCategory: string
+    ) => {
+      if (subscriptionItemCategory === "Show overdue") {
+        subscriptionItems.value = subscriptionItems.value.filter(
+          (item) => new Date(item.date!) < new Date()
+        );
+      } else if (subscriptionItemCategory === "Show future subscription") {
+        subscriptionItems.value = subscriptionItems.value.filter(
+          (item) => new Date(item.date!) >= new Date()
+        );
+      } else {
+        await refreshDataSource();
+      }
+    };
+
     return {
       addSubscription,
       refreshDataSource,
       filterSubscriptionItems,
+      filterSubscriptionItemsBasedOnDate,
       removeSubscription,
       subscriptionItems,
       updateElementOrder,
