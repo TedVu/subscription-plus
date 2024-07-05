@@ -27,6 +27,7 @@ export default defineConfig({
     rollupOptions: {
       plugins: [del({ targets: "dist/*" })],
       output: {
+        chunkFileNames: "[name]-[hash].mjs",
         manualChunks(id) {
           if (id.includes("node_modules")) {
             return id
@@ -40,6 +41,7 @@ export default defineConfig({
       treeshake: false,
     },
     minify: true,
+    cssCodeSplit: true,
     cssMinify: true,
     sourcemap: "inline",
   },
