@@ -34,6 +34,10 @@ export default defineConfig({
           }
         },
       },
+      treeshake: false,
     },
+    minify: true,
+    cssMinify: true,
+    sourcemap: "inline",
   },
 });
