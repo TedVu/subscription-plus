@@ -19,6 +19,9 @@ export default defineConfig({
       "@validation": path.resolve(__dirname, "./src/validation/index.ts"),
     },
   },
+  server: {
+    port: 8008,
+  },
   plugins: [vue(), splitVendorChunkPlugin(), vuetify(), visualizer()],
   build: {
     rollupOptions: {
