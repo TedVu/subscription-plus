@@ -27,7 +27,7 @@ export default defineConfig({
     rollupOptions: {
       plugins: [del({ targets: "dist/*" })],
       output: {
-        chunkFileNames: "[name]-[hash].js",
+        chunkFileNames: "vendors/[name]-[hash].js",
         manualChunks(id) {
           if (id.includes("node_modules")) {
             return id
@@ -47,10 +47,12 @@ export default defineConfig({
       toplevel: true,
       compress: true,
     },
+    assetsDir: "src",
     cssCodeSplit: true,
     cssMinify: "lightningcss",
     sourcemap: "inline",
     manifest: true,
     ssrManifest: true,
+    ssrEmitAssets: true,
   },
 });
