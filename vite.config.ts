@@ -41,8 +41,16 @@ export default defineConfig({
       treeshake: true,
     },
     minify: "terser",
+    terserOptions: {
+      mangle: true,
+      sourceMap: true,
+      toplevel: true,
+      compress: true,
+    },
     cssCodeSplit: true,
     cssMinify: "lightningcss",
     sourcemap: "inline",
+    manifest: true,
+    ssrManifest: true,
   },
 });
