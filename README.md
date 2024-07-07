@@ -16,6 +16,8 @@ Subscription Plus application is a software that helps you address the problem o
 
 ## Bug list
 
+1. The app navigation is missing in small screen.
+
 ## Features
 
 1. Allow filtering overdue, future subscriptions.
