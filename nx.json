@@ -2,7 +2,9 @@
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "targetDefaults": {
     "build": {
-      "outputs": ["{projectRoot}/dist"],
+      "outputs": [
+        "{projectRoot}/dist"
+      ],
       "cache": true
     },
     "deploy": {
@@ -13,5 +15,5 @@
     }
   },
   "defaultBase": "main",
-  "nxCloudAccessToken": "MzVlZDY1NGUtMDlhZC00ZTBlLWFmODMtMThkMjgxYzg3NzQ4fHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "ZWE1YWExYTUtMWYzNi00OThlLTg5NmYtMTBlY2JhNDEwZjkzfHJlYWQtd3JpdGU="
 }
