@@ -1,1 +1,1 @@
-npm run type:check
+npx nx run-many -t type:check
