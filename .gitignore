@@ -25,3 +25,8 @@ dist-ssr
 *.sw?
 stats.html
 
+
+
+
+.nx/cache
+.nx/workspace-data
