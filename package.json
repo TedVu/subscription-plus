@@ -6,6 +6,7 @@
   "scripts": {
     "build": "vue-tsc && vite build",
     "build:nx": "npx nx run-many -t build",
+    "visualize:nx": "npx nx graph",
     "deploy": "firebase deploy --only hosting",
     "dev": "vite",
     "format": "prettier . --write",
