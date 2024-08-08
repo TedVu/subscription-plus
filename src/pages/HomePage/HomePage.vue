@@ -146,7 +146,7 @@ const isCardVisible = (item: Subscription) => {
         <v-icon> mdi-magnify </v-icon>
       </template>
     </v-text-field>
-    <v-menu v-if="subscriptionItems.length > 0">
+    <v-menu>
       <template v-slot:activator="{ props }">
         <v-btn color="primary" v-bind="props" append-icon="mdi-arrow-down">
           {{ currentFilterCategory }}
