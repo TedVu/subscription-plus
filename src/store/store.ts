@@ -62,10 +62,12 @@ export const useSubscriptionItemsStore = defineStore(
       subscriptionItemCategory: string
     ) => {
       if (subscriptionItemCategory === "Show overdue") {
+        await refreshDataSource();
         subscriptionItems.value = subscriptionItems.value.filter(
           (item) => new Date(item.date!) < new Date()
         );
       } else if (subscriptionItemCategory === "Show future subscription") {
+        await refreshDataSource();
         subscriptionItems.value = subscriptionItems.value.filter(
           (item) => new Date(item.date!) >= new Date()
         );
