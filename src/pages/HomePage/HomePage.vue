@@ -30,10 +30,10 @@ const snackbar = ref(false);
 const snackbarColor = ref("");
 const snackbarMsg = ref("");
 
-loading!.value = true;
+loading.value = true;
 const store = useSubscriptionItemsStore();
 await store.refreshDataSource();
-loading!.value = false;
+loading.value = false;
 
 const computeItemsOrder = () => {
   const localStorageItems = JSON.parse(

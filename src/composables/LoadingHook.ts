@@ -10,5 +10,8 @@ export const setLoadingState = (loadingState: boolean) => {
 
 export const useLoadingState = () => {
   const loadingRef = inject<Ref<boolean> | undefined>(loadingSymbol, undefined);
+
+  if (!loadingRef) throw new Error("Could not find loadRef injection");
+
   return loadingRef;
 };
