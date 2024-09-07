@@ -58,6 +58,12 @@ export const useSubscriptionItemsStore = defineStore(
       }
     };
 
+    const getOverdueSubscriptionItems = async () => {
+      return subscriptionItems.value.filter(
+        (item) => new Date(item.date!) < new Date()
+      );
+    };
+
     const filterSubscriptionItemsBasedOnDate = async (
       subscriptionItemCategory: string
     ) => {
@@ -82,6 +88,7 @@ export const useSubscriptionItemsStore = defineStore(
       refreshDataSource,
       filterSubscriptionItems,
       filterSubscriptionItemsBasedOnDate,
+      getOverdueSubscriptionItems,
       removeSubscription,
       updateElementOrder,
       updateSubscription,
