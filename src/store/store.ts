@@ -77,12 +77,12 @@ export const useSubscriptionItemsStore = defineStore(
     };
 
     return {
+      subscriptionItems,
       addSubscription,
       refreshDataSource,
       filterSubscriptionItems,
       filterSubscriptionItemsBasedOnDate,
       removeSubscription,
-      subscriptionItems,
       updateElementOrder,
       updateSubscription,
     };

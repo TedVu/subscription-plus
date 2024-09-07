@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { useAuthentication } from "@composables";
+import { useSubscriptionItemsStore } from "@store";
 
 const { userRef } = useAuthentication();
+
+const { subscriptionItems } = useSubscriptionItemsStore();
 </script>
 
 <template>
@@ -13,6 +16,6 @@ const { userRef } = useAuthentication();
       <v-img :src="userRef?.photoURL ?? ''" cover></v-img>
     </v-avatar>
 
-    <div>Number of subscription: 5</div>
+    <div>Number of subscription: {{ subscriptionItems.length }}</div>
   </v-card>
 </template>
