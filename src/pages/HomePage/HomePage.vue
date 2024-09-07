@@ -146,23 +146,25 @@ const isCardVisible = (item: Subscription) => {
         <v-icon> mdi-magnify </v-icon>
       </template>
     </v-text-field>
-    <v-menu>
-      <template v-slot:activator="{ props }">
-        <v-btn color="primary" v-bind="props" append-icon="mdi-arrow-down">
-          {{ currentFilterCategory }}
-        </v-btn>
-      </template>
-      <v-list>
-        <v-list-item
-          v-for="(item, index) in filterCategory"
-          :key="index"
-          :value="index"
-          @click="onFilterCategoryClick(item)"
-        >
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu>
+    <v-container style="display: flex; align-items: baseline">
+      <v-menu>
+        <template v-slot:activator="{ props }">
+          <v-btn color="primary" v-bind="props" append-icon="mdi-arrow-down">
+            {{ currentFilterCategory }}
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item
+            v-for="(item, index) in filterCategory"
+            :key="index"
+            :value="index"
+            @click="onFilterCategoryClick(item)"
+          >
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </v-container>
     <v-container>
       <template v-if="subscriptionItems.length > 0">
         <v-row no-gutters justify-cotent="center">
