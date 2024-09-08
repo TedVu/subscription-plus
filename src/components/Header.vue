@@ -28,11 +28,12 @@ const handleProfileItemClick = () => {
 
 const toggleTheme = () => {
   theme.global.name.value = theme.global.current.value.dark ? "light" : "dark";
+  document.body.style.background = theme.global.current.value.colors.background;
 };
 </script>
 <template>
   <v-app>
-    <v-app-bar color="info" density="comfortable" v-if="isAuthenticated">
+    <v-app-bar color="primary" density="comfortable" v-if="isAuthenticated">
       <v-app-bar-title> Subscription plus </v-app-bar-title>
       <v-btn icon="mdi-theme-light-dark" @click="toggleTheme" />
     </v-app-bar>
