@@ -3,8 +3,10 @@ import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { setLoadingState, useAuthentication } from "@composables";
 import router, { RoutesEnum } from "@routes";
+import { useTheme } from "vuetify";
 
 const loading = setLoadingState(false);
+const theme = useTheme();
 
 const computedVMainStyle = computed(() => ({
   "vmain__main-content__loading": loading.value,
@@ -23,11 +25,16 @@ const handleLogout = () => {
 const handleProfileItemClick = () => {
   router.push(RoutesEnum.PROFILE);
 };
+
+const toggleTheme = () => {
+  theme.global.name.value = theme.global.current.value.dark ? "light" : "dark";
+};
 </script>
 <template>
   <v-app>
     <v-app-bar color="info" density="comfortable" v-if="isAuthenticated">
       <v-app-bar-title> Subscription plus </v-app-bar-title>
+      <v-btn icon="mdi-theme-light-dark" @click="toggleTheme" />
     </v-app-bar>
     <v-navigation-drawer expand-on-hover rail v-if="isAuthenticated">
       <v-list>
