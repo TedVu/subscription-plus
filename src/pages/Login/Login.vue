@@ -28,6 +28,7 @@ ui.start("#firebaseui-auth-container", uiConfig);
 
 <template>
   <div class="text-h6 mb-12">Welcome to Subscription Plus Application</div>
+  <v-btn color="primary" width="220">Sign in with email</v-btn>
   <div id="firebaseui-auth-container"></div>
   <div id="loader">
     <v-progress-circular color="primary" indeterminate></v-progress-circular>
