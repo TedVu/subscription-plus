@@ -15,6 +15,11 @@ export const useAuthentication = defineStore(
       }
     });
 
+    const signIn = (user: User) => {
+      userRef.value = user;
+      isAuthenticated.value = true;
+    };
+
     const logout = () => {
       auth.signOut();
       isAuthenticated.value = false;
@@ -22,6 +27,7 @@ export const useAuthentication = defineStore(
     };
 
     return {
+      signIn,
       isAuthenticated,
       logout,
       userRef,
