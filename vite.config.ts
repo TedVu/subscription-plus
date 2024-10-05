@@ -52,8 +52,5 @@ export default defineConfig({
     cssCodeSplit: true,
     cssMinify: "lightningcss",
     sourcemap: "inline",
-    manifest: true,
-    ssrManifest: true,
-    ssrEmitAssets: true,
   },
 });
