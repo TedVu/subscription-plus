@@ -24,6 +24,7 @@ export default defineConfig({
   },
   plugins: [vue(), splitVendorChunkPlugin(), vuetify(), visualizer()],
   build: {
+    target: "esnext",
     rollupOptions: {
       plugins: [del({ targets: "dist/*" })],
       output: {
