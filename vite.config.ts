@@ -1,9 +1,9 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import del from "rollup-plugin-delete";
-import { splitVendorChunkPlugin } from "vite";
 import { visualizer } from "rollup-plugin-visualizer";
 import path from "path";
+import mkcert from "vite-plugin-mkcert";
 
 export default defineConfig({
   resolve: {
@@ -21,7 +21,7 @@ export default defineConfig({
   server: {
     port: 8008,
   },
-  plugins: [vue(), splitVendorChunkPlugin(), visualizer()],
+  plugins: [vue(), visualizer(), mkcert()],
   build: {
     target: "esnext",
     rollupOptions: {
