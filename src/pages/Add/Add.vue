@@ -12,7 +12,7 @@ import { useAuthentication } from "@composables";
 const { userRef } = useAuthentication();
 const name = ref("");
 const date = ref("");
-const images = ref([]);
+const image = ref();
 const loading = ref(false);
 const subscriptionDateErrorMsg = ref<boolean | undefined>(undefined);
 const snackbar = ref(false);
@@ -40,7 +40,7 @@ const submit = async () => {
     loading.value = true;
 
     const imgName = `${uuidv4().replaceAll("-", "")}.${(
-      images.value[0] as File
+      image.value as unknown as File
     )?.name
       .split(".")
       .pop()}`;
@@ -53,7 +53,7 @@ const submit = async () => {
       },
       userRef?.uid ?? ""
     );
-    await uploadFirebaseStaticFile(images.value[0], imgName);
+    await uploadFirebaseStaticFile(image.value, imgName);
     setTimeout(() => {
       loading.value = false;
     }, 2000);
@@ -93,7 +93,7 @@ const submit = async () => {
         Subscription date is not in the correct format
       </span>
       <v-file-input
-        v-model="images"
+        v-model="image"
         accept="image/png, image/jpeg, image/gif"
         label="Subscription Image"
         class="mt-5"
