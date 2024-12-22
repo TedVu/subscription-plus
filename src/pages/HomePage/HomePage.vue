@@ -183,7 +183,7 @@ const isCardVisible = (item: Subscription) => {
               <v-col :key="item.id" cols="4" v-if="isCardVisible(item)">
                 <v-card hover @click="handleCardClick">
                   <v-img
-                    :src="itemsMapComputed.get(item.id)!"
+                    :src="itemsMapComputed.get(item.id) ?? undefined"
                     class="align-end"
                     gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                     height="200px"
