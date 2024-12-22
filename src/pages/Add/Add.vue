@@ -51,7 +51,7 @@ const submit = async () => {
         imgName,
         id: uuidv4().replaceAll("-", ""),
       },
-      userRef?.uid!
+      userRef?.uid ?? ""
     );
     await uploadFirebaseStaticFile(images.value[0], imgName);
     setTimeout(() => {
