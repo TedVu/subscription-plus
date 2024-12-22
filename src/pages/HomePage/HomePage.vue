@@ -37,7 +37,7 @@ loading.value = false;
 
 const computeItemsOrder = () => {
   const localStorageItems = JSON.parse(
-    localStorage.getItem("items-order")!
+    localStorage.getItem("items-order") ?? ""
   ) as Subscription[];
   if (localStorageItems) {
     const oldOrderedItems = [] as Subscription[];
