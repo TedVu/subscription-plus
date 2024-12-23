@@ -29,7 +29,7 @@ ui.start("#firebaseui-auth-container", uiConfig);
 const actionCodeSettings = {
   // URL you want to redirect back to. The domain (www.example.com) for this
   // URL must be in the authorized domains list in the Firebase Console.
-  url: "http://localhost:8008/profile",
+  url: "https://localhost:8008/profile",
   // This must be true.
   handleCodeInApp: true,
 };
