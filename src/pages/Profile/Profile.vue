@@ -7,7 +7,7 @@ const { userRef } = useAuthentication();
 const { subscriptionItems, getOverdueSubscriptionItems } =
   useSubscriptionItemsStore();
 
-const overSubscriptions = await getOverdueSubscriptionItems();
+const overdueSubscriptionItems = await getOverdueSubscriptionItems();
 </script>
 
 <template>
@@ -23,7 +23,7 @@ const overSubscriptions = await getOverdueSubscriptionItems();
       Number of subscriptions: {{ subscriptionItems.length }}
     </div>
     <div class="text-h6">
-      Overdued subscriptions: {{ overSubscriptions.length }}
+      Overdued subscriptions: {{ overdueSubscriptionItems.length }}
     </div>
   </VCard>
 </template>

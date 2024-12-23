@@ -138,7 +138,7 @@ const isCardVisible = (item: Subscription) => {
 </script>
 <template>
   <template v-if="loading"
-    ><v-progress-circular color="primary" indeterminate></v-progress-circular
+    ><VProgressCircular color="primary" indeterminate></VProgressCircular
   ></template>
   <template v-else>
     <VTextField v-model="filterValue">

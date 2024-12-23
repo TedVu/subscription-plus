@@ -56,6 +56,6 @@ const handleSignInWithEmail = () => {
   >
   <div id="firebaseui-auth-container"></div>
   <div id="loader">
-    <v-progress-circular color="primary" indeterminate></v-progress-circular>
+    <VProgressCircular color="primary" indeterminate></VProgressCircular>
   </div>
 </template>
