@@ -4,10 +4,10 @@
     <div class="about-content">
       <p>Welcome to subscription application!</p>
       <p>
-        We are on a mission to help you manage your subscriptions as easy as
+        We are on a mission to help you manage your subscriptions as easy as a
         pie. Have you ever registered for an application and tried the free
-        trial only to finally realize you have forgotten to cancel the
-        subscription ? This app can help you solve the problem.
+        trial only to finally realized you forgot to cancel the subscription ?
+        This application can help you solve the problem.
       </p>
       <iframe
         style="margin-top: 10%; margin-bottom: 10%"
