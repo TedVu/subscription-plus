@@ -26,10 +26,12 @@ const attachedSubscriptionItem = subscriptionItems.value.find(
   (subscriptionItem) => subscriptionItem.id === props.id
 );
 
-const parts = attachedSubscriptionItem!.date!.split("/");
-const parsedDate = new Date(+parts[2], +parts[1] - 1, +parts[0]);
+const parts = attachedSubscriptionItem?.date?.split("/");
+const parsedDate = parts
+  ? new Date(+parts[2], +parts[1] - 1, +parts[0])
+  : undefined;
 const name = ref(attachedSubscriptionItem!.name);
-const date = ref(parsedDate.toDateString());
+const date = ref(parsedDate ? parsedDate.toDateString() : "");
 const loading = ref(false);
 const snackbar = ref(false);
 const snackbarMsg = ref("");
