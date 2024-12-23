@@ -30,7 +30,7 @@ const parts = attachedSubscriptionItem?.date?.split("/");
 const parsedDate = parts
   ? new Date(+parts[2], +parts[1] - 1, +parts[0])
   : undefined;
-const name = ref(attachedSubscriptionItem!.name);
+const name = ref(attachedSubscriptionItem?.name ?? "");
 const date = ref(parsedDate ? parsedDate.toDateString() : "");
 const loading = ref(false);
 const snackbar = ref(false);
@@ -53,7 +53,7 @@ const submit = async () => {
       : undefined;
 
     const updatedSubscriptionItem = {
-      id: props.id!,
+      id: props.id ?? "",
       name: name.value,
       date: date.value ?? attachedSubscriptionItem?.date,
       imgName: updateImageName ?? attachedSubscriptionItem?.imgName,
@@ -62,12 +62,12 @@ const submit = async () => {
     if (images.value[0]) {
       await uploadFirebaseStaticFile(
         images.value[0],
-        updatedSubscriptionItem.imgName!
+        updatedSubscriptionItem.imgName ?? ""
       );
     }
 
     await updateSubscription(
-      props.id!,
+      props.id ?? "",
       updatedSubscriptionItem,
       !!images.value[0]
     );
