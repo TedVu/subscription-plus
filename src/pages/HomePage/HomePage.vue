@@ -141,33 +141,33 @@ const isCardVisible = (item: Subscription) => {
     ><v-progress-circular color="primary" indeterminate></v-progress-circular
   ></template>
   <template v-else>
-    <v-text-field v-model="filterValue">
+    <VTextField v-model="filterValue">
       <template v-slot:append-inner>
         <v-icon> mdi-magnify </v-icon>
       </template>
-    </v-text-field>
-    <v-container style="display: flex; align-items: baseline">
-      <v-menu>
+    </VTextField>
+    <VContainer style="display: flex; align-items: baseline">
+      <VMenu>
         <template v-slot:activator="{ props }">
-          <v-btn color="primary" v-bind="props" append-icon="mdi-arrow-down">
+          <VBtn color="primary" v-bind="props" append-icon="mdi-arrow-down">
             {{ currentFilterCategory }}
-          </v-btn>
+          </VBtn>
         </template>
-        <v-list>
-          <v-list-item
+        <VList>
+          <VListItem
             v-for="(item, index) in filterCategory"
             :key="index"
             :value="index"
             @click="onFilterCategoryClick(item)"
           >
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-    </v-container>
-    <v-container>
+            <VListItem-title>{{ item.title }}</VListItem-title>
+          </VListItem>
+        </VList>
+      </VMenu>
+    </VContainer>
+    <VContainer>
       <template v-if="subscriptionItems.length > 0">
-        <v-row no-gutters justify-cotent="center">
+        <VRow no-gutters justify-cotent="center">
           <draggable
             v-model="subscriptionItems"
             item-key="id"
@@ -180,44 +180,44 @@ const isCardVisible = (item: Subscription) => {
             @change="handleDragEnd"
           >
             <template #item="{ element: item }: { element: Subscription }">
-              <v-col :key="item.id" cols="4" v-if="isCardVisible(item)">
-                <v-card hover @click="handleCardClick">
-                  <v-img
+              <VCol :key="item.id" cols="4" v-if="isCardVisible(item)">
+                <VCard hover @click="handleCardClick">
+                  <VImg
                     :src="itemsMapComputed.get(item.id) ?? undefined"
                     class="align-end"
                     gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                     height="200px"
                     cover
                   >
-                    <v-card-title
+                    <VCardTitle
                       class="text-white"
                       v-text="item.name"
-                    ></v-card-title>
-                  </v-img>
+                    ></VCardTitle>
+                  </VImg>
 
-                  <v-card-actions>
+                  <VCard-actions>
                     <div class="mr-2 font-weight-bold" style="font-size: 10px">
                       Subscription Date:
                     </div>
                     {{ item.date }}
-                    <v-spacer />
-                    <v-btn
+                    <VSpacer />
+                    <VBtn
                       size="small"
                       variant="text"
                       icon="mdi-drag"
                       style="cursor: grab"
                       class="drag-handle"
                       @click="($event: Event) => $event.stopPropagation()"
-                    ></v-btn>
-                    <v-dialog width="500" transition="dialog-top-transition">
+                    ></VBtn>
+                    <VDialog width="500" transition="dialog-top-transition">
                       <template #activator="{ props }">
-                        <v-btn
+                        <VBtn
                           v-bind="props"
                           size="small"
                           color="surface-variant"
                           variant="text"
                           icon="mdi-update"
-                        ></v-btn>
+                        ></VBtn>
                       </template>
                       <template #default="{ isActive }">
                         <update-dialog
@@ -226,23 +226,23 @@ const isCardVisible = (item: Subscription) => {
                           :id="item.id"
                         />
                       </template>
-                    </v-dialog>
-                    <v-dialog width="500">
+                    </VDialog>
+                    <VDialog width="500">
                       <template #activator="{ props }">
-                        <v-btn
+                        <VBtn
                           v-bind="props"
                           size="small"
                           color="surface-variant"
                           variant="text"
                           icon="mdi-delete"
-                        ></v-btn>
+                        ></VBtn>
                       </template>
                       <template #default="{ isActive }">
-                        <v-card title="Delete subscription?">
+                        <VCard title="Delete subscription?">
                           <template v-slot:actions>
-                            <v-spacer></v-spacer>
+                            <VSpacer></VSpacer>
 
-                            <v-btn
+                            <VBtn
                               @click="
                                 handleSubscriptionItemDelete(item.id, isActive)
                               "
@@ -250,38 +250,38 @@ const isCardVisible = (item: Subscription) => {
                               variant="elevated"
                             >
                               Yes
-                            </v-btn>
+                            </VBtn>
 
-                            <v-btn
+                            <VBtn
                               @click="isActive.value = false"
                               color="green"
                               variant="elevated"
                             >
                               No
-                            </v-btn>
+                            </VBtn>
                           </template>
-                        </v-card>
+                        </VCard>
                       </template>
-                    </v-dialog>
-                  </v-card-actions>
-                </v-card>
-              </v-col>
+                    </VDialog>
+                  </VCard-actions>
+                </VCard>
+              </VCol>
             </template>
           </draggable>
-        </v-row>
-        <v-pagination
+        </VRow>
+        <VPagination
           v-if="paginationLength > 1"
           variant="elevated"
           :length="paginationLength"
           v-model="pagination"
-        ></v-pagination>
+        ></VPagination>
       </template>
       <template v-else> No subscription items </template>
-    </v-container>
+    </VContainer>
   </template>
-  <v-snackbar v-model="snackbar" :color="snackbarColor">
+  <VSnackbar v-model="snackbar" :color="snackbarColor">
     {{ snackbarMsg }}
-  </v-snackbar>
+  </VSnackbar>
 </template>
 
 <style lang="scss" scoped>

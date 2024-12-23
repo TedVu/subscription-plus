@@ -81,14 +81,14 @@ const submit = async () => {
 };
 </script>
 <template>
-  <v-form validate-on="blur" @submit.prevent="submit">
-    <v-card title="">
-      <v-card-title class="d-flex justify-space-between align-center">
+  <VForm validate-on="blur" @submit.prevent="submit">
+    <VCard title="">
+      <VCardTitle class="d-flex justify-space-between align-center">
         <div class="text-h5 text-medium-emphasis ps-2">Update Subscription</div>
-        <v-btn icon="mdi-close" variant="text" @click="emits('close')"></v-btn>
-      </v-card-title>
-      <v-card-text>
-        <v-text-field
+        <VBtn icon="mdi-close" variant="text" @click="emits('close')"></VBtn>
+      </VCardTitle>
+      <VCard-text>
+        <VTextField
           v-model="name"
           label="Subscription Name"
           :rules="nameRules"
@@ -107,33 +107,33 @@ const submit = async () => {
           :state="subscriptionDateErrorMsg"
         >
         </VueDatePicker>
-        <v-file-input
+        <VFileInput
           v-model="images"
           accept="image/png, image/jpeg, image/gif"
           label="Subscription Image"
           class="mt-5"
           prepend-icon="mdi-camera"
-        ></v-file-input>
-      </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn
+        ></VFileInput>
+      </VCard-text>
+      <VCard-actions>
+        <VSpacer></VSpacer>
+        <VBtn
           :loading="loading"
           color="green"
           variant="elevated"
           text="Update"
           type="submit"
-        ></v-btn>
-        <v-btn
+        ></VBtn>
+        <VBtn
           color="red"
           variant="elevated"
           text="Close Dialog"
           @click="emits('close')"
-        ></v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-form>
-  <v-snackbar v-model="snackbar" :color="snackbarColor">
+        ></VBtn>
+      </VCard-actions>
+    </VCard>
+  </VForm>
+  <VSnackbar v-model="snackbar" :color="snackbarColor">
     {{ snackbarMsg }}
-  </v-snackbar>
+  </VSnackbar>
 </template>

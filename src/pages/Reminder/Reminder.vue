@@ -1,5 +1,5 @@
 <template>
-  <v-btn color="primary" @click="requestPermission">Request Permission</v-btn>
+  <VBtn color="primary" @click="requestPermission">Request Permission</VBtn>
 </template>
 
 <script lang="ts" setup>

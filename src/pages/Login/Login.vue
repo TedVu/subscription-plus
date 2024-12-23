@@ -51,8 +51,8 @@ const handleSignInWithEmail = () => {
 
 <template>
   <div class="text-h6 mb-12">Welcome to Subscription Plus Application</div>
-  <v-btn color="primary" width="220" @click="handleSignInWithEmail"
-    >Sign in with email</v-btn
+  <VBtn color="primary" width="220" @click="handleSignInWithEmail"
+    >Sign in with email</VBtn
   >
   <div id="firebaseui-auth-container"></div>
   <div id="loader">

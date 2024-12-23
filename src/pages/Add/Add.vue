@@ -69,13 +69,9 @@ const submit = async () => {
 </script>
 
 <template>
-  <v-sheet width="300" class="mx-auto">
-    <v-form validate-on="blur" @submit.prevent="submit">
-      <v-text-field
-        v-model="name"
-        label="Subscription Name"
-        :rules="nameRules"
-      />
+  <VSheet width="300" class="mx-auto">
+    <VForm validate-on="blur" @submit.prevent="submit">
+      <VTextField v-model="name" label="Subscription Name" :rules="nameRules" />
       <VueDatePicker
         v-model="date"
         :enable-time-picker="false"
@@ -92,28 +88,28 @@ const submit = async () => {
       <span v-if="subscriptionDateErrorMsg === false" class="date-error">
         Subscription date is not in the correct format
       </span>
-      <v-file-input
+      <VFileInput
         v-model="image"
         accept="image/png, image/jpeg, image/gif"
         label="Subscription Image"
         class="mt-5"
         prepend-icon="mdi-camera"
-      ></v-file-input>
+      ></VFileInput>
 
-      <v-btn
+      <VBtn
         :loading="loading"
         type="submit"
         block
         class="mt-2"
         color="green"
         variant="elevated"
-        >Submit</v-btn
+        >Submit</VBtn
       >
-    </v-form>
-    <v-snackbar v-model="snackbar" :color="snackbarColor">
+    </VForm>
+    <VSnackbar v-model="snackbar" :color="snackbarColor">
       {{ snackbarMsg }}
-    </v-snackbar>
-  </v-sheet>
+    </VSnackbar>
+  </VSheet>
 </template>
 
 <style>

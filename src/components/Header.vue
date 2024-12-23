@@ -35,67 +35,63 @@ const toggleTheme = () => {
   <v-app>
     <v-app-bar color="primary" density="comfortable" v-if="isAuthenticated">
       <v-app-bar-title> Subscription plus </v-app-bar-title>
-      <v-btn icon="mdi-theme-light-dark" @click="toggleTheme" />
+      <VBtn icon="mdi-theme-light-dark" @click="toggleTheme" />
     </v-app-bar>
     <v-navigation-drawer expand-on-hover rail v-if="isAuthenticated">
-      <v-list>
-        <v-list-item
+      <VList>
+        <VListItem
           :title="userRef?.displayName ?? undefined"
           :prepend-avatar="userRef?.photoURL ?? undefined"
           :subtitle="userRef?.email ?? undefined"
           @click="handleProfileItemClick"
-        ></v-list-item>
+        ></VListItem>
         <v-divider></v-divider>
-        <v-list-item
+        <VListItem
           prepend-icon="mdi-account-multiple"
           to="profile"
           title="Profile"
-        ></v-list-item>
-        <v-list-item
-          prepend-icon="mdi-home"
-          to="home"
-          title="Home"
-        ></v-list-item>
-        <v-list-item
+        ></VListItem>
+        <VListItem prepend-icon="mdi-home" to="home" title="Home"></VListItem>
+        <VListItem
           prepend-icon="mdi-plus"
           to="add"
           title="Add subscription"
-        ></v-list-item>
-        <v-list-item
+        ></VListItem>
+        <VListItem
           prepend-icon="mdi-information"
           to="about"
           title="About"
-        ></v-list-item>
-        <v-dialog width="500" transition="dialog-top-transition">
+        ></VListItem>
+        <VDialog width="500" transition="dialog-top-transition">
           <template #activator="{ props }">
-            <v-list-item
+            <VListItem
               v-bind="props"
               prepend-icon="mdi-logout"
               title="Logout"
               @click=""
-            ></v-list-item>
+            ></VListItem>
           </template>
           <template #default="{ isActive }">
-            <v-card title="Are you sure you want to logout">
+            <VCard title="Are you sure you want to logout">
               <template v-slot:actions>
-                <v-spacer></v-spacer>
+                <VSpacer></VSpacer>
 
-                <v-btn color="error" variant="elevated" @click="handleLogout">
+                <VBtn color="error" variant="elevated" @click="handleLogout">
                   Yes
-                </v-btn>
+                </VBtn>
 
-                <v-btn
+                <VBtn
                   @click="isActive.value = false"
                   color="primary"
                   variant="elevated"
                 >
                   No
-                </v-btn>
+                </VBtn>
               </template>
-            </v-card>
+            </VCard>
           </template>
-        </v-dialog>
-      </v-list>
+        </VDialog>
+      </VList>
     </v-navigation-drawer>
     <v-main :class="computedVMainStyle"><slot /></v-main>
   </v-app>
