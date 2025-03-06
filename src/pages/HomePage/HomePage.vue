@@ -36,9 +36,10 @@ await store.refreshDataSource();
 loading.value = false;
 
 const computeItemsOrder = () => {
-  const localStorageItems = JSON.parse(
-    localStorage.getItem("items-order") ?? ""
-  ) as Subscription[];
+  const localItemsOrder = localStorage.getItem("items-order");
+  const localStorageItems = localItemsOrder
+    ? (JSON.parse(localItemsOrder) as Subscription[])
+    : [];
   if (localStorageItems) {
     const oldOrderedItems = [] as Subscription[];
     const newOrderItems = [] as Subscription[];
