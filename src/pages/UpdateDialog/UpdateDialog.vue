@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import VueDatePicker from "@vuepic/vue-datepicker";
 
 import { isAllDataCorrect, nameRules } from "@validation";
-import { updateSubscription } from "@composables";
+import { updateSubscriptionItemAsync } from "@composables";
 import { uploadFirebaseStaticFile } from "../../firebase";
 import { useSubscriptionItemsStore } from "@store";
 
@@ -66,7 +66,7 @@ const submit = async () => {
       );
     }
 
-    await updateSubscription(
+    await updateSubscriptionItemAsync(
       props.id ?? "",
       updatedSubscriptionItem,
       !!images.value[0]

@@ -78,7 +78,7 @@ const uploadFirebaseStaticFile = async (file: File, fileName: string) => {
   await uploadBytes(storageRef, file);
 };
 
-const getSubscriptionItems = async () => {
+const getSubscriptionItemsAsync = async () => {
   const { userRef } = useAuthentication();
   const db = getFirestore(app);
   const colRef = collection(db, userRef!.uid);
@@ -154,7 +154,7 @@ export {
   addFirebaseRecord,
   deleteFirebaseRecord,
   getSubscriptionImageUrl,
-  getSubscriptionItems,
+  getSubscriptionItemsAsync,
   _getToken,
   updateFirebaseRecord,
   uploadFirebaseStaticFile,

@@ -1,24 +1,24 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { Subscription } from "@types";
-import { getSubscriptionItems } from "../firebase";
+import { getSubscriptionItemsAsync } from "../firebase";
 export const useSubscriptionItemsStore = defineStore(
   "subscription-items",
   () => {
     const subscriptionItems = ref([] as Subscription[]);
     const serverSubscriptionItems = ref([] as Subscription[]);
-    const refreshDataSource = async () => {
+    const getLatestDataSourceAsync = async () => {
       if (localStorage.getItem("items-order")) {
         subscriptionItems.value = JSON.parse(
           localStorage.getItem("items-order")!
         ) as Subscription[];
       } else {
-        subscriptionItems.value = await getSubscriptionItems();
+        subscriptionItems.value = await getSubscriptionItemsAsync();
       }
       serverSubscriptionItems.value = subscriptionItems.value;
     };
 
-    const removeSubscription = (id: string) => {
+    const removeSubscriptionItemAsync = (id: string) => {
       subscriptionItems.value = subscriptionItems.value.filter(
         (item) => item.id !== id
       );
@@ -28,7 +28,7 @@ export const useSubscriptionItemsStore = defineStore(
       subscriptionItems.value.push(subscriptionItem);
     };
 
-    const updateSubscription = (subscriptionItem: Subscription) => {
+    const updateSubscriptionItemAsync = (subscriptionItem: Subscription) => {
       let newSubscriptionItems: Subscription[] = [];
       subscriptionItems.value.forEach((item) => {
         if (item.id === subscriptionItem.id) {
@@ -54,44 +54,44 @@ export const useSubscriptionItemsStore = defineStore(
             .includes(subscriptionItemSearchKeyword.toUpperCase())
         );
       } else {
-        await refreshDataSource();
+        await getLatestDataSourceAsync();
       }
     };
 
-    const getOverdueSubscriptionItems = async () => {
+    const getOverdueSubscriptionItemsAsync = async () => {
       return subscriptionItems.value.filter(
         (item) => new Date(item.date!) < new Date()
       );
     };
 
-    const filterSubscriptionItemsBasedOnDate = async (
+    const filterSubscriptionItemsByDateAsync = async (
       subscriptionItemCategory: string
     ) => {
       if (subscriptionItemCategory === "Show overdue") {
-        await refreshDataSource();
+        await getLatestDataSourceAsync();
         subscriptionItems.value = subscriptionItems.value.filter(
           (item) => new Date(item.date!) < new Date()
         );
       } else if (subscriptionItemCategory === "Show future subscription") {
-        await refreshDataSource();
+        await getLatestDataSourceAsync();
         subscriptionItems.value = subscriptionItems.value.filter(
           (item) => new Date(item.date!) >= new Date()
         );
       } else {
-        await refreshDataSource();
+        await getLatestDataSourceAsync();
       }
     };
 
     return {
       subscriptionItems,
       addSubscription,
-      refreshDataSource,
+      getLatestDataSourceAsync,
       filterSubscriptionItems,
-      filterSubscriptionItemsBasedOnDate,
-      getOverdueSubscriptionItems,
-      removeSubscription,
+      filterSubscriptionItemsByDateAsync,
+      getOverdueSubscriptionItemsAsync,
+      removeSubscriptionItemAsync,
       updateElementOrder,
-      updateSubscription,
+      updateSubscriptionItemAsync,
     };
   }
 );

@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { ref, Ref, watch, computed, onMounted } from "vue";
-import { storeToRefs } from "pinia";
 import { computedAsync } from "@vueuse/core";
-import draggable from "vuedraggable";
-import type { Subscription } from "@types";
 import { getSubscriptionImageUrl } from "../../firebase";
-import { removeSubscription, useLoadingState } from "@composables";
-import { useSubscriptionItemsStore } from "@store";
+import { ref, Ref, watch, computed, onMounted } from "vue";
+import { removeSubscriptionItemAsync, useLoadingState } from "@composables";
+import { storeToRefs } from "pinia";
 import { UpdateDialog } from "@pages";
+import { useSubscriptionItemsStore } from "@store";
+import draggable from "vuedraggable";
 import router, { RoutesEnum } from "@routes";
+import type { Subscription } from "@types";
 
 const filterCategory = [
   { title: "Show all" },
@@ -32,7 +32,7 @@ const snackbarMsg = ref("");
 
 loading.value = true;
 const store = useSubscriptionItemsStore();
-await store.refreshDataSource();
+await store.getLatestDataSourceAsync();
 loading.value = false;
 
 const computeItemsOrder = () => {
@@ -92,7 +92,7 @@ const handleSubscriptionItemDelete = async (
   id: string,
   isActive: Ref<Boolean>
 ) => {
-  await removeSubscription(id);
+  await removeSubscriptionItemAsync(id);
   localStorage.setItem("items-order", JSON.stringify(subscriptionItems.value));
   dialog.value = false;
   isActive.value = false;
@@ -117,7 +117,7 @@ watch(
 watch(
   () => currentFilterCategory.value,
   async (newCurrentFilterCategory) => {
-    await store.filterSubscriptionItemsBasedOnDate(newCurrentFilterCategory);
+    await store.filterSubscriptionItemsByDateAsync(newCurrentFilterCategory);
   }
 );
 

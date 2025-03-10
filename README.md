@@ -25,3 +25,4 @@ Subscription Plus application is a software that helps you address the problem o
 3. Sending email / SMS notification with Twilio APIs.
 4. Sending in-app notification with Firebase Cloud Messaging / One Signal.
 5. Enhance development experience.
+6. Allow login with facebook, github.

@@ -6,13 +6,13 @@ import {
   updateFirebaseRecord,
 } from "../firebase";
 
-const getSubscriptionItems = async () => {
+const getSubscriptionItemsAsync = async () => {
   const store = useSubscriptionItemsStore();
-  await store.refreshDataSource();
+  await store.getLatestDataSourceAsync();
   return store.subscriptionItems;
 };
 
-const addSubscriptionItem = async (
+const addSubscriptionItemAsync = async (
   subscriptionItem: Subscription,
   userId: string
 ) => {
@@ -22,27 +22,27 @@ const addSubscriptionItem = async (
   await addFirebaseRecord(subscriptionItem, userId);
 };
 
-const removeSubscription = async (id: string) => {
+const removeSubscriptionItemAsync = async (id: string) => {
   const store = useSubscriptionItemsStore();
-  store.removeSubscription(id);
+  store.removeSubscriptionItemAsync(id);
   await deleteFirebaseRecord(id);
 };
 
-const updateSubscription = async (
+const updateSubscriptionItemAsync = async (
   id: string,
   updatedSubscriptionItem: Subscription,
   isDeleteOldImage: boolean
 ) => {
   await updateFirebaseRecord(id, updatedSubscriptionItem, isDeleteOldImage);
   const store = useSubscriptionItemsStore();
-  store.updateSubscription({
+  store.updateSubscriptionItemAsync({
     ...updatedSubscriptionItem,
     date: new Date(updatedSubscriptionItem.date!).toLocaleDateString("en-AU"),
   });
 };
 export {
-  getSubscriptionItems,
-  addSubscriptionItem,
-  removeSubscription,
-  updateSubscription,
+  getSubscriptionItemsAsync,
+  addSubscriptionItemAsync,
+  removeSubscriptionItemAsync,
+  updateSubscriptionItemAsync,
 };

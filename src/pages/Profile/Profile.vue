@@ -4,10 +4,10 @@ import { useSubscriptionItemsStore } from "@store";
 
 const { userRef } = useAuthentication();
 
-const { subscriptionItems, getOverdueSubscriptionItems } =
+const { subscriptionItems, getOverdueSubscriptionItemsAsync } =
   useSubscriptionItemsStore();
 
-const overdueSubscriptionItems = await getOverdueSubscriptionItems();
+const overdueSubscriptionItems = await getOverdueSubscriptionItemsAsync();
 </script>
 
 <template>
