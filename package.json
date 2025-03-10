@@ -19,6 +19,7 @@
     "@vuepic/vue-datepicker": "^7.4.0",
     "@vueuse/core": "^10.9.0",
     "chart.js": "^4.4.3",
+    "date-fns": "^4.1.0",
     "firebase": "^10.7.1",
     "firebaseui": "^6.1.0",
     "pinia": "^2.1.7",

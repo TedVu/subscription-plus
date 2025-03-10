@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import { Subscription } from "@types";
 import { getSubscriptionItemsAsync } from "../firebase";
+import { isDateInFuture } from "../utility";
 export const useSubscriptionItemsStore = defineStore(
   "subscription-items",
   () => {
@@ -74,8 +75,8 @@ export const useSubscriptionItemsStore = defineStore(
         );
       } else if (subscriptionItemCategory === "Show future subscription") {
         await getLatestDataSourceAsync();
-        subscriptionItems.value = subscriptionItems.value.filter(
-          (item) => new Date(item.date!) >= new Date()
+        subscriptionItems.value = subscriptionItems.value.filter((item) =>
+          isDateInFuture(item.date!)
         );
       } else {
         await getLatestDataSourceAsync();
