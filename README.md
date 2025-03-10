@@ -16,7 +16,7 @@ Subscription Plus application is a software that helps you address the problem o
 
 ## Bug list
 
-1. The app navigation is missing in small screen.
+1. The app navigation is missing on small screen.
 
 ## Features
 
