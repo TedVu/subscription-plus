@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import { Subscription } from "@types";
 import { getSubscriptionItemsAsync } from "../firebase";
-import { isDateInFuture } from "../utility";
+import { isDateInFuture, isDateInPast } from "../utility";
 export const useSubscriptionItemsStore = defineStore(
   "subscription-items",
   () => {
@@ -60,9 +60,7 @@ export const useSubscriptionItemsStore = defineStore(
     };
 
     const getOverdueSubscriptionItemsAsync = async () => {
-      return subscriptionItems.value.filter(
-        (item) => new Date(item.date!) < new Date()
-      );
+      return subscriptionItems.value.filter((item) => isDateInPast(item.date!));
     };
 
     const filterSubscriptionItemsByDateAsync = async (
@@ -70,8 +68,8 @@ export const useSubscriptionItemsStore = defineStore(
     ) => {
       if (subscriptionItemCategory === "Show overdue") {
         await getLatestDataSourceAsync();
-        subscriptionItems.value = subscriptionItems.value.filter(
-          (item) => new Date(item.date!) < new Date()
+        subscriptionItems.value = subscriptionItems.value.filter((item) =>
+          isDateInPast(item.date!)
         );
       } else if (subscriptionItemCategory === "Show future subscription") {
         await getLatestDataSourceAsync();

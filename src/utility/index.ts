@@ -1,4 +1,4 @@
-import { isAfter, startOfDay, parse } from "date-fns";
+import { isAfter, startOfDay, parse, isBefore, isEqual } from "date-fns";
 
 const isDateInFuture = (dateString: string): boolean => {
   const parsedDate = parse(dateString, "dd/MM/yyyy", new Date());
@@ -6,4 +6,12 @@ const isDateInFuture = (dateString: string): boolean => {
   return isAfter(parsedDate, today);
 };
 
-export { isDateInFuture };
+const isDateInPast = (dateString: string): boolean => {
+  const parsedDate = parse(dateString, "dd/MM/yyyy", new Date());
+  const today = startOfDay(new Date());
+
+  console.log(parsedDate, today);
+  return isBefore(parsedDate, today) || isEqual(parsedDate, today);
+};
+
+export { isDateInFuture, isDateInPast };
