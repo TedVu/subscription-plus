@@ -10,9 +10,9 @@ Subscription Plus application is a software that helps you address the problem o
 
 ## To Do
 
-1. Implement basic feature to capture notification features: how long does subscription last?, notification type (is it via phone or email?), frequency of notifications, how long before subscription end to notify?,...
+1. Layout for cards, right now its not responsive which is bad.
 
-2. Sanity check all features and refactor code.
+2. Typing to be more strict.
 
 ## Bug list
 
