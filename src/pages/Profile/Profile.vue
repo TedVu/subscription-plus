@@ -23,7 +23,7 @@ const overdueSubscriptionItems = await getOverdueSubscriptionItemsAsync();
       Number of subscriptions: {{ subscriptionItems.length }}
     </div>
     <div class="text-h6">
-      Overdued subscriptions: {{ overdueSubscriptionItems.length }}
+      Overdue subscriptions: {{ overdueSubscriptionItems.length }}
     </div>
   </VCard>
 </template>
