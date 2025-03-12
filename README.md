@@ -10,9 +10,9 @@ Subscription Plus application is a software that helps you address the problem o
 
 ## To Do
 
-1. Layout for cards, right now its not responsive which is bad.
+1. Typing to be more strict.
 
-2. Typing to be more strict.
+2. Validation when inputting data.
 
 ## Bug list
 

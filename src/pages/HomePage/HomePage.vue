@@ -10,6 +10,8 @@ import draggable from "vuedraggable";
 import router, { RoutesEnum } from "@routes";
 import type { Subscription } from "@types";
 
+const MAX_ITEM_IN_PAGE = 6;
+
 const filterCategory = [
   { title: "Show all" },
   { title: "Show overdue" },
@@ -59,8 +61,8 @@ const computeItemsOrder = () => {
 const displayItemsPagination = computed(() => {
   const paginatedItems: Subscription[] = [];
   subscriptionItems.value.forEach((item, index) => {
-    const maxPage = pagination.value * 3;
-    const minPage = (pagination.value - 1) * 3;
+    const maxPage = pagination.value * MAX_ITEM_IN_PAGE;
+    const minPage = (pagination.value - 1) * MAX_ITEM_IN_PAGE;
     if (index < maxPage && index >= minPage) {
       paginatedItems.push(item);
     }
@@ -76,7 +78,7 @@ onMounted(() => {
 const { subscriptionItems } = storeToRefs(store);
 
 const paginationLength = computed(() => {
-  return Math.ceil(subscriptionItems.value.length / 3);
+  return Math.ceil(subscriptionItems.value.length / MAX_ITEM_IN_PAGE);
 });
 const itemsMapComputed = computedAsync(async () => {
   const itemsMap = new Map<string, string | void>();
@@ -181,7 +183,7 @@ const isCardVisible = (item: Subscription) => {
             @change="handleDragEnd"
           >
             <template #item="{ element: item }: { element: Subscription }">
-              <VCol :key="item.id" cols="4" v-if="isCardVisible(item)">
+              <VCol :key="item.id" cols="12" sm="4" v-if="isCardVisible(item)">
                 <VCard hover @click="handleCardClick">
                   <VImg
                     :src="itemsMapComputed.get(item.id) ?? undefined"
