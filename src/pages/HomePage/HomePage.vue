@@ -183,7 +183,7 @@ const isCardVisible = (item: Subscription) => {
             @change="handleDragEnd"
           >
             <template #item="{ element: item }: { element: Subscription }">
-              <VCol :key="item.id" cols="12" sm="4" v-if="isCardVisible(item)">
+              <VCol :key="item.id" cols="12" md="4" v-if="isCardVisible(item)">
                 <VCard hover @click="handleCardClick">
                   <VImg
                     :src="itemsMapComputed.get(item.id) ?? undefined"
