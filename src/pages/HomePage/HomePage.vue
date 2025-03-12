@@ -198,7 +198,7 @@ const isCardVisible = (item: Subscription) => {
                     ></VCardTitle>
                   </VImg>
 
-                  <VCard-actions>
+                  <VCardActions>
                     <div class="mr-2 font-weight-bold" style="font-size: 10px">
                       Subscription Date:
                     </div>
@@ -266,7 +266,7 @@ const isCardVisible = (item: Subscription) => {
                         </VCard>
                       </template>
                     </VDialog>
-                  </VCard-actions>
+                  </VCardActions>
                 </VCard>
               </VCol>
             </template>
