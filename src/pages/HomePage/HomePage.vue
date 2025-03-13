@@ -9,6 +9,7 @@ import { useSubscriptionItemsStore } from "@store";
 import draggable from "vuedraggable";
 import router, { RoutesEnum } from "@routes";
 import type { Subscription } from "@types";
+import { useDisplay } from "vuetify/lib/framework.mjs";
 
 const MAX_ITEM_IN_PAGE = 6;
 
@@ -70,6 +71,8 @@ const displayItemsPagination = computed(() => {
 
   return paginatedItems;
 });
+
+const { mdAndUp } = useDisplay();
 
 onMounted(() => {
   computeItemsOrder();
@@ -184,7 +187,7 @@ const isCardVisible = (item: Subscription) => {
           >
             <template #item="{ element: item }: { element: Subscription }">
               <VCol :key="item.id" cols="12" md="4" v-if="isCardVisible(item)">
-                <VCard hover @click="handleCardClick">
+                <VCard hover @click="handleCardClick" min-width="120">
                   <VImg
                     :src="itemsMapComputed.get(item.id) ?? undefined"
                     class="align-end"
@@ -199,11 +202,15 @@ const isCardVisible = (item: Subscription) => {
                   </VImg>
 
                   <VCardActions>
-                    <div class="mr-2 font-weight-bold" style="font-size: 10px">
+                    <div
+                      v-if="mdAndUp"
+                      class="mr-2 font-weight-bold"
+                      style="font-size: 10px"
+                    >
                       Subscription Date:
                     </div>
                     {{ item.date }}
-                    <VSpacer />
+                    <VSpacer v-if="mdAndUp" />
                     <VBtn
                       size="small"
                       variant="text"
