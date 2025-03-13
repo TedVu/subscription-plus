@@ -10,9 +10,11 @@ Subscription Plus application is a software that helps you address the problem o
 
 ## To Do
 
-1. Typing to be more strict.
+1. Framework on mobile, navigation bar disappears on mobile.
 
-2. Validation when inputting data.
+2. Typing to be more strict.
+
+3. Validation when inputting data.
 
 ## Bug list
 
