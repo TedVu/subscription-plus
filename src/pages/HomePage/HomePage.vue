@@ -205,7 +205,7 @@ const isCardVisible = (item: Subscription) => {
                     ></VCardTitle>
                   </VImg>
 
-                  <VCardActions>
+                  <VCardActions style="flex-wrap: wrap">
                     <div
                       v-if="mdAndUp"
                       class="mr-2 font-weight-bold"
