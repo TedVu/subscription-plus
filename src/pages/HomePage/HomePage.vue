@@ -10,6 +10,7 @@ import draggable from "vuedraggable";
 import router, { RoutesEnum } from "@routes";
 import type { Subscription } from "@types";
 import { useDisplay } from "vuetify/lib/framework.mjs";
+import { onBeforeMount } from "vue";
 
 const MAX_ITEM_IN_PAGE = 6;
 
@@ -33,10 +34,13 @@ const snackbar = ref(false);
 const snackbarColor = ref("");
 const snackbarMsg = ref("");
 
-loading.value = true;
 const store = useSubscriptionItemsStore();
-await store.getLatestDataSourceAsync();
-loading.value = false;
+
+onBeforeMount(async () => {
+  loading.value = true;
+  await store.getLatestDataSourceAsync();
+  loading.value = false;
+});
 
 const computeItemsOrder = () => {
   const localItemsOrder = localStorage.getItem("items-order");
