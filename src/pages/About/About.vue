@@ -37,9 +37,9 @@ const team = [
     id: 1,
     name: "Ted Vu",
     position: "Software Architect",
-    image: "https://tedvublogimages.s3.us-west-1.amazonaws.com/profilepics.jpg",
+    image:
+      "https://storage.googleapis.com/subscription-plus.appspot.com/images/creator/6C9A5039.JPG",
   },
-  // Add more team members as needed
 ];
 </script>
 
