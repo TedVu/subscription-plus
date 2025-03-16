@@ -32,11 +32,11 @@ const toggleTheme = () => {
 };
 </script>
 <template>
-  <v-app>
-    <v-app-bar color="primary" density="comfortable" v-if="isAuthenticated">
-      <v-app-bar-title> Subscription plus </v-app-bar-title>
+  <VApp>
+    <VAppBar color="primary" density="comfortable" v-if="isAuthenticated">
+      <VAppBarTitle> Subscription plus </VAppBarTitle>
       <VBtn icon="mdi-theme-light-dark" @click="toggleTheme" />
-    </v-app-bar>
+    </VAppBar>
     <v-navigation-drawer expand-on-hover rail v-if="isAuthenticated">
       <VList>
         <VListItem
@@ -94,7 +94,7 @@ const toggleTheme = () => {
       </VList>
     </v-navigation-drawer>
     <v-main :class="computedVMainStyle"><slot /></v-main>
-  </v-app>
+  </VApp>
 </template>
 
 <style lang="scss" scoped>
