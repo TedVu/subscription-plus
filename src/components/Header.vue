@@ -82,7 +82,7 @@ const toggleTheme = () => {
             ></VListItem>
           </template>
           <template #default="{ isActive }">
-            <VCard title="Are you sure you want to logout">
+            <VCard title="Are you sure you want to logout?">
               <template v-slot:actions>
                 <VSpacer></VSpacer>
 
