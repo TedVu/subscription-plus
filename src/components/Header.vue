@@ -4,8 +4,10 @@ import { storeToRefs } from "pinia";
 import { setLoadingState, useAuthentication } from "@composables";
 import router, { RoutesEnum } from "@routes";
 import { useTheme } from "vuetify";
+import { ref } from "vue";
 
 const loading = setLoadingState(false);
+const drawer = ref(false);
 const theme = useTheme();
 
 const computedVMainStyle = computed(() => ({
@@ -33,11 +35,19 @@ const toggleTheme = () => {
 </script>
 <template>
   <VApp>
-    <VAppBar color="primary" density="comfortable" v-if="isAuthenticated">
+    <VAppBar
+      color="primary"
+      density="comfortable"
+      v-if="isAuthenticated"
+      :elevation="2"
+    >
+      <template v-slot:prepend>
+        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      </template>
       <VAppBarTitle> Subscription plus </VAppBarTitle>
       <VBtn icon="mdi-theme-light-dark" @click="toggleTheme" />
     </VAppBar>
-    <v-navigation-drawer expand-on-hover rail v-if="isAuthenticated">
+    <v-navigation-drawer v-if="isAuthenticated && drawer" location="left">
       <VList>
         <VListItem
           :title="userRef?.displayName ?? undefined"
