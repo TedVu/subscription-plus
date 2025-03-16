@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getMessaging, getToken, onMessage } from "firebase/messaging";
+import { getMessaging, getToken } from "firebase/messaging";
 import {
   getDownloadURL,
   deleteObject,
@@ -137,7 +137,7 @@ const _getToken = () => {
         // ...
       }
     })
-    .catch((err) => {
+    .catch(() => {
       // ...
     });
 };
