@@ -9,16 +9,6 @@
         trial only to finally realized you forgot to cancel the subscription ?
         This application can help you solve the problem.
       </p>
-      <iframe
-        style="margin-top: 10%; margin-bottom: 10%"
-        width="640"
-        height="360"
-        src="https://www.loom.com/embed/558527a5ae3047e8ac47193a44cb14ad?sid=0f6473dd-c21b-4724-a0e6-d5a674e025b9"
-        frameborder="0"
-        webkitallowfullscreen
-        mozallowfullscreen
-        allowfullscreen
-      ></iframe>
       <h2>Our Team</h2>
       <div class="team-members">
         <div v-for="member in team" :key="member.id" class="member">
