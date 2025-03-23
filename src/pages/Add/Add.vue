@@ -26,7 +26,7 @@ const isAllDataCorrect = () => {
     isCorrect = false;
   }
 
-  if (date.value === null) {
+  if (!date.value) {
     subscriptionDateErrorMsg.value = false;
     isCorrect = false;
   } else {
