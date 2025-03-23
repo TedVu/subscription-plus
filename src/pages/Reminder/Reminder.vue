@@ -1,15 +1,3 @@
-<template>
-  <VBtn color="primary" @click="requestPermission">Request Permission</VBtn>
-</template>
+<template></template>
 
-<script lang="ts" setup>
-import { _getToken } from "../../firebase";
-const requestPermission = () => {
-  Notification.requestPermission().then((permission) => {
-    if (permission === "granted") {
-      _getToken();
-    } else {
-    }
-  });
-};
-</script>
+<script lang="ts" setup></script>
