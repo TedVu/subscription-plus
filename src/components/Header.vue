@@ -47,7 +47,11 @@ const toggleTheme = () => {
       <VAppBarTitle> Subscription plus </VAppBarTitle>
       <VBtn icon="mdi-theme-light-dark" @click="toggleTheme" />
     </VAppBar>
-    <v-navigation-drawer v-if="isAuthenticated && drawer" location="left">
+    <v-navigation-drawer
+      v-if="isAuthenticated"
+      v-model="drawer"
+      location="left"
+    >
       <VList>
         <VListItem
           :title="userRef?.displayName ?? undefined"
