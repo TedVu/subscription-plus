@@ -13,7 +13,7 @@
           ></v-img>
         </div>
       </v-col>
-      <v-col cols="12" sm="8"> DETAILS</v-col>
+      <v-col cols="12" sm="8"> </v-col>
     </v-row>
   </v-container>
 </template>
