@@ -16,6 +16,8 @@ Subscription Plus application is a software that helps you address the problem o
 
 3. Validation when inputting data.
 
+4. Mail scheduling functionality
+
 ## Bug list
 
 1. The app navigation is missing on small screen.
