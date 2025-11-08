@@ -58,7 +58,7 @@ const submit = async () => {
       loading.value = false;
     }, 2000);
     snackbar.value = true;
-    snackbarMsg.value = "Adding a new subscription successful!";
+    snackbarMsg.value = "Adding a new subscription successfully!";
     snackbarColor.value = "success";
   } else {
     snackbar.value = true;
