@@ -1,21 +1,21 @@
 <template>
-  <v-container>
-    <v-row no-gutters>
-      <v-col cols="12" sm="4">
+  <VContainer>
+    <VRow no-gutters>
+      <VCol cols="12" sm="4">
         <div class="ma-4">
           <div class="text-subtitle-2">Cover</div>
-          <v-img
+          <VImg
             :aspect-ratio="1"
             class="bg-white"
             src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
             width="300"
             cover
-          ></v-img>
+          ></VImg>
         </div>
-      </v-col>
-      <v-col cols="12" sm="8"> </v-col>
-    </v-row>
-  </v-container>
+      </VCol>
+      <VCol cols="12" sm="8"> </VCol>
+    </VRow>
+  </VContainer>
 </template>
 
 <script lang="ts" setup></script>

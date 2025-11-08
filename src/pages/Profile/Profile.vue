@@ -15,9 +15,9 @@ const overdueSubscriptionItems = await getOverdueSubscriptionItemsAsync();
     Welcome to Subscription Plus Application, {{ userRef?.displayName }}!
   </div>
   <VCard class="mx-auto mt-8 pa-8" max-width="600" rounded="true">
-    <v-avatar class="mb-3" color="grey" rounded="0" size="200">
+    <VAvatar class="mb-3" color="grey" rounded="0" size="200">
       <VImg :src="userRef?.photoURL ?? ''" cover></VImg>
-    </v-avatar>
+    </VAvatar>
 
     <div class="text-h6">
       Number of subscriptions: {{ subscriptionItems.length }}

@@ -170,7 +170,7 @@ const isCardVisible = (item: Subscription) => {
             :value="index"
             @click="onFilterCategoryClick(item)"
           >
-            <VListItem-title>{{ item.title }}</VListItem-title>
+            <VListItemTitle>{{ item.title }}</VListItemTitle>
           </VListItem>
         </VList>
       </VMenu>
@@ -234,7 +234,7 @@ const isCardVisible = (item: Subscription) => {
                         ></VBtn>
                       </template>
                       <template #default="{ isActive }">
-                        <update-dialog
+                        <UpdateDialog
                           @close="isActive.value = false"
                           @update="handleUpdate"
                           :id="item.id"
