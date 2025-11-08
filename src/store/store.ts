@@ -3,6 +3,13 @@ import { ref } from "vue";
 import { Subscription } from "@types";
 import { getSubscriptionItemsAsync } from "../firebase";
 import { isDateInFuture, isDateInPast } from "../utility";
+
+enum SubscriptionItemCategory {
+  ShowAll = "Show all",
+  ShowOverdue = "Show overdue",
+  ShowFutureSubscription = "Show future subscription",
+}
+
 export const useSubscriptionItemsStore = defineStore(
   "subscription-items",
   () => {
@@ -66,12 +73,15 @@ export const useSubscriptionItemsStore = defineStore(
     const filterSubscriptionItemsByDateAsync = async (
       subscriptionItemCategory: string
     ) => {
-      if (subscriptionItemCategory === "Show overdue") {
+      if (subscriptionItemCategory === SubscriptionItemCategory.ShowOverdue) {
         await getLatestDataSourceAsync();
         subscriptionItems.value = subscriptionItems.value.filter((item) =>
           isDateInPast(item.date!)
         );
-      } else if (subscriptionItemCategory === "Show future subscription") {
+      } else if (
+        subscriptionItemCategory ===
+        SubscriptionItemCategory.ShowFutureSubscription
+      ) {
         await getLatestDataSourceAsync();
         subscriptionItems.value = subscriptionItems.value.filter((item) =>
           isDateInFuture(item.date!)
