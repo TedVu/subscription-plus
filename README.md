@@ -20,6 +20,8 @@ We are on a mission to help you manage your subscriptions as easy as a pie. Have
 
 4. Mail scheduling functionality
 
+5. Linting for vue components
+
 ## Bug list
 
 1. The app navigation is missing on small screen.
