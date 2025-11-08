@@ -30,6 +30,7 @@ const handleProfileItemClick = () => {
 
 const toggleTheme = () => {
   theme.global.name.value = theme.global.current.value.dark ? "light" : "dark";
+  localStorage.setItem("theme", theme.global.name.value);
   document.body.style.background = theme.global.current.value.colors.background;
 };
 </script>
