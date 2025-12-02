@@ -4,9 +4,13 @@ import { useSubscriptionItemsStore } from "@store";
 
 const { userRef } = useAuthentication();
 
-const { subscriptionItems, getOverdueSubscriptionItemsAsync } =
-  useSubscriptionItemsStore();
+const {
+  getTotalNumberOfSubscriptionItemsAsync,
+  getOverdueSubscriptionItemsAsync,
+} = useSubscriptionItemsStore();
 
+const totalNumberOfSubscriptionItems =
+  await getTotalNumberOfSubscriptionItemsAsync();
 const overdueSubscriptionItems = await getOverdueSubscriptionItemsAsync();
 </script>
 
@@ -20,7 +24,7 @@ const overdueSubscriptionItems = await getOverdueSubscriptionItemsAsync();
     </VAvatar>
 
     <div class="text-h6">
-      Number of subscriptions: {{ subscriptionItems.length }}
+      Number of subscriptions: {{ totalNumberOfSubscriptionItems }}
     </div>
     <div class="text-h6">
       Overdue subscriptions: {{ overdueSubscriptionItems.length }}

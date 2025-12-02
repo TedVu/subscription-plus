@@ -67,7 +67,13 @@ export const useSubscriptionItemsStore = defineStore(
     };
 
     const getOverdueSubscriptionItemsAsync = async () => {
+      await getLatestDataSourceAsync();
       return subscriptionItems.value.filter((item) => isDateInPast(item.date!));
+    };
+
+    const getTotalNumberOfSubscriptionItemsAsync = async () => {
+      await getLatestDataSourceAsync();
+      return subscriptionItems.value.length;
     };
 
     const filterSubscriptionItemsByDateAsync = async (
@@ -92,13 +98,14 @@ export const useSubscriptionItemsStore = defineStore(
     };
 
     return {
-      subscriptionItems,
       addSubscription,
-      getLatestDataSourceAsync,
       filterSubscriptionItems,
       filterSubscriptionItemsByDateAsync,
+      getLatestDataSourceAsync,
       getOverdueSubscriptionItemsAsync,
+      getTotalNumberOfSubscriptionItemsAsync,
       removeSubscriptionItemAsync,
+      subscriptionItems,
       updateElementOrder,
       updateSubscriptionItemAsync,
     };
