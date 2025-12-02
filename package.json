@@ -4,16 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "vue-tsc && vite build",
     "build:nx": "npx nx run-many -t type:check build",
-    "visualize:nx": "npx nx graph",
+    "build": "vue-tsc && vite build",
     "deploy": "firebase deploy --only hosting",
     "dev": "vite",
     "format": "prettier . --write",
     "prepare": "husky",
     "preview": "vite preview",
     "serve": "vite",
-    "type:check": "vue-tsc"
+    "type:check": "vue-tsc",
+    "visualize:nx": "npx nx graph"
   },
   "dependencies": {
     "@vuepic/vue-datepicker": "^7.4.0",
