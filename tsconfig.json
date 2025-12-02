@@ -27,8 +27,7 @@
       "@store": ["store/index.ts"],
       "@types": ["types/index.ts"],
       "@validation": ["validation/index.ts"]
-    },
-    "ignoreDeprecations": "6.0"
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
   "references": [
