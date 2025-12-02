@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Header } from "@components";
 import { onMounted } from "vue";
-import { useTheme } from "vuetify/lib/framework.mjs";
+import { useTheme } from "vuetify";
 
 onMounted(() => {
   const theme = useTheme();

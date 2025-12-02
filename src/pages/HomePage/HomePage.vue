@@ -9,7 +9,7 @@ import { useSubscriptionItemsStore } from "@store";
 import draggable from "vuedraggable";
 import router, { RoutesEnum } from "@routes";
 import type { Subscription } from "@types";
-import { useDisplay } from "vuetify/lib/framework.mjs";
+import { useDisplay } from "vuetify";
 import { onBeforeMount } from "vue";
 
 const MAX_ITEM_IN_PAGE = 6;
